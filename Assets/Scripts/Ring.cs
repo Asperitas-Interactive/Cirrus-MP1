@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Ring : MonoBehaviour
 {
-    public bool ringCheck = false;
-    [SerializeField]
-    private Material blueRing;
-    [SerializeField]
-    private Material redRing;
+    [FormerlySerializedAs("ringCheck")] public bool m_ringCheck = false;
+    [FormerlySerializedAs("blueRing")] [SerializeField]
+    private Material m_blueRing;
+    [FormerlySerializedAs("redRing")] [SerializeField]
+    private Material m_redRing;
     // Start is called before the first frame update
     private void OnEnable()
     {
-        ringCheck = false;
+        m_ringCheck = false;
     }
 
     // Update is called once per frame
@@ -20,18 +21,18 @@ public class Ring : MonoBehaviour
     {
         
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if(other.tag == "Player")
+        if(_other.tag == "Player")
         {
-            ringCheck = true;
-            gameObject.GetComponent<MeshRenderer>().material = redRing;
+            m_ringCheck = true;
+            gameObject.GetComponent<MeshRenderer>().material = m_redRing;
         }
     }
 
     public void Reset()
     {
-        ringCheck = false;
-        gameObject.GetComponent<MeshRenderer>().material = blueRing;
+        m_ringCheck = false;
+        gameObject.GetComponent<MeshRenderer>().material = m_blueRing;
     }
 }

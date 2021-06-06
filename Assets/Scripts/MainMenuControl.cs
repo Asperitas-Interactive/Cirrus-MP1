@@ -18,17 +18,17 @@ public class MainMenuControl : MonoBehaviour
         
     }
 
-    public void gameStart()
+    public void GameStart()
     {
         SceneManager.LoadScene(1);
     }
 
-    public void gameQuit()
+    public void GameQuit()
     {
         Application.Quit();
     }
 
-    public void toMainMenu()
+    public void ToMainMenu()
     {
         SceneManager.LoadScene(0);
     }

@@ -16,9 +16,9 @@ public class PressurePlate : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if (other.attachedRigidbody.mass >= 10)
+        if (_other.attachedRigidbody.mass >= 10)
         {
             Debug.Log("success");
             //Insert functions we can attach

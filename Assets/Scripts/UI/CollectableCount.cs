@@ -1,21 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class CollectableCount : MonoBehaviour
 {
-    public bool counted = false;
-    [SerializeField]
-    private Texture Unchecked;
-    [SerializeField]
-    private Texture Checked;
-    private RawImage UIImage;
+    [FormerlySerializedAs("counted")] public bool m_counted = false;
+    [FormerlySerializedAs("Unchecked")] [SerializeField]
+    private Texture m_unchecked;
+    [FormerlySerializedAs("Checked")] [SerializeField]
+    private Texture m_checked;
+    private RawImage m_uiImage;
     // Start is called before the first frame update
     void Start()
     {
-        UIImage = GetComponent<RawImage>();
-        UIImage.texture = Unchecked;
+        m_uiImage = GetComponent<RawImage>();
+        m_uiImage.texture = m_unchecked;
     }
 
     // Update is called once per frame
@@ -24,9 +25,9 @@ public class CollectableCount : MonoBehaviour
         
     }
 
-    public void onCollection()
+    public void ONCollection()
     {
-        UIImage.texture = Checked;
-        counted = true;
+        m_uiImage.texture = m_checked;
+        m_counted = true;
     }
 }

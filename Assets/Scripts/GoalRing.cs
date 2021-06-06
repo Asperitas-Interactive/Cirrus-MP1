@@ -1,18 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GoalRing : MonoBehaviour
 {
-    public Collectable collectable;
-    public Ring[] Rings;
-    int rCount = 0;
+    [FormerlySerializedAs("collectable")] public Collectable m_collectable;
+    [FormerlySerializedAs("Rings")] public Ring[] m_rings;
+    int m_rCount = 0;
 
     // Start is called before the first frame update
 
     private void OnEnable()
     {
-        collectable.gameObject.SetActive(false);
+        m_collectable.gameObject.SetActive(false);
         
     }
     void Start()
@@ -25,33 +26,33 @@ public class GoalRing : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if(other.tag == "Player")
+        if(_other.tag == "Player")
         {
-            foreach(Ring r in Rings)
+            foreach(Ring r in m_rings)
             {
-                if(r.ringCheck == true)
+                if(r.m_ringCheck == true)
                 {
-                    rCount++;
+                    m_rCount++;
                 }
             }
 
-            if(rCount == Rings.Length)
+            if(m_rCount == m_rings.Length)
             {
-                collectable.gameObject.SetActive(true);
-                GameObject.FindGameObjectWithTag("Switch2").GetComponent<PuzzleSpawner>().Timer = 0.0f;
+                m_collectable.gameObject.SetActive(true);
+                GameObject.FindGameObjectWithTag("Switch2").GetComponent<PuzzleSpawner>().m_timer = 0.0f;
             }
         }
     }
 
     public void Reset()
     {
-        foreach (Ring r in Rings)
+        foreach (Ring r in m_rings)
         {
             r.Reset();
         }
 
-        rCount = 0;
+        m_rCount = 0;
     }
 }

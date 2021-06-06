@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class CollectionCheck : MonoBehaviour
 {
-    public CollectableCount[] counters;
-    public bool bFinished = false;
+    [FormerlySerializedAs("counters")] public CollectableCount[] m_counters;
+    [FormerlySerializedAs("bFinished")] public bool m_bFinished = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,9 +18,9 @@ public class CollectionCheck : MonoBehaviour
     void Update()
     {
         int collection = 0;
-        foreach(CollectableCount counter in counters)
+        foreach(CollectableCount counter in m_counters)
         {
-            if(counter.counted == true)
+            if(counter.m_counted == true)
             {
                 collection++;
             }
@@ -27,7 +28,7 @@ public class CollectionCheck : MonoBehaviour
 
         if(collection == 5)
         {
-            bFinished = true;
+            m_bFinished = true;
         }
     }
 }

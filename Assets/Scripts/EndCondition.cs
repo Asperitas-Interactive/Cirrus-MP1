@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class EndCondition : MonoBehaviour
 {
     // Start is called before the first frame update
-    public CollectionCheck cc;
+    [FormerlySerializedAs("cc")] public CollectionCheck m_cc;
     void Start()
     {
         
@@ -18,11 +19,11 @@ public class EndCondition : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if(other.tag == "Player")
+        if(_other.tag == "Player")
         {
-            if(cc.bFinished == true)
+            if(m_cc.m_bFinished == true)
             {
                 SceneManager.LoadScene(2);
             }

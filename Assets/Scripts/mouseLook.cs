@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
-public class mouseLook : MonoBehaviour
+public class eMouseLook : MonoBehaviour
 {
 
-    public float mouseSensitivity;
-    public Transform playerBody;
+    [FormerlySerializedAs("mouseSensitivity")] public float m_mouseSensitivity;
+    [FormerlySerializedAs("playerBody")] public Transform m_playerBody;
 
-    float xRotation = 0f;
+    float m_xRotation = 0f;
 
     // Start is called before the first frame update
     void Start()
@@ -21,14 +22,14 @@ public class mouseLook : MonoBehaviour
     void Update()
     {
         
-        float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
+        float mouseY = Input.GetAxis("Mouse Y") * m_mouseSensitivity * Time.deltaTime;
 
-        xRotation -= mouseY;
+        m_xRotation -= mouseY;
 
         //if (gameObject.tag == "MainCamera")
-            xRotation = Mathf.Clamp(xRotation, -15f, 15f);
+            m_xRotation = Mathf.Clamp(m_xRotation, -15f, 15f);
 
        
-        transform.localRotation = (Quaternion.Euler(xRotation, 0f, 0f));
+        transform.localRotation = (Quaternion.Euler(m_xRotation, 0f, 0f));
     }
 }

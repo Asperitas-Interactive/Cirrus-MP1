@@ -2,39 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class MovePlat : MonoBehaviour
 {
-    playerMovement pl;
+    ePlayerMovement m_pl;
     //The Distance the end points are
-    public Vector3 DisplacementPos;
-    public Vector3 DisplacementNeg;
+    [FormerlySerializedAs("DisplacementPos")] public Vector3 m_displacementPos;
+    [FormerlySerializedAs("DisplacementNeg")] public Vector3 m_displacementNeg;
     //The Speed you arrive at a end point
-    private Vector3 VectorSpeed;
+    private Vector3 m_vectorSpeed;
     //The Destination it checks
-    private Vector3 DestinationMax;
-    private Vector3 DestinationMin;
+    private Vector3 m_destinationMax;
+    private Vector3 m_destinationMin;
     // Start is called before the first frame update
     void Start()
     {
-        VectorSpeed.y = Random.Range(0.1f, 0.5f);
-        DestinationMax = transform.position + DisplacementPos;
-        DestinationMin = transform.position + DisplacementNeg;
+        m_vectorSpeed.y = Random.Range(0.1f, 0.5f);
+        m_destinationMax = transform.position + m_displacementPos;
+        m_destinationMin = transform.position + m_displacementNeg;
     }
 
-    private void OnCollisionEnter(Collision coll)
+    private void OnCollisionEnter(Collision _coll)
     {
-        if (coll.collider.CompareTag("Player"))
+        if (_coll.collider.CompareTag("Player"))
         {
-            coll.collider.transform.SetParent(transform);
+            _coll.collider.transform.SetParent(transform);
         }
     }
 
-    private void OnCollisionExit(Collision coll)
+    private void OnCollisionExit(Collision _coll)
     {
-        if (coll.collider.CompareTag("Player"))
+        if (_coll.collider.CompareTag("Player"))
         {
-            coll.collider.transform.SetParent(null);
+            _coll.collider.transform.SetParent(null);
         }
     }
 
@@ -43,15 +44,15 @@ public class MovePlat : MonoBehaviour
     void Update()
     {
         //Move towards location
-        transform.Translate(VectorSpeed * Time.deltaTime, Space.World);
+        transform.Translate(m_vectorSpeed * Time.deltaTime, Space.World);
         //Clamp between for correct calculation
-        transform.position = new Vector3(Mathf.Clamp(transform.position.x, DestinationMin.x, DestinationMax.x),
-            Mathf.Clamp(transform.position.y, DestinationMin.y, DestinationMax.y),
-            Mathf.Clamp(transform.position.z, DestinationMin.z, DestinationMax.z));
+        transform.position = new Vector3(Mathf.Clamp(transform.position.x, m_destinationMin.x, m_destinationMax.x),
+            Mathf.Clamp(transform.position.y, m_destinationMin.y, m_destinationMax.y),
+            Mathf.Clamp(transform.position.z, m_destinationMin.z, m_destinationMax.z));
         //check if reached
         DestinationReach();
 
-        if(pl)
+        if(m_pl)
         {
 
         }
@@ -60,14 +61,14 @@ public class MovePlat : MonoBehaviour
     //Check if it reached its destination
     void DestinationReach()
     {
-        if(transform.position.x == DestinationMax.x && transform.position.y == DestinationMax.y && transform.position.z == DestinationMax.z)
+        if(transform.position.x == m_destinationMax.x && transform.position.y == m_destinationMax.y && transform.position.z == m_destinationMax.z)
         {
-            VectorSpeed = -VectorSpeed;
+            m_vectorSpeed = -m_vectorSpeed;
         }
 
-        if (transform.position.x == DestinationMin.x && transform.position.y == DestinationMin.y && transform.position.z == DestinationMin.z)
+        if (transform.position.x == m_destinationMin.x && transform.position.y == m_destinationMin.y && transform.position.z == m_destinationMin.z)
         {
-            VectorSpeed = -VectorSpeed;
+            m_vectorSpeed = -m_vectorSpeed;
         }
     }
 

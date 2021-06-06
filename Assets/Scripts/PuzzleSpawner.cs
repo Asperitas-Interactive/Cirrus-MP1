@@ -1,22 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PuzzleSpawner : MonoBehaviour
 {
     // Start is called before the first frame update
-    private GameObject[] puzzleElements;
-    public AudioSource OverWorld;
-    public AudioSource Challenge;
-    public string puzzletag;
-    public float Timer = 20.0f;
-    public float maxTimer = 20.0f;
-    private bool isTiming = false;
-    private bool bActive = false;
+    private GameObject[] m_puzzleElements;
+    [FormerlySerializedAs("OverWorld")] public AudioSource m_overWorld;
+    [FormerlySerializedAs("Challenge")] public AudioSource m_challenge;
+    [FormerlySerializedAs("puzzletag")] public string m_puzzletag;
+    [FormerlySerializedAs("Timer")] public float m_timer = 20.0f;
+    [FormerlySerializedAs("maxTimer")] public float m_maxTimer = 20.0f;
+    private bool m_isTiming = false;
+    private bool m_bActive = false;
     void Start()
     {
-        puzzleElements = GameObject.FindGameObjectsWithTag(puzzletag);
-        foreach (GameObject element in puzzleElements)
+        m_puzzleElements = GameObject.FindGameObjectsWithTag(m_puzzletag);
+        foreach (GameObject element in m_puzzleElements)
         {
             element.SetActive(false);
         }
@@ -25,56 +26,56 @@ public class PuzzleSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isTiming == true)
+        if(m_isTiming == true)
         {
-            Timer -= Time.deltaTime;
-            if (Timer <= 10.0f)
+            m_timer -= Time.deltaTime;
+            if (m_timer <= 10.0f)
             {
-                Challenge.pitch += 0.5f / maxTimer * Time.deltaTime;
+                m_challenge.pitch += 0.5f / m_maxTimer * Time.deltaTime;
             }
         }
 
-        if(Timer <= 0.0f)
+        if(m_timer <= 0.0f)
         {
             PuzzleEnd();
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionEnter(Collision _collision)
     {
-        if (collision.gameObject.tag == "Player" && bActive == false)
+        if (_collision.gameObject.tag == "Player" && m_bActive == false)
         {
             PuzzleBegin();
-            Challenge.Play();
-            OverWorld.Stop();
+            m_challenge.Play();
+            m_overWorld.Stop();
         }
     }
 
     private void PuzzleBegin()
     {
-        foreach (GameObject element in puzzleElements)
+        foreach (GameObject element in m_puzzleElements)
         {
             element.SetActive(true);
-            isTiming = true;
-            bActive = true;
+            m_isTiming = true;
+            m_bActive = true;
         }
     }
 
     private void PuzzleEnd()
     {
-        foreach (GameObject element in puzzleElements)
+        foreach (GameObject element in m_puzzleElements)
         {
             if(element.GetComponent<GoalRing>() != null)
             {
                 element.GetComponent<GoalRing>().Reset();
             }
             element.SetActive(false);
-            isTiming = false;
-            Timer = maxTimer;
-            bActive = false;
-            Challenge.Stop();
-            Challenge.pitch = 1.0f;
-            OverWorld.Play();
+            m_isTiming = false;
+            m_timer = m_maxTimer;
+            m_bActive = false;
+            m_challenge.Stop();
+            m_challenge.pitch = 1.0f;
+            m_overWorld.Play();
         }
     }
 }
