@@ -35,6 +35,7 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 Velocity;
     private Vector3 movementRaw;
     private Vector3 movementSmooth;
+    private float movementAir;
 
     // Start is called before the first frame update
     void Start()
@@ -67,11 +68,12 @@ public class CharacterMovement : MonoBehaviour
         if (m_isGrounded)
         {
             Velocity = Vector3.zero;
+            movementAir = m_speed;
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             m_controller.Move(movementRaw * m_speed * Time.deltaTime);
         } else
         {
-            m_controller.Move(movementSmooth * m_speed * Time.deltaTime);
+            m_controller.Move(movementSmooth * movementAir * Time.deltaTime);
         }
 
         if (Input.GetButtonDown("Jump") && m_isGrounded)
