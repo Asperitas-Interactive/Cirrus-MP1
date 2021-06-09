@@ -66,7 +66,8 @@ public class CharacterMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
             Velocity.y += m_jumpheight;
-        } else if(!m_isGrounded)
+        } 
+        else if(!m_isGrounded)
         {
             Velocity.y += m_gravity * Time.deltaTime;
         }
