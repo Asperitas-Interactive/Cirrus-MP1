@@ -68,29 +68,31 @@ public class CharacterMovement : MonoBehaviour
             m_speed = m_baseSpeed;
         }
 
-        if (m_isGrounded)
+        if (m_isGrounded) //Whenever player is grounded
         {
             Velocity = Vector3.zero;
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             movementAir = m_speed;
         }
-       
 
-        if (m_isGrounded && movementRaw.magnitude > 0.1f)
+
+        if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
         {
             float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
-        } else if(!m_isGrounded && movementSmooth.magnitude > 0.1f)
+
+        } else if (!m_isGrounded && movementSmooth.magnitude > 0.1f) //If in the air and moving
         {
             Debug.Log(movementSmooth);
             float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
-            
+
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir * (movementAir * Time.deltaTime));
-        } else if (!m_isGrounded)
+
+        } else if (!m_isGrounded)//If in the air and not moving
         {
             m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
         }
