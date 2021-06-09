@@ -20,7 +20,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField]
     private float m_groundDistance = 0.4f;
     [SerializeField]
-    private bool m_isGrounded;
+    private bool m_isGrounded = false;
     [SerializeField]
     private float m_gravity = 20.0f;
 
@@ -30,6 +30,7 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField]
     private float m_VelZ;
 
+    private Vector3 Velocity;
 
     // Start is called before the first frame update
     void Start()
@@ -48,5 +49,25 @@ public class CharacterMovement : MonoBehaviour
         Vector3 movement = new Vector3(m_VelX, 0.0f, m_VelZ);
 
         m_controller.Move(movement * m_speed * Time.deltaTime);
+
+        if (m_isGrounded)
+        {
+            Velocity = Vector3.zero;
+        }
+
+        if (Input.GetButton("Jump") && m_isGrounded)
+        {
+            Velocity.y += m_jumpheight;
+        } else
+        {
+            Velocity.y += m_gravity;
+        }
+
+        m_controller.Move(Velocity * Time.deltaTime);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.DrawSphere(m_groundChecker.position, m_groundDistance);
     }
 }
