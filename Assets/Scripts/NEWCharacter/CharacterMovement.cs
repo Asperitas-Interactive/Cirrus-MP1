@@ -55,12 +55,13 @@ public class CharacterMovement : MonoBehaviour
             Velocity = Vector3.zero;
         }
 
-        if (Input.GetButton("Jump") && m_isGrounded)
+        if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
             Velocity.y += m_jumpheight;
-        } else
+        } 
+        else if(!m_isGrounded)
         {
-            Velocity.y += m_gravity;
+            Velocity.y += m_gravity * Time.deltaTime;
         }
 
         m_controller.Move(Velocity * Time.deltaTime);
