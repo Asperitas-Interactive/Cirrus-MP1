@@ -1,4 +1,4 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -23,6 +23,8 @@ public class CharacterMovement : MonoBehaviour
     private bool m_isGrounded = false;
     [SerializeField]
     private float m_gravity = 20.0f;
+    [SerializeField] 
+    private Transform m_playerCam;
 
     //Axis
     [SerializeField]
@@ -31,7 +33,7 @@ public class CharacterMovement : MonoBehaviour
     private float m_VelZ;
 
     private Vector3 Velocity;
-
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -48,7 +50,13 @@ public class CharacterMovement : MonoBehaviour
 
         Vector3 movement = new Vector3(m_VelX, 0.0f, m_VelZ);
 
-        m_controller.Move(movement * m_speed * Time.deltaTime);
+        if (movement.magnitude > 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
+        }
 
         if (m_isGrounded)
         {
