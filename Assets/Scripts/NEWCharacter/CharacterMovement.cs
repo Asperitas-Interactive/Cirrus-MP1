@@ -7,6 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField]
     private float m_speed = 12;
+    private float m_sprintSpeed;
+    private float m_baseSpeed;
     [SerializeField]
     private CharacterController m_controller;
 
@@ -38,6 +40,8 @@ public class CharacterMovement : MonoBehaviour
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
+        m_sprintSpeed = m_speed * 2;
+        m_baseSpeed = m_speed;
     }
 
     // Update is called once per frame
@@ -51,6 +55,14 @@ public class CharacterMovement : MonoBehaviour
         movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
 
         m_isGrounded = Physics.CheckSphere(m_groundChecker.position, m_groundDistance, m_layerMask);
+
+        if (Input.GetButton("Sprint"))
+        {
+            m_speed = m_sprintSpeed;
+        } else
+        {
+            m_speed = m_baseSpeed;
+        }
 
         if (m_isGrounded)
         {
