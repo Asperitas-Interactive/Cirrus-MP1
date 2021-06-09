@@ -21,6 +21,11 @@ public class PickUpItem : MonoBehaviour
             m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
             m_pickUp = null;
         }
+
+        if(m_pickUp != null)
+        {
+            m_pickUp.transform.Rotate(new Vector3(10 * Time.deltaTime, 0.0f, 0.0f));
+        }
     }
 
 
