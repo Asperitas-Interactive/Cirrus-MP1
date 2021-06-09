@@ -9,7 +9,7 @@ public class CharacterMovement : MonoBehaviour
     private float m_speed = 12;
     private float m_sprintSpeed;
     private float m_baseSpeed;
-    [SerializeField]
+
     private CharacterController m_controller;
 
     //Jump Variables
@@ -79,7 +79,8 @@ public class CharacterMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
-        } else if(!m_isGrounded)
+        } 
+        else if(!m_isGrounded)
         {
             m_controller.Move(movementSmooth * movementAir * Time.deltaTime);
         }
