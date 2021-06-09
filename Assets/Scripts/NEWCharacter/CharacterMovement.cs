@@ -79,7 +79,7 @@ public class CharacterMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
-        } else
+        } else if(!m_isGrounded)
         {
             m_controller.Move(movementSmooth * movementAir * Time.deltaTime);
         }
