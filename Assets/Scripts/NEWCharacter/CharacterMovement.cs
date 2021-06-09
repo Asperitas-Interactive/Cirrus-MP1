@@ -82,11 +82,16 @@ public class CharacterMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
-        } else if(!m_isGrounded)
+        } else if(!m_isGrounded && movementSmooth.magnitude > 0.1f)
         {
             Debug.Log(movementSmooth);
             float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+            
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            m_controller.Move(moveDir * (movementAir * Time.deltaTime));
+        } else if (!m_isGrounded)
+        {
             m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
         }
 
