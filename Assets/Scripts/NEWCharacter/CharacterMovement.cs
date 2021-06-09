@@ -25,12 +25,14 @@ public class CharacterMovement : MonoBehaviour
     private float m_gravity = 20.0f;
 
     //Axis
-    [SerializeField]
     private float m_VelX;
-    [SerializeField]
     private float m_VelZ;
+    private float m_smoothX;
+    private float m_smoothZ;
 
     private Vector3 Velocity;
+    private Vector3 movementRaw;
+    private Vector3 movementSmooth;
 
     // Start is called before the first frame update
     void Start()
@@ -43,16 +45,21 @@ public class CharacterMovement : MonoBehaviour
     {
         m_VelX = Input.GetAxisRaw("Horizontal");
         m_VelZ = Input.GetAxisRaw("Vertical");
+        m_smoothX = Input.GetAxis("Horizontal");
+        m_smoothZ = Input.GetAxis("Vertical");
+
+        movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
 
         m_isGrounded = Physics.CheckSphere(m_groundChecker.position, m_groundDistance, m_layerMask);
-
-        Vector3 movement = new Vector3(m_VelX, 0.0f, m_VelZ);
-
-        m_controller.Move(movement * m_speed * Time.deltaTime);
 
         if (m_isGrounded)
         {
             Velocity = Vector3.zero;
+            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
+            m_controller.Move(movementRaw * m_speed * Time.deltaTime);
+        } else
+        {
+            m_controller.Move(movementSmooth * m_speed * Time.deltaTime);
         }
 
         if (Input.GetButtonDown("Jump") && m_isGrounded)
