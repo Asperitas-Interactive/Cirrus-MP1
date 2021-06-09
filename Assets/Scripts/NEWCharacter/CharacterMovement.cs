@@ -7,6 +7,8 @@ public class CharacterMovement : MonoBehaviour
 {
     [SerializeField]
     private float m_speed = 12;
+    private float m_sprintSpeed;
+    private float m_baseSpeed;
     [SerializeField]
     private CharacterController m_controller;
 
@@ -27,17 +29,22 @@ public class CharacterMovement : MonoBehaviour
     private Transform m_playerCam;
 
     //Axis
-    [SerializeField]
     private float m_VelX;
-    [SerializeField]
     private float m_VelZ;
+    private float m_smoothX;
+    private float m_smoothZ;
 
     private Vector3 Velocity;
-    
+    private Vector3 movementRaw;
+    private Vector3 movementSmooth;
+    private float movementAir;
+
     // Start is called before the first frame update
     void Start()
     {
         m_controller = GetComponent<CharacterController>();
+        m_sprintSpeed = m_speed * 2;
+        m_baseSpeed = m_speed;
     }
 
     // Update is called once per frame
@@ -45,11 +52,21 @@ public class CharacterMovement : MonoBehaviour
     {
         m_VelX = Input.GetAxisRaw("Horizontal");
         m_VelZ = Input.GetAxisRaw("Vertical");
+        m_smoothX = Input.GetAxis("Horizontal");
+        m_smoothZ = Input.GetAxis("Vertical");
+
+        movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
 
         m_isGrounded = Physics.CheckSphere(m_groundChecker.position, m_groundDistance, m_layerMask);
 
-        Vector3 movement = new Vector3(m_VelX, 0.0f, m_VelZ);
-
+        if (Input.GetButton("Sprint"))
+        {
+            m_speed = m_sprintSpeed;
+        } else
+        {
+            m_speed = m_baseSpeed;
+        }
+        
         if (movement.magnitude > 0.1f)
         {
             float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
@@ -61,6 +78,12 @@ public class CharacterMovement : MonoBehaviour
         if (m_isGrounded)
         {
             Velocity = Vector3.zero;
+            movementAir = m_speed;
+            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
+            m_controller.Move(movementRaw * m_speed * Time.deltaTime);
+        } else
+        {
+            m_controller.Move(movementSmooth * movementAir * Time.deltaTime);
         }
 
         if (Input.GetButtonDown("Jump") && m_isGrounded)

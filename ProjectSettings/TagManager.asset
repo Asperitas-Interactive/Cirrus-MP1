@@ -10,6 +10,7 @@ TagManager:
   - Water
   - Switch1
   - Switch2
+  - PickUp
   layers:
   - Default
   - TransparentFX
