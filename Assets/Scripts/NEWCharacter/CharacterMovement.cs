@@ -1,4 +1,4 @@
-using System.Collections;
+  using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -25,6 +25,8 @@ public class CharacterMovement : MonoBehaviour
     private bool m_isGrounded = false;
     [SerializeField]
     private float m_gravity = 20.0f;
+    [SerializeField] 
+    private Transform m_playerCam;
 
     //Axis
     private float m_VelX;
@@ -63,6 +65,14 @@ public class CharacterMovement : MonoBehaviour
         } else
         {
             m_speed = m_baseSpeed;
+        }
+        
+        if (movement.magnitude > 0.1f)
+        {
+            float targetAngle = Mathf.Atan2(movement.x, movement.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
         }
 
         if (m_isGrounded)
