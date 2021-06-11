@@ -86,7 +86,7 @@ public class CharacterMovement : MonoBehaviour
         } else if ((!m_isGrounded && movementSmooth.magnitude > 0.1f && Velocity.y > 0.0f)) { //If in the air, moving and ascending
 
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
-            float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir.normalized * (movementAir * Time.deltaTime));
