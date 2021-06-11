@@ -35,7 +35,5 @@ public class SwitchDoor : MonoBehaviour
             m_isOpen = false;
             gameObject.GetComponent<MeshRenderer>().enabled = true;
         }
-
-        Debug.Log(m_isOpen);
     }
 }
