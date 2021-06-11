@@ -6,7 +6,9 @@ using UnityEngine.Serialization;
 public class ItemSlot : MonoBehaviour
 {
     [FormerlySerializedAs("Connected Item")] public GameObject m_connectedItem;
-    [FormerlySerializedAs("Is Connected")] public bool m_isConnected;
+    
+    //So its door can check
+    public bool m_isConnected;
 
     [SerializeField] private BoxCollider m_boxCollider;
     // Start is called before the first frame update
@@ -26,6 +28,14 @@ public class ItemSlot : MonoBehaviour
         if(other.gameObject == m_connectedItem)
         {
             m_isConnected = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject == m_connectedItem)
+        {
+            m_isConnected = false;
         }
     }
 
