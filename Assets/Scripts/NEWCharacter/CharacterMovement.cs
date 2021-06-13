@@ -131,7 +131,9 @@ public class CharacterMovement : MonoBehaviour
             Velocity.y += m_jumpheight;
         } 
         else if (!m_isGrounded && isGliding) {
-            Velocity.y += (m_gravity / 20) * Time.deltaTime;
+            //We are not aiming for a exponential fall,
+            //but a constant one
+            Velocity.y = m_gravity / 4;
         }
         else if(!m_isGrounded)
         {
