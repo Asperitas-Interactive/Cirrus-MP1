@@ -81,11 +81,12 @@ public class CharacterMovement : MonoBehaviour
         if(!m_isGrounded && Input.GetButtonDown("Jump"))
         {
             isGliding = true;
-            //movementAir = 0;
+            movementAir = 0;
         }
         if(!m_isGrounded && Input.GetButtonUp("Jump"))
         {
             isGliding = false;
+            movementAir = m_baseSpeed;
         }
 
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
