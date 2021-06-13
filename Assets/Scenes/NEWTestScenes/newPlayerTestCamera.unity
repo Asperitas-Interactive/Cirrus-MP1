@@ -189,7 +189,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 13856478}
-  m_LocalRotation: {x: 0.05199802, y: -0.0000000042957753, z: 2.2367436e-10, w: 0.9986472}
+  m_LocalRotation: {x: 0.05199802, y: 0.000000004295778, z: -2.236745e-10, w: 0.9986472}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1757,7 +1757,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060420125}
-  m_LocalRotation: {x: 0.08823951, y: 0.000000004284816, z: -3.795707e-10, w: 0.9960993}
+  m_LocalRotation: {x: 0.08823951, y: -0.000000004284816, z: 3.795707e-10, w: 0.9960993}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1783,7 +1783,7 @@ PrefabInstance:
       objectReference: {fileID: 1703468003}
     - target: {fileID: 3870347661354914019, guid: b8bb98eb405deaf48872105cc2595f9d, type: 3}
       propertyPath: m_jumpheight
-      value: 15
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3870347661354914019, guid: b8bb98eb405deaf48872105cc2595f9d, type: 3}
       propertyPath: m_groundDistance
