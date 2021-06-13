@@ -28,6 +28,8 @@ public class CharacterMovement : MonoBehaviour
     [SerializeField] 
     private Transform m_playerCam;
 
+    private bool isGliding = false;
+
     //Axis
     private float m_VelX;
     private float m_VelZ;
@@ -70,11 +72,16 @@ public class CharacterMovement : MonoBehaviour
 
         if (m_isGrounded) //Whenever player is grounded
         {
+            isGliding = false;
             Velocity = Vector3.zero;
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             movementAir = m_speed;
         }
 
+        if(!m_isGrounded && Input.GetButtonDown("Jump"))
+        {
+            isGliding = true;
+        }
 
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
         {
@@ -83,7 +90,7 @@ public class CharacterMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
 
-        } else if (!m_isGrounded && movementSmooth.magnitude > 0.1f) //If in the air and moving
+        } else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
         {
             float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
 
@@ -91,15 +98,27 @@ public class CharacterMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir * (movementAir * Time.deltaTime));
 
-        } else if (!m_isGrounded)//If in the air and not moving
+        } else if (!m_isGrounded && !isGliding)//If in the air and not moving
         {
             m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+        } else if (!m_isGrounded && isGliding)
+        {
+            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
+
+            float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+            m_controller.Move(moveDir * (movementAir * Time.deltaTime));
         }
 
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
             Velocity.y += m_jumpheight;
         } 
+        else if (!m_isGrounded && isGliding) {
+            Velocity.y += (m_gravity / 4) * Time.deltaTime;
+        }
         else if(!m_isGrounded)
         {
             Velocity.y += m_gravity * Time.deltaTime;
@@ -111,5 +130,10 @@ public class CharacterMovement : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.DrawSphere(m_groundChecker.position, m_groundDistance);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Debug.Log(Time.time);
     }
 }
