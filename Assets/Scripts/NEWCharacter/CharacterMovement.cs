@@ -81,6 +81,11 @@ public class CharacterMovement : MonoBehaviour
         if(!m_isGrounded && Input.GetButtonDown("Jump"))
         {
             isGliding = true;
+            //movementAir = 0;
+        }
+        if(!m_isGrounded && Input.GetButtonUp("Jump"))
+        {
+            isGliding = false;
         }
 
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
@@ -98,18 +103,21 @@ public class CharacterMovement : MonoBehaviour
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
             m_controller.Move(moveDir * (movementAir * Time.deltaTime));
 
-        } else if (!m_isGrounded && !isGliding)//If in the air and not moving
+        } else if (!m_isGrounded && !isGliding)//If in the air and not moving / gliding
         {
             m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
-        } else if (!m_isGrounded && isGliding)
+
+        } else if (!m_isGrounded && isGliding && movementRaw.magnitude > 0.1f) //if gliding while moving
         {
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
-
-            float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+            float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
 
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            m_controller.Move(moveDir * (movementAir * Time.deltaTime));
+            m_controller.Move(moveDir * (m_baseSpeed * Time.deltaTime));
+        } else if(!m_isGrounded && isGliding){ //If gliding without moving
+            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
+            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
         }
 
         if (Input.GetButtonDown("Jump") && m_isGrounded)
@@ -117,7 +125,7 @@ public class CharacterMovement : MonoBehaviour
             Velocity.y += m_jumpheight;
         } 
         else if (!m_isGrounded && isGliding) {
-            Velocity.y += (m_gravity / 4) * Time.deltaTime;
+            Velocity.y = 0.0f;
         }
         else if(!m_isGrounded)
         {
