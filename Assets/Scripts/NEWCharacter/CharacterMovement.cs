@@ -140,7 +140,7 @@ public class CharacterMovement : MonoBehaviour
             Velocity.y += m_gravity * Time.deltaTime;
         }
 
-        Debug.Log(Velocity.y);
+        //Debug.Log(Velocity.y);
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
@@ -152,6 +152,6 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(Time.time);
+        //Debug.Log(Time.time);
     }
 }
