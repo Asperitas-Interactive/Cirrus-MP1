@@ -57,7 +57,6 @@ public class MovePlat : MonoBehaviour
     {
         if (m_Trigger.bounds.Contains(m_Player.transform.position))
         {
-            Debug.Log("eureka");
             m_Player.GetComponent<CharacterController>().Move(m_vectorSpeed * Time.deltaTime);
         }
     }
