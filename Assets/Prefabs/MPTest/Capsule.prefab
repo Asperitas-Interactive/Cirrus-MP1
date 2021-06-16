@@ -359,6 +359,7 @@ GameObject:
   - component: {fileID: 4358994942074642493}
   - component: {fileID: 4358994942074642481}
   - component: {fileID: 3870347661354914019}
+  - component: {fileID: 1030298714}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -415,14 +416,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_speed: 12
   m_controller: {fileID: 0}
-  m_jumpheight: 10
+  m_jumpheight: 8
   m_groundChecker: {fileID: 1004495456966238038}
   m_layerMask:
     serializedVersion: 2
     m_Bits: 8
-  m_groundDistance: 0.2
+  m_groundDistance: 0.4
   m_isGrounded: 0
   m_gravity: -20
   m_playerCam: {fileID: 0}
-  m_VelX: 0
-  m_VelZ: 0
+--- !u!114 &1030298714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358994942074642480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f33b3506035b9094db7cc2fb2975d97a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
