@@ -127,8 +127,7 @@ public class CharacterMovement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            m_controller.Move(moveDir.normalized * (m_speed * Time.deltaTime));
+            m_controller.Move(transform.forward * (m_speed * Time.deltaTime));
 
         }
         else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
@@ -136,8 +135,7 @@ public class CharacterMovement : MonoBehaviour
             float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
 
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            m_controller.Move(moveDir * (movementAir * Time.deltaTime));
+            m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
 
         }
         else if (!m_isGrounded && !isGliding)//If in the air and not moving / gliding
@@ -152,12 +150,11 @@ public class CharacterMovement : MonoBehaviour
             float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
 
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            Vector3 moveDir = Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-            m_controller.Move(moveDir * (m_baseSpeed * Time.deltaTime));
+            m_controller.Move(transform.forward * (m_baseSpeed * Time.deltaTime));
 
         }
-        else if (!m_isGrounded && isGliding)
-        { //If gliding without moving
+        else if (!m_isGrounded && isGliding) //If gliding without moving
+        { 
             //Update Smooth so we keep the speed of gliding when we let release
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
