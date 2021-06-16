@@ -133,7 +133,7 @@ public class CharacterMovement : MonoBehaviour
         else if (!m_isGrounded && isGliding) {
             //We are not aiming for a exponential fall,
             //but a constant one
-            Velocity.y = m_gravity / 4;
+            Velocity.y += (m_gravity / 4) * Time.deltaTime;
         }
         else if(!m_isGrounded)
         {
