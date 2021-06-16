@@ -1,15 +1,17 @@
   using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
+  using Cinemachine;
+  using UnityEngine;
 using UnityEngine.Serialization;
 
 public class CharacterMovement : MonoBehaviour
 {
+    [SerializeField] private CinemachineFreeLook m_freeLook;
     [SerializeField]
     private float m_speed = 12;
     private float m_sprintSpeed;
     private float m_baseSpeed;
-    [SerializeField]
+
     private CharacterController m_controller;
 
     //Jump Variables
@@ -78,6 +80,8 @@ public class CharacterMovement : MonoBehaviour
             Velocity = Vector3.zero;
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             movementAir = m_speed;
+            m_freeLook.m_XAxis.m_MaxSpeed = 450;
+
         }
 
         if(!m_isGrounded && Input.GetButtonDown("Jump"))
@@ -135,17 +139,22 @@ public class CharacterMovement : MonoBehaviour
         else if (!m_isGrounded && isGliding) {
             //We are not aiming for a exponential fall,
             //but a constant one
+            m_freeLook.m_XAxis.m_MaxSpeed = 450;
             Velocity.y += (m_gravity / 4) * Time.deltaTime;
         }
         else if(!m_isGrounded)
         {
             Velocity.y += m_gravity * Time.deltaTime;
+            m_freeLook.m_XAxis.m_MaxSpeed = 0;
+
         }
 
         //Debug.Log(Velocity.y);
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
+
+   
 
     private void OnCollisionEnter(Collision collision)
     {
