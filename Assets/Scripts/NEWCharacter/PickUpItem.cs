@@ -49,7 +49,7 @@ public class PickUpItem : MonoBehaviour
     {
         if(m_pickUp != null)
         {
-            m_pickUp.transform.position = transform.position + (transform.forward * 4) + (transform.up * 3);
+            m_pickUp.transform.Rotate(transform.position, 10 * Time.deltaTime);
         }
     }
 }
