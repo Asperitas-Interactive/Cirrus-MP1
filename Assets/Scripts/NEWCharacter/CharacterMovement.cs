@@ -41,6 +41,8 @@ public class CharacterMovement : MonoBehaviour
     private Vector3 movementSmooth;
     private float movementAir;
 
+    RaycastHit hitInfo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -60,7 +62,7 @@ public class CharacterMovement : MonoBehaviour
 
         movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
 
-        m_isGrounded = Physics.CheckSphere(m_groundChecker.position, m_groundDistance, m_layerMask);
+        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
 
         if (Input.GetButton("Sprint"))
         {
@@ -143,11 +145,6 @@ public class CharacterMovement : MonoBehaviour
         //Debug.Log(Velocity.y);
 
         m_controller.Move(Velocity * Time.deltaTime);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawSphere(m_groundChecker.position, m_groundDistance);
     }
 
     private void OnCollisionEnter(Collision collision)
