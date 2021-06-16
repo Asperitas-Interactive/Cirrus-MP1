@@ -133,14 +133,14 @@ public class CharacterMovement : MonoBehaviour
         else if (!m_isGrounded && isGliding) {
             //We are not aiming for a exponential fall,
             //but a constant one
-            Velocity.y = m_gravity / 4;
+            Velocity.y += (m_gravity / 4) * Time.deltaTime;
         }
         else if(!m_isGrounded)
         {
             Velocity.y += m_gravity * Time.deltaTime;
         }
 
-        Debug.Log(Velocity.y);
+        //Debug.Log(Velocity.y);
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
@@ -152,6 +152,6 @@ public class CharacterMovement : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log(Time.time);
+        //Debug.Log(Time.time);
     }
 }
