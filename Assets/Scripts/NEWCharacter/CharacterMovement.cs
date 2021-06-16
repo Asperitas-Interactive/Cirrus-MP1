@@ -79,7 +79,6 @@ public class CharacterMovement : MonoBehaviour
             movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             movementAir = m_speed;
             m_freeLook.m_XAxis.m_MaxSpeed = 450;
-
         }
 
         if(!m_isGrounded && Input.GetButtonDown("Jump"))
