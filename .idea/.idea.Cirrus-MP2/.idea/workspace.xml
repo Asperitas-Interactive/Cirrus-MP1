@@ -10,6 +10,10 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/Cinemachine3rdPersonAim.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
       <option value="$PROJECT_DIR$/Assets/Scripts/Collectable.cs" />
@@ -18,6 +22,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/eScatter.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Scatter.cs" />
       <option value="$PROJECT_DIR$/Assets/Samples/Cinemachine/2.6.3/Cinemachine Example Scenes/Shared/Models/UnityCharacter/Scripts/CharacterMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
     </changedPaths>
   </component>
@@ -65,7 +71,8 @@
       <option name="presentableId" value="Default" />
       <updated>1622965608711</updated>
       <workItem from="1622965632228" duration="903000" />
-      <workItem from="1623200708509" duration="3603000" />
+      <workItem from="1623200708509" duration="4566000" />
+      <workItem from="1623806267335" duration="4750000" />
     </task>
     <servers />
   </component>
