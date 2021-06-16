@@ -6,37 +6,23 @@ using UnityEngine.Serialization;
 
 public class MovePlat : MonoBehaviour
 {
-    ePlayerMovement m_pl;
     //The Distance the end points are
     [FormerlySerializedAs("DisplacementPos")] public Vector3 m_displacementPos;
     [FormerlySerializedAs("DisplacementNeg")] public Vector3 m_displacementNeg;
     //The Speed you arrive at a end point
-    private Vector3 m_vectorSpeed;
+    public Vector3 m_vectorSpeed;
     //The Destination it checks
     private Vector3 m_destinationMax;
     private Vector3 m_destinationMin;
+
+    public GameObject m_Player;
+    public BoxCollider m_Trigger;
+
     // Start is called before the first frame update
     void Start()
     {
-        m_vectorSpeed.y = Random.Range(0.1f, 0.5f);
         m_destinationMax = transform.position + m_displacementPos;
         m_destinationMin = transform.position + m_displacementNeg;
-    }
-
-    private void OnCollisionEnter(Collision _coll)
-    {
-        if (_coll.collider.CompareTag("Player"))
-        {
-            _coll.collider.transform.SetParent(transform);
-        }
-    }
-
-    private void OnCollisionExit(Collision _coll)
-    {
-        if (_coll.collider.CompareTag("Player"))
-        {
-            _coll.collider.transform.SetParent(null);
-        }
     }
 
 
@@ -51,11 +37,6 @@ public class MovePlat : MonoBehaviour
             Mathf.Clamp(transform.position.z, m_destinationMin.z, m_destinationMax.z));
         //check if reached
         DestinationReach();
-
-        if(m_pl)
-        {
-
-        }
     }
 
     //Check if it reached its destination
@@ -72,5 +53,13 @@ public class MovePlat : MonoBehaviour
         }
     }
 
-   
+    private void LateUpdate()
+    {
+        if (m_Trigger.bounds.Contains(m_Player.transform.position))
+        {
+            Debug.Log("eureka");
+            m_Player.GetComponent<CharacterController>().Move(m_vectorSpeed * Time.deltaTime);
+        }
+    }
+
 }
