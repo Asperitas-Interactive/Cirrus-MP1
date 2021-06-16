@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 367668654}
   - component: {fileID: 367668657}
   - component: {fileID: 367668656}
+  - component: {fileID: 367668655}
   m_Layer: 0
   m_Name: Cube (1)
   m_TagString: Untagged
@@ -81,6 +82,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &367668655
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 367668653}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &751180531
 GameObject:
   m_ObjectHideFlags: 0
@@ -220,6 +234,7 @@ GameObject:
   - component: {fileID: 2145490873}
   - component: {fileID: 2145490876}
   - component: {fileID: 2145490875}
+  - component: {fileID: 2145490874}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -290,6 +305,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!65 &2145490874
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2145490872}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1163053448034378824
 GameObject:
   m_ObjectHideFlags: 0
@@ -332,6 +360,7 @@ GameObject:
   - component: {fileID: 4358994942074642481}
   - component: {fileID: 3870347661354914019}
   - component: {fileID: 1030298714}
+  - component: {fileID: 1147030448}
   m_Layer: 0
   m_Name: Capsule
   m_TagString: Untagged
@@ -388,12 +417,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_freeLook: {fileID: 0}
   m_speed: 12
-  m_jumpheight: 8
+  m_jumpheight: 12
   m_groundChecker: {fileID: 1004495456966238038}
   m_layerMask:
     serializedVersion: 2
     m_Bits: 8
-  m_groundDistance: 2.2
+  m_groundDistance: 2.25
   m_isGrounded: 0
   m_gravity: -20
   m_playerCam: {fileID: 0}
@@ -409,3 +438,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f33b3506035b9094db7cc2fb2975d97a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1147030448
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358994942074642480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4a7ce18b431caa4a9869e43a05000be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_aimCamera: {fileID: 0}
+  m_normalCamera: {fileID: 0}
