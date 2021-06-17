@@ -44,6 +44,10 @@ public class CharacterMovement : MonoBehaviour
     private float movementAir;
 
     RaycastHit hitInfo;
+    Vector3 forward;
+    float groundAngle;
+
+    bool isJumping;
 
     // Start is called before the first frame update
     void Start()
@@ -60,6 +64,7 @@ public class CharacterMovement : MonoBehaviour
         GetAxis();
 
         m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
+        Debug.DrawLine(transform.position, hitInfo.point);
 
         SpeedControl();
 
@@ -78,6 +83,28 @@ public class CharacterMovement : MonoBehaviour
         m_smoothZ = Input.GetAxis("Vertical");
 
         movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
+    }
+
+    void GetForward()
+    {
+        if (!m_isGrounded)
+        {
+            forward = transform.forward;
+            return;
+        }
+
+        forward = Vector3.Cross(hitInfo.normal, -transform.right);
+    }
+
+    void GetGroundAngle()
+    {
+        if (!m_isGrounded)
+        {
+            groundAngle = 90;
+            return;
+        }
+
+        groundAngle = Vector3.Angle(hitInfo.normal, transform.forward);
     }
 
     void SpeedControl()
@@ -162,8 +189,13 @@ public class CharacterMovement : MonoBehaviour
     }
     void ApplyGravity()
     {
+        if(Velocity.y == m_jumpheight)
+        {
+            isJumping = false;
+        }
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
+            isJumping = true;
             Velocity.y += m_jumpheight;
         }
         else if (!m_isGrounded && isGliding)
@@ -177,8 +209,13 @@ public class CharacterMovement : MonoBehaviour
         {
             Velocity.y += m_gravity * Time.deltaTime;
             m_freeLook.m_XAxis.m_MaxSpeed = 0;
-
         }
+        else if(m_isGrounded && !isJumping)
+        {
+            Velocity.y += m_gravity * Time.deltaTime;
+        }
+
+        Debug.Log(isJumping);
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
@@ -187,5 +224,11 @@ public class CharacterMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log(Time.time);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.3f);
     }
 }
