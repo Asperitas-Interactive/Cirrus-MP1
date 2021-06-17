@@ -44,6 +44,7 @@ public class CharacterMovement : MonoBehaviour
     private float movementAir;
 
     RaycastHit hitInfo;
+    RaycastHit SlopeHit;
     Vector3 forward;
     float groundAngle;
 
@@ -63,11 +64,17 @@ public class CharacterMovement : MonoBehaviour
     {
         GetAxis();
 
-        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
+        GetGroundAngle();
+        if (groundAngle == 90)
+        {
+            m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
+        } else
+        {
+            m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance + 0.3f, m_layerMask);
+        }
         Debug.DrawLine(transform.position, hitInfo.point);
 
         GetForward();
-        GetGroundAngle();
 
         Debug.Log(groundAngle);
 
@@ -103,13 +110,14 @@ public class CharacterMovement : MonoBehaviour
 
     void GetGroundAngle()
     {
+        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, m_groundDistance + 0.3f, m_layerMask);
         if (!m_isGrounded)
         {
             groundAngle = 90;
             return;
         }
 
-        groundAngle = Vector3.Angle(hitInfo.normal, transform.forward);
+        groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
     }
 
     void SpeedControl()
@@ -155,11 +163,22 @@ public class CharacterMovement : MonoBehaviour
 
    void MovementControl()
     {
+        if(m_isGrounded && groundAngle >= 125)
+        {
+            m_controller.Move(-forward * m_speed * Time.deltaTime);
+        }
+
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
         {
-            float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            m_controller.Move(forward * (m_speed * Time.deltaTime));
+            if (groundAngle < 125)
+            {
+                float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                m_controller.Move(forward * (m_speed * Time.deltaTime));
+            } else
+            {
+                m_controller.Move(-forward * m_speed * Time.deltaTime);
+            }
 
         }
         else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
