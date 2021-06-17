@@ -66,6 +66,8 @@ public class CharacterMovement : MonoBehaviour
         m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
         Debug.DrawLine(transform.position, hitInfo.point);
 
+        GetForward();
+
         SpeedControl();
 
         GlideControl();
@@ -154,7 +156,7 @@ public class CharacterMovement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            m_controller.Move(transform.forward * (m_speed * Time.deltaTime));
+            m_controller.Move(forward * (m_speed * Time.deltaTime));
 
         }
         else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
