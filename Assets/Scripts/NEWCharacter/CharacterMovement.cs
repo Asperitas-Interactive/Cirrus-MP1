@@ -67,6 +67,9 @@ public class CharacterMovement : MonoBehaviour
         Debug.DrawLine(transform.position, hitInfo.point);
 
         GetForward();
+        GetGroundAngle();
+
+        Debug.Log(groundAngle);
 
         SpeedControl();
 
@@ -216,8 +219,6 @@ public class CharacterMovement : MonoBehaviour
         {
             Velocity.y += m_gravity * Time.deltaTime;
         }
-
-        Debug.Log(isJumping);
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
