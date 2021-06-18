@@ -213,8 +213,6 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (!m_isGrounded && isGliding && movementRaw.magnitude > 0.1f) //if gliding while moving
         {
-            //Update smooth for when we release
-            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
 
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
@@ -225,8 +223,6 @@ public class CharacterMovement : MonoBehaviour
         {
             if (groundAngle == 90)
             {
-                //Update Smooth so we keep the speed of gliding when we let release
-                movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
                 m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
             } else
             {
