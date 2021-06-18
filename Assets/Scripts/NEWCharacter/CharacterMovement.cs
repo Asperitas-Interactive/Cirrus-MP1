@@ -49,6 +49,8 @@ public class CharacterMovement : MonoBehaviour
     float groundAngle;
     float slopeDistance;
 
+    Vector3 SlopeOff;
+
     bool isJumping;
 
     // Start is called before the first frame update
@@ -96,6 +98,7 @@ public class CharacterMovement : MonoBehaviour
         m_smoothZ = Input.GetAxis("Vertical");
 
         movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
+        movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
     }
 
     void GetForward()
@@ -119,7 +122,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         slopeDistance = transform.position.y - SlopeHit.point.y;
-        Debug.Log(groundAngle);
+        SlopeOff = Vector3.Cross(SlopeHit.normal, -transform.right);
         Debug.DrawLine(transform.position, SlopeHit.point);
         groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
     }
@@ -138,7 +141,6 @@ public class CharacterMovement : MonoBehaviour
         if (m_isGrounded) //Whenever player is grounded
         {
             Velocity = Vector3.zero;
-            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
             movementAir = m_speed;
             m_freeLook.m_XAxis.m_MaxSpeed = 450;
         }
@@ -187,15 +189,26 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
         {
-            float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
-
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
+            if (groundAngle == 90)
+            {
+                float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
+            } else
+            {
+                m_controller.Move(-SlopeOff * m_speed * Time.deltaTime);
+            }
 
         }
         else if (!m_isGrounded && !isGliding)//If in the air and not moving / gliding
         {
-            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+            if (groundAngle == 90)
+            {
+                m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+            } else
+            {
+                m_controller.Move(-SlopeOff * m_speed * Time.deltaTime);
+            }
 
         }
         else if (!m_isGrounded && isGliding && movementRaw.magnitude > 0.1f) //if gliding while moving
@@ -209,10 +222,16 @@ public class CharacterMovement : MonoBehaviour
 
         }
         else if (!m_isGrounded && isGliding) //If gliding without moving
-        { 
-            //Update Smooth so we keep the speed of gliding when we let release
-            movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
-            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+        {
+            if (groundAngle == 90)
+            {
+                //Update Smooth so we keep the speed of gliding when we let release
+                movementSmooth = new Vector3(m_smoothX, 0.0f, m_smoothZ);
+                m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+            } else
+            {
+                m_controller.Move(-SlopeOff * m_speed * Time.deltaTime);
+            }
         }
     }
     void ApplyGravity()
