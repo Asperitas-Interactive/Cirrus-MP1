@@ -47,6 +47,7 @@ public class CharacterMovement : MonoBehaviour
     RaycastHit SlopeHit;
     Vector3 forward;
     float groundAngle;
+    float slopeDistance;
 
     bool isJumping;
 
@@ -76,7 +77,7 @@ public class CharacterMovement : MonoBehaviour
 
         GetForward();
 
-        Debug.Log(groundAngle);
+        //Debug.Log(groundAngle);
 
         SpeedControl();
 
@@ -110,13 +111,14 @@ public class CharacterMovement : MonoBehaviour
 
     void GetGroundAngle()
     {
-        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, m_groundDistance + 0.3f, m_layerMask);
+        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, Mathf.Infinity, m_layerMask);
         if (!m_isGrounded)
         {
             groundAngle = 90;
             return;
         }
 
+        slopeDistance = transform.position.y - SlopeHit.point.y;
         groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
     }
 
