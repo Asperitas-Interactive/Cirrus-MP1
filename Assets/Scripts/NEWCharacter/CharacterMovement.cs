@@ -44,6 +44,12 @@ public class CharacterMovement : MonoBehaviour
     private float movementAir;
 
     RaycastHit hitInfo;
+    RaycastHit SlopeHit;
+    Vector3 forward;
+    float groundAngle;
+    float slopeDistance;
+
+    bool isJumping;
 
     // Start is called before the first frame update
     void Start()
@@ -59,7 +65,19 @@ public class CharacterMovement : MonoBehaviour
     {
         GetAxis();
 
-        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
+        GetGroundAngle();
+        if (groundAngle == 90)
+        {
+            m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
+        } else
+        {
+            m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance + 0.3f, m_layerMask);
+        }
+        Debug.DrawLine(transform.position, hitInfo.point);
+
+        GetForward();
+
+        //Debug.Log(groundAngle);
 
         SpeedControl();
 
@@ -78,6 +96,30 @@ public class CharacterMovement : MonoBehaviour
         m_smoothZ = Input.GetAxis("Vertical");
 
         movementRaw = new Vector3(m_VelX, 0.0f, m_VelZ);
+    }
+
+    void GetForward()
+    {
+        if (!m_isGrounded)
+        {
+            forward = transform.forward;
+            return;
+        }
+
+        forward = Vector3.Cross(hitInfo.normal, -transform.right);
+    }
+
+    void GetGroundAngle()
+    {
+        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, Mathf.Infinity, m_layerMask);
+        if (!m_isGrounded)
+        {
+            groundAngle = 90;
+            return;
+        }
+
+        slopeDistance = transform.position.y - SlopeHit.point.y;
+        groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
     }
 
     void SpeedControl()
@@ -123,11 +165,22 @@ public class CharacterMovement : MonoBehaviour
 
    void MovementControl()
     {
+        if(m_isGrounded && groundAngle >= 125)
+        {
+            m_controller.Move(-forward * m_speed * Time.deltaTime);
+        }
+
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
         {
-            float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
-            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            m_controller.Move(transform.forward * (m_speed * Time.deltaTime));
+            if (groundAngle < 125)
+            {
+                float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+                m_controller.Move(forward * (m_speed * Time.deltaTime));
+            } else
+            {
+                m_controller.Move(-forward * m_speed * Time.deltaTime);
+            }
 
         }
         else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
@@ -162,8 +215,13 @@ public class CharacterMovement : MonoBehaviour
     }
     void ApplyGravity()
     {
+        if(Velocity.y == m_jumpheight)
+        {
+            isJumping = false;
+        }
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
+            isJumping = true;
             Velocity.y += m_jumpheight;
         }
         else if (!m_isGrounded && isGliding)
@@ -177,7 +235,10 @@ public class CharacterMovement : MonoBehaviour
         {
             Velocity.y += m_gravity * Time.deltaTime;
             m_freeLook.m_XAxis.m_MaxSpeed = 0;
-
+        }
+        else if(m_isGrounded && !isJumping)
+        {
+            Velocity.y += m_gravity * Time.deltaTime;
         }
 
         m_controller.Move(Velocity * Time.deltaTime);
@@ -187,5 +248,11 @@ public class CharacterMovement : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         //Debug.Log(Time.time);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, 0.3f);
     }
 }
