@@ -215,7 +215,7 @@ MonoBehaviour:
   m_layerMask:
     serializedVersion: 2
     m_Bits: 8
-  m_groundDistance: 1.2
+  m_groundDistance: 1.08
   m_isGrounded: 0
   m_gravity: -20
   m_playerCam: {fileID: 0}
