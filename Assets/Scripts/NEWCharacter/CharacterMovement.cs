@@ -189,27 +189,14 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (!m_isGrounded && movementSmooth.magnitude > 0.1f && !isGliding) //If in the air and moving
         {
-            if (groundAngle == 90)
-            {
-                float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-                m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
-            } else
-            {
-                m_controller.Move(-SlopeOff * m_speed * Time.deltaTime);
-            }
+            float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
+            transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
+            m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
 
         }
         else if (!m_isGrounded && !isGliding)//If in the air and not moving / gliding
         {
-            if (groundAngle == 90)
-            {
-                m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
-            } else
-            {
-                m_controller.Move(-SlopeOff * m_speed * Time.deltaTime);
-            }
-
+            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
         }
         else if (!m_isGrounded && isGliding && movementRaw.magnitude > 0.1f) //if gliding while moving
         {
@@ -221,13 +208,7 @@ public class CharacterMovement : MonoBehaviour
         }
         else if (!m_isGrounded && isGliding) //If gliding without moving
         {
-            if (groundAngle == 90)
-            {
-                m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
-            } else
-            {
-                m_controller.Move(-SlopeOff * m_speed * Time.deltaTime);
-            }
+            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
         }
     }
     void ApplyGravity()
