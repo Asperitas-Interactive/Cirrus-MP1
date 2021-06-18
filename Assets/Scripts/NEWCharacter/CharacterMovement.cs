@@ -119,6 +119,8 @@ public class CharacterMovement : MonoBehaviour
         }
 
         slopeDistance = transform.position.y - SlopeHit.point.y;
+        Debug.Log(groundAngle);
+        Debug.DrawLine(transform.position, SlopeHit.point);
         groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
     }
 
@@ -240,6 +242,7 @@ public class CharacterMovement : MonoBehaviour
         {
             Velocity.y += m_gravity * Time.deltaTime;
         }
+
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
