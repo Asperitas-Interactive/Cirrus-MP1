@@ -55,9 +55,9 @@ Material:
     - Vector1_14045465f7de45538c03bd62b951534e: 5.35
     - Vector1_72f24bca0f384df2a86ee7783398485b: 1
     - _Depthpower: 7.19
-    - _FoamSpeed: 0.18
+    - _FoamSpeed: 0.128
     - _Foamdistance: 1.1
-    - _Fresnel: 0.23
+    - _Fresnel: 0.143
     - _NormalPower: 1.33
     m_Colors:
     - Color_a656bda511484c7e9e5134e176b79708: {r: 0.20652369, g: 0.2688581, b: 0.4811321, a: 0}
