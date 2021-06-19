@@ -67,15 +67,10 @@ public class CharacterMovement : MonoBehaviour
     {
         GetAxis();
 
+        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance + 0.05f, m_layerMask);
         GetGroundAngle();
-        if (groundAngle == 90)
-        {
-            m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
-        } else
-        {
-            m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance + 0.3f, m_layerMask);
-        }
-        Debug.DrawLine(transform.position, hitInfo.point);
+
+        //Debug.DrawLine(transform.position, hitInfo.point);
 
         GetForward();
 
@@ -114,17 +109,25 @@ public class CharacterMovement : MonoBehaviour
 
     void GetGroundAngle()
     {
-        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, Mathf.Infinity, m_layerMask);
+        Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, Mathf.Infinity, m_layerMask);
+
+        slopeDistance = transform.position.y - SlopeHit.point.y;
+
+        Debug.DrawLine(transform.position, SlopeHit.point);
+
         if (!m_isGrounded)
         {
             groundAngle = 90;
-            return;
+            
         }
 
-        slopeDistance = transform.position.y - SlopeHit.point.y;
         SlopeOff = Vector3.Cross(SlopeHit.normal, -transform.right);
-        Debug.DrawLine(transform.position, SlopeHit.point);
         groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
+        if (slopeDistance < 1.2f)
+        {
+            m_groundDistance = slopeDistance;
+        }
+        Debug.Log(groundAngle);
     }
 
     void SpeedControl()
@@ -150,6 +153,7 @@ public class CharacterMovement : MonoBehaviour
     {
         if (!m_isGrounded && Input.GetButtonDown("Jump"))
         {
+            Velocity = Vector3.zero;
             isGliding = true;
             //No movement Airspeed while gliding
             movementAir = 0;
