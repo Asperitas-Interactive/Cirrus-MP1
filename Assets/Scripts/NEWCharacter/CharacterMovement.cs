@@ -50,6 +50,9 @@ public class CharacterMovement : MonoBehaviour
     float slopeDistance;
 
     Vector3 SlopeOff;
+    bool onSlope = false;
+
+    float prevY;
 
     bool isJumping;
     
@@ -71,7 +74,7 @@ public class CharacterMovement : MonoBehaviour
         m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
         GetGroundAngle();
 
-        //Debug.DrawLine(transform.position, hitInfo.point);
+        Debug.DrawLine(transform.position, hitInfo.point);
 
         GetForward();
 
@@ -110,25 +113,27 @@ public class CharacterMovement : MonoBehaviour
 
     void GetGroundAngle()
     {
-        Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, Mathf.Infinity, m_layerMask);
+        Physics.Raycast(transform.position, -Vector3.up, out SlopeHit, 2.0f, m_layerMask);
 
-        slopeDistance = transform.position.y - SlopeHit.point.y;
-
-        Debug.DrawLine(transform.position, SlopeHit.point);
-
-        if (!m_isGrounded)
+        if (SlopeHit.point != Vector3.zero)
         {
-            groundAngle = 90;
-            
-        }
+            slopeDistance = transform.position.y - SlopeHit.point.y;
 
-        SlopeOff = Vector3.Cross(SlopeHit.normal, -transform.right);
-        groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
-        if (slopeDistance < 1.2f)
-        {
-            m_groundDistance = slopeDistance;
+            //Debug.DrawLine(transform.position, SlopeHit.point);
+
+            SlopeOff = Vector3.Cross(SlopeHit.normal, -transform.right);
+            groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
+            if (groundAngle == 90)
+            {
+                m_groundDistance = (m_controller.height / 2) + m_controller.skinWidth + 0.0004f;
+                onSlope = true;
+            }
+            else
+            {
+                m_groundDistance = slopeDistance;
+                onSlope = false;
+            }
         }
-        Debug.Log(groundAngle);
     }
 
     void SpeedControl()
@@ -144,7 +149,6 @@ public class CharacterMovement : MonoBehaviour
 
         if (m_isGrounded) //Whenever player is grounded
         {
-            Velocity = Vector3.zero;
             movementAir = m_speed;
             m_freeLook.m_XAxis.m_MaxSpeed = 450;
         }
@@ -174,21 +178,21 @@ public class CharacterMovement : MonoBehaviour
 
    void MovementControl()
     {
-        if(m_isGrounded && groundAngle >= 125)
+        if(m_isGrounded && groundAngle >= 130)
         {
-            m_controller.Move(-forward * m_speed * Time.deltaTime);
+            m_controller.Move(SlopeOff * m_speed * Time.deltaTime);
         }
 
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
         {
-            if (groundAngle < 125)
+            if (groundAngle < 130)
             {
                 float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
                 m_controller.Move(forward * (m_speed * Time.deltaTime));
             } else
             {
-                m_controller.Move(-forward * m_speed * Time.deltaTime);
+                m_controller.Move(SlopeOff * m_speed * Time.deltaTime);
             }
 
         }
@@ -239,19 +243,27 @@ public class CharacterMovement : MonoBehaviour
             Velocity.y += m_gravity * Time.deltaTime;
             m_freeLook.m_XAxis.m_MaxSpeed = 0;
         }
-        else if(m_isGrounded && !isJumping)
+        else if(m_isGrounded && onSlope)
         {
             Velocity.y += m_gravity * Time.deltaTime;
         }
 
-
+        prevY = transform.position.y;
         m_controller.Move(Velocity * Time.deltaTime);
+
+        //Check if we arent moving down anymore
+        if (prevY == transform.position.y)
+        {
+            Velocity = Vector3.zero;
+        }
+
+        Debug.Log(Velocity);
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log(Time.time);
+        Debug.Log(collision.gameObject.layer);
     }
 
 
