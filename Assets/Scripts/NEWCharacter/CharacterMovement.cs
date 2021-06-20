@@ -243,7 +243,7 @@ public class CharacterMovement : MonoBehaviour
             Velocity.y += m_gravity * Time.deltaTime;
             m_freeLook.m_XAxis.m_MaxSpeed = 0;
         }
-        else if(m_isGrounded && onSlope)
+        else if(m_isGrounded && !onSlope)
         {
             Velocity.y += m_gravity * Time.deltaTime;
         }
@@ -256,8 +256,6 @@ public class CharacterMovement : MonoBehaviour
         {
             Velocity = Vector3.zero;
         }
-
-        Debug.Log(Velocity);
     }
 
 
