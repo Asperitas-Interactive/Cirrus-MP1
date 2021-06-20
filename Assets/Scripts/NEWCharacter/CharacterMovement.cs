@@ -243,6 +243,8 @@ public class CharacterMovement : MonoBehaviour
             Velocity.y += m_gravity * Time.deltaTime;
         }
 
+        //Clamp to create a terminal velocity
+        Velocity = new Vector3(Velocity.x, Mathf.Clamp(Velocity.y, 0, 20.0f), Velocity.z);
 
         m_controller.Move(Velocity * Time.deltaTime);
     }
