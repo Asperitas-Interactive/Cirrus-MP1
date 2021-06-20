@@ -67,7 +67,7 @@ public class CharacterMovement : MonoBehaviour
     {
         GetAxis();
 
-        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance + 0.05f, m_layerMask);
+        m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
         GetGroundAngle();
 
         //Debug.DrawLine(transform.position, hitInfo.point);
