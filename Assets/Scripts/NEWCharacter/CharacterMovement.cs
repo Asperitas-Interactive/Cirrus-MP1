@@ -52,6 +52,7 @@ public class CharacterMovement : MonoBehaviour
     Vector3 SlopeOff;
 
     bool isJumping;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -253,9 +254,5 @@ public class CharacterMovement : MonoBehaviour
         //Debug.Log(Time.time);
     }
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(transform.position, 0.3f);
-    }
+
 }

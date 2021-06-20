@@ -37,6 +37,8 @@ public class MovePlat : MonoBehaviour
             Mathf.Clamp(transform.position.z, m_destinationMin.z, m_destinationMax.z));
         //check if reached
         DestinationReach();
+        
+       
     }
 
     //Check if it reached its destination
