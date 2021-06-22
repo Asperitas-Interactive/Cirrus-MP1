@@ -20,7 +20,7 @@ public class Reciever : MonoBehaviour
 
     private void OnTriggerEnter(Collider _collider)
     {
-        if (_collider.CompareTag("Player"))
+        if (_collider.CompareTag("PickUp"))
         {
             m_stuff?.Invoke();
             Destroy(this.gameObject);

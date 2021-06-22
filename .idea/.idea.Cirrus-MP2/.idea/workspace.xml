@@ -44,6 +44,7 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Doors.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Reciever.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tZ9B78imEIjZTnTcebdlBIaIxF" />
