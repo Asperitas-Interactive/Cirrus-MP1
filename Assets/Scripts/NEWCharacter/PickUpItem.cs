@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,8 @@ public class PickUpItem : MonoBehaviour
     private GameObject m_pickUp;
 
     bool m_canPickUp = false;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
+    
+    
     void Update()
     {
         if (Input.GetButtonUp("PickUp") && m_pickUp != null)
@@ -44,7 +40,7 @@ public class PickUpItem : MonoBehaviour
             }
         }
     }
-
+    
     private void LateUpdate()
     {
         if(m_pickUp != null)
@@ -52,4 +48,5 @@ public class PickUpItem : MonoBehaviour
             m_pickUp.transform.position = transform.position + (transform.forward * 4) + (transform.up * 3);
         }
     }
+    
 }
