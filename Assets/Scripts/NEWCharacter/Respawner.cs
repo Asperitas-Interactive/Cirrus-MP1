@@ -20,10 +20,7 @@ public class Respawner : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.A))
-        {
-            ToSpawnLoc(0);
-        }
+      
     }
 
     private void LateUpdate()

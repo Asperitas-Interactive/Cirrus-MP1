@@ -54,12 +54,15 @@ public class CharacterMovement : MonoBehaviour
 
     float prevY;
 
+    private Animator m_animator;
     bool isJumping;
-    
+    private static readonly int Speed = Animator.StringToHash("Speed");
+
 
     // Start is called before the first frame update
     void Start()
     {
+        m_animator = transform.GetChild(2).GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
         m_controller = GetComponent<CharacterController>();
         m_sprintSpeed = m_speed * 2;
@@ -178,9 +181,14 @@ public class CharacterMovement : MonoBehaviour
 
    void MovementControl()
     {
+        if (movementRaw.magnitude < 0.1f)
+        {
+            m_animator.SetFloat(Speed, 0.0f);
+        }
         if(m_isGrounded && groundAngle >= 130)
         {
             m_controller.Move(SlopeOff * m_speed * Time.deltaTime);
+            m_animator.SetFloat(Speed, (SlopeOff * m_speed).magnitude);
         }
 
         if (m_isGrounded && movementRaw.magnitude > 0.1f) //If grounded and moving
@@ -190,9 +198,13 @@ public class CharacterMovement : MonoBehaviour
                 float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
                 m_controller.Move(forward * (m_speed * Time.deltaTime));
-            } else
+                m_animator.SetFloat(Speed, (forward * m_speed).magnitude);
+            } 
+            
+            else
             {
                 m_controller.Move(SlopeOff * m_speed * Time.deltaTime);
+                m_animator.SetFloat(Speed, (SlopeOff * m_speed).magnitude);
             }
 
         }
@@ -201,11 +213,12 @@ public class CharacterMovement : MonoBehaviour
             float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
-
+            m_animator.SetFloat(Speed, (transform.forward * (movementAir )).magnitude);
         }
         else if (!m_isGrounded && !isGliding)//If in the air and not moving / gliding
         {
-            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+            m_controller.Move(movementSmooth * movementAir);
+            m_animator.SetFloat(Speed, (movementSmooth *movementAir ).magnitude);
         }
         else if (!m_isGrounded && isGliding && movementRaw.magnitude > 0.1f) //if gliding while moving
         {
@@ -213,11 +226,13 @@ public class CharacterMovement : MonoBehaviour
 
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             m_controller.Move(transform.forward * (m_baseSpeed * Time.deltaTime));
+            m_animator.SetFloat(Speed, (transform.forward * (m_baseSpeed )).magnitude);
 
         }
         else if (!m_isGrounded && isGliding) //If gliding without moving
         {
             m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+            m_animator.SetFloat(Speed, (movementSmooth * (movementAir )).magnitude);
         }
     }
     void ApplyGravity()
