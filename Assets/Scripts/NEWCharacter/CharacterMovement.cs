@@ -69,6 +69,7 @@ public class CharacterMovement : MonoBehaviour
         m_baseSpeed = m_speed;
     }
 
+
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -77,11 +78,7 @@ public class CharacterMovement : MonoBehaviour
         m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
         GetGroundAngle();
 
-        //Debug.Log(transform.position.y - hitInfo.point.y);
-
         GetForward();
-
-        //Debug.Log(groundAngle);
 
         SpeedControl();
 
@@ -121,8 +118,6 @@ public class CharacterMovement : MonoBehaviour
         if (SlopeHit.point != Vector3.zero)
         {
             slopeDistance = transform.position.y - SlopeHit.point.y;
-
-            //Debug.DrawLine(transform.position, SlopeHit.point);
 
             SlopeOff = Vector3.Cross(SlopeHit.normal, -transform.right);
             groundAngle = Vector3.Angle(SlopeHit.normal, transform.forward);
@@ -237,10 +232,8 @@ public class CharacterMovement : MonoBehaviour
     }
     void ApplyGravity()
     {
-        Debug.Log(Velocity);
         if (Velocity.y < 0)
         {
-            Debug.Log("ah");
             isJumping = false;
         }
         if (Input.GetButtonDown("Jump") && m_isGrounded)
@@ -267,7 +260,7 @@ public class CharacterMovement : MonoBehaviour
 
         if (m_isGrounded && !isJumping)
         {
-            
+
             Velocity = Vector3.zero;
         }
 
@@ -275,12 +268,5 @@ public class CharacterMovement : MonoBehaviour
         m_controller.Move(Velocity * Time.fixedDeltaTime);
 
     }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        Debug.Log(collision.gameObject.layer);
-    }
-
 
 }
