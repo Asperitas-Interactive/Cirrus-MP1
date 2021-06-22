@@ -7,15 +7,20 @@ public class Doors : MonoBehaviour
     [SerializeField] private GameObject m_cutsceneCamera;
    
 
-    public void OpenDoor()
+    public void OpenDoor(int _delay)
+    {
+       Invoke("Open", _delay);
+    }
+
+    private void Open()
     {
         GetComponent<Animator>().SetTrigger("Open");
     }
 
     public void setupCam()
     {
-        Invoke("enableCam", 3);
-        Invoke("disableCam", 6);
+        enableCam();
+        Invoke("disableCam", 3);
     }
 
     private void enableCam()

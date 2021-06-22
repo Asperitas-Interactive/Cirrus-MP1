@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="566830a8-82ba-4377-8178-8d7be6e26ea1" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,6 +23,8 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/CinemachineFreeLook.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7D971898-EA0F-4307-A8ED-DF491EA76525/77/fa0a6624/CharacterController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/Cinemachine3rdPersonAim.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MovingPlat.cs" root0="FORCE_HIGHLIGHTING" />
@@ -36,8 +41,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovingPlat.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovePlat.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Doors.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Reciever.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tZ9B78imEIjZTnTcebdlBIaIxF" />
