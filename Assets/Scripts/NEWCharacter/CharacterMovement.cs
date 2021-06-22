@@ -82,10 +82,12 @@ public class CharacterMovement : MonoBehaviour
 
         SpeedControl();
 
-        GlideControl();
-
         MovementControl();
+    }
 
+    private void Update()
+    {
+        GlideControl();
         ApplyGravity();
     }
 
@@ -246,16 +248,16 @@ public class CharacterMovement : MonoBehaviour
             //We are not aiming for a exponential fall,
             //but a constant one
             // m_freeLook.m_XAxis.m_MaxSpeed = 450;
-            Velocity.y += (m_gravity / 4) * Time.fixedDeltaTime;
+            Velocity.y += (m_gravity / 4) * Time.deltaTime;
         }
         else if (!m_isGrounded)
         {
-            Velocity.y += m_gravity * Time.fixedDeltaTime;
+            Velocity.y += m_gravity * Time.deltaTime;
             //m_freeLook.m_XAxis.m_MaxSpeed = 0;
         }
         else if (m_isGrounded && !onSlope)
         {
-            Velocity.y += m_gravity * Time.fixedDeltaTime;
+            Velocity.y += m_gravity * Time.deltaTime;
         }
 
         if (m_isGrounded && !isJumping)
@@ -265,7 +267,7 @@ public class CharacterMovement : MonoBehaviour
         }
 
         prevY = transform.position.y;
-        m_controller.Move(Velocity * Time.fixedDeltaTime);
+        m_controller.Move(Velocity * Time.deltaTime);
 
     }
 
