@@ -70,14 +70,14 @@ public class CharacterMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         GetAxis();
 
         m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
         GetGroundAngle();
 
-        Debug.DrawLine(transform.position, hitInfo.point);
+        //Debug.Log(transform.position.y - hitInfo.point.y);
 
         GetForward();
 
@@ -187,7 +187,7 @@ public class CharacterMovement : MonoBehaviour
         }
         if(m_isGrounded && groundAngle >= 130)
         {
-            m_controller.Move(SlopeOff * m_speed * Time.deltaTime);
+            m_controller.Move(SlopeOff * m_speed * Time.fixedDeltaTime);
             m_animator.SetFloat(Speed, (SlopeOff * m_speed).magnitude);
         }
 
@@ -197,13 +197,13 @@ public class CharacterMovement : MonoBehaviour
             {
                 float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
                 transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-                m_controller.Move(forward * (m_speed * Time.deltaTime));
+                m_controller.Move(forward * (m_speed * Time.fixedDeltaTime));
                 m_animator.SetFloat(Speed, (forward * m_speed).magnitude);
             } 
             
             else
             {
-                m_controller.Move(SlopeOff * m_speed * Time.deltaTime);
+                m_controller.Move(SlopeOff * m_speed * Time.fixedDeltaTime);
                 m_animator.SetFloat(Speed, (SlopeOff * m_speed).magnitude);
             }
 
@@ -212,7 +212,7 @@ public class CharacterMovement : MonoBehaviour
         {
             float targetAngle = Mathf.Atan2(movementSmooth.x, movementSmooth.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            m_controller.Move(transform.forward * (movementAir * Time.deltaTime));
+            m_controller.Move(transform.forward * (movementAir * Time.fixedDeltaTime));
             m_animator.SetFloat(Speed, (transform.forward * (movementAir )).magnitude);
         }
         else if (!m_isGrounded && !isGliding)//If in the air and not moving / gliding
@@ -225,20 +225,22 @@ public class CharacterMovement : MonoBehaviour
             float targetAngle = Mathf.Atan2(movementRaw.x, movementRaw.z) * Mathf.Rad2Deg + m_playerCam.eulerAngles.y;
 
             transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            m_controller.Move(transform.forward * (m_baseSpeed * Time.deltaTime));
+            m_controller.Move(transform.forward * (m_baseSpeed * Time.fixedDeltaTime));
             m_animator.SetFloat(Speed, (transform.forward * (m_baseSpeed )).magnitude);
 
         }
         else if (!m_isGrounded && isGliding) //If gliding without moving
         {
-            m_controller.Move(movementSmooth * (movementAir * Time.deltaTime));
+            m_controller.Move(movementSmooth * (movementAir * Time.fixedDeltaTime));
             m_animator.SetFloat(Speed, (movementSmooth * (movementAir )).magnitude);
         }
     }
     void ApplyGravity()
     {
-        if(Velocity.y == m_jumpheight)
+        Debug.Log(Velocity);
+        if (Velocity.y < 0)
         {
+            Debug.Log("ah");
             isJumping = false;
         }
         if (Input.GetButtonDown("Jump") && m_isGrounded)
@@ -250,27 +252,28 @@ public class CharacterMovement : MonoBehaviour
         {
             //We are not aiming for a exponential fall,
             //but a constant one
-           // m_freeLook.m_XAxis.m_MaxSpeed = 450;
-            Velocity.y += (m_gravity / 4) * Time.deltaTime;
+            // m_freeLook.m_XAxis.m_MaxSpeed = 450;
+            Velocity.y += (m_gravity / 4) * Time.fixedDeltaTime;
         }
         else if (!m_isGrounded)
         {
-            Velocity.y += m_gravity * Time.deltaTime;
+            Velocity.y += m_gravity * Time.fixedDeltaTime;
             //m_freeLook.m_XAxis.m_MaxSpeed = 0;
         }
-        else if(m_isGrounded && !onSlope)
+        else if (m_isGrounded && !onSlope)
         {
-            Velocity.y += m_gravity * Time.deltaTime;
+            Velocity.y += m_gravity * Time.fixedDeltaTime;
+        }
+
+        if (m_isGrounded && !isJumping)
+        {
+            
+            Velocity = Vector3.zero;
         }
 
         prevY = transform.position.y;
-        m_controller.Move(Velocity * Time.deltaTime);
+        m_controller.Move(Velocity * Time.fixedDeltaTime);
 
-        //Check if we arent moving down anymore
-        if (prevY == transform.position.y)
-        {
-            Velocity = Vector3.zero;
-        }
     }
 
 
