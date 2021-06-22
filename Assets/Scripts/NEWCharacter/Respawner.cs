@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,11 +26,18 @@ public class Respawner : MonoBehaviour
         }
     }
 
+    private void LateUpdate()
+    {
+        if (!m_controller.enabled)
+        {
+            m_controller.enabled = true;
+        }
+    }
+
     public void ToSpawnLoc(int _delay)
     {
         m_controller.enabled = false;
         Invoke("spawnInvokation", _delay);
-        m_controller.enabled = true;
     }
 
     public void SetSpawnLocation(int _loc)
