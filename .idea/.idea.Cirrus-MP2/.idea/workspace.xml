@@ -19,6 +19,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/Cinemachine3rdPersonAim.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/MovingPlat.cs" root0="FORCE_HIGHLIGHTING" />
@@ -34,8 +35,9 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovingPlat.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovePlat.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tZ9B78imEIjZTnTcebdlBIaIxF" />
@@ -45,6 +47,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DebuggerViewTab_PTCS_FirstProportionKey" value="0.34994584" />
+    <property name="DebuggerViewTab_PTCS_LastProportionKey" value="0.0" />
     <property name="Discover.Launch.Via.Unity" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
