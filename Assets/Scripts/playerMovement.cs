@@ -58,15 +58,15 @@ public class playerMovement : MonoBehaviour
     private void Update()
     {
         //Jump Force
-        if (Input.GetButtonDown("Jump") && m_isGrounded)
-        {
-            //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
-
-            m_isJumping = true;
-            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Force);
-            m_defaultPos = transform.position.y;
-            m_jumpTimer = 0.2f;
-        }
+        // if (Input.GetButtonDown("Jump") && m_isGrounded)
+        // {
+        //     //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
+        //
+        //     m_isJumping = true;
+        //     m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+        //     m_defaultPos = transform.position.y;
+        //     m_jumpTimer = 0.2f;
+        // }
 
         if (unlockGlide)
         {
@@ -153,15 +153,7 @@ public class playerMovement : MonoBehaviour
 
         //Fall down
 
-        if (Input.GetButtonDown("Jump") && m_isGrounded)
-        {
-           //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
-
-            m_isJumping = true;
-            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
-            m_defaultPos = transform.position.y;
-            m_jumpTimer = 0.2f;
-        }
+        
 
         //movement if we arent jumping?
         
