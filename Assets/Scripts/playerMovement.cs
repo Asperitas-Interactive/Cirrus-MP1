@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngineInternal;
 
-public class ePlayerMovement : MonoBehaviour
+public class playerMovement : MonoBehaviour
 {
 
     float m_glideTimer = 0.0f;
@@ -63,8 +63,8 @@ public class ePlayerMovement : MonoBehaviour
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        transform.GetChild(4).GetComponent<Animator>().SetFloat("inputX", x);
-        transform.GetChild(4).GetComponent<Animator>().SetFloat("inputY", y);
+        // transform.GetChild(4).GetComponent<Animator>().SetFloat("inputX", x);
+        // transform.GetChild(4).GetComponent<Animator>().SetFloat("inputY", y);
 
 
 
@@ -97,13 +97,13 @@ public class ePlayerMovement : MonoBehaviour
             if (m_jumpTimer < 0.0f)
             {
                 m_isJumping = false;
-                transform.GetChild(4).GetComponent<Animator>().SetBool("isJumping", false);
-                transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
+                // transform.GetChild(4).GetComponent<Animator>().SetBool("isJumping", false);
+                // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
             }
         }
 
-        transform.GetChild(4).GetComponent<Animator>().SetFloat("speed", m_rb.velocity.magnitude);
+        transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
 
         transform.rotation = Quaternion.Euler(0f, m_cam.eulerAngles.y, 0f);
 
@@ -130,7 +130,7 @@ public class ePlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
-           transform.GetChild(4).GetComponent<Animator>().SetBool("isJumping", true);
+           //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
 
             m_isJumping = true;
             m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
@@ -153,7 +153,7 @@ public class ePlayerMovement : MonoBehaviour
         if (Input.GetButton("Jump") && m_canGlide)
         {
             RaycastHit hit = new RaycastHit();
-            transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", true);
+            //transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", true);
 
             m_glideTimer -= Time.deltaTime;
 
@@ -192,7 +192,7 @@ public class ePlayerMovement : MonoBehaviour
         }
         else
         {
-            transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
+            //transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
         }
 
