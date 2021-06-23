@@ -165,9 +165,10 @@ public class playerMovement : MonoBehaviour
 
         //movement if we arent jumping?
         
-        if (m_isGrounded && !m_isJumping)
+        if (!m_isGrounded && !m_isGliding)
         {
-            //m_rb.velocity = new Vector3(m_rb.velocity.x, 0f, m_rb.velocity.z);
+            Debug.Log("call");
+            m_rb.AddForce(Physics.gravity, ForceMode.Force);
         }
 
         if (Input.GetButton("Jump") && m_isGliding)
