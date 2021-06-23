@@ -13,27 +13,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -10.489174
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: -9.188875
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 8.604828
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: -0.481899
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0
+      value: 0.87622684
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalRotation.z
@@ -45,12 +45,20 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 237.619
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 28026cdf7f85be24b833e26554308be2, type: 2}
     - target: {fileID: -7511558181221131132, guid: 14a8517fa6d42ab48b519778da4b8064, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
