@@ -156,9 +156,6 @@ public class playerMovement : MonoBehaviour
             m_isGliding = false;
         }
 
-        Debug.Log(m_rb.velocity);
-
-
     }
 
     
