@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Doors : MonoBehaviour
 {
-    [SerializeField] private GameObject m_cutsceneCamera;
+    
    
 
     public void OpenDoor(int _delay)
@@ -17,18 +17,7 @@ public class Doors : MonoBehaviour
         GetComponent<Animator>().SetTrigger("Open");
     }
 
-    public void setupCam()
-    {
-        enableCam();
-        Invoke("disableCam", 3);
-    }
 
-    private void enableCam()
-    {
-        m_cutsceneCamera.SetActive(true);
-    }
-    private void disableCam()
-    {
-        m_cutsceneCamera.SetActive(false);
-    }
+
+   
 }

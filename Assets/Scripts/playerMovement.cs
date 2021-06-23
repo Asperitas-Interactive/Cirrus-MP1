@@ -46,6 +46,9 @@ public class playerMovement : MonoBehaviour
     [SerializeField] bool unlockGlide;
 
     float m_jumpTimer;
+
+    public bool m_cutscenePlayin { get; set; }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,6 +60,7 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
+        if(m_cutscenePlayin)    return;
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
@@ -93,6 +97,7 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (m_cutscenePlayin) return;
         m_jumpTimer -= Time.fixedDeltaTime;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
@@ -134,11 +139,12 @@ public class playerMovement : MonoBehaviour
         transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
 
         //Rotate in direction of movement
-        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
         //if moving
         if (m_move.magnitude > 0.1f)
         {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
         }
