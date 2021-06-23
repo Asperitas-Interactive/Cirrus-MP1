@@ -133,7 +133,7 @@ public class playerMovement : MonoBehaviour
            //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
 
             m_isJumping = true;
-            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Force);
             m_defaultPos = transform.position.y;
             m_jumpTimer = 0.2f;
         }
@@ -206,7 +206,8 @@ public class playerMovement : MonoBehaviour
             if (m_move.magnitude > 0.1f)
             {
                 m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
-
+                float targetAngle = Mathf.Atan2(m_rb.velocity.x, m_rb.velocity.z) * Mathf.Rad2Deg + Camera.main.gameObject.transform.eulerAngles.y;
+                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
             }
 
             else
