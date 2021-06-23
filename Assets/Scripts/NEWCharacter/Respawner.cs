@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+using Vector3 = UnityEngine.Vector3;
 
 public class Respawner : MonoBehaviour
 {
@@ -9,11 +11,12 @@ public class Respawner : MonoBehaviour
     [SerializeField] private Transform[] m_spawnLocations;
 
 
-    private CharacterController m_controller;
+    private playerMovement m_player;
     public int m_currentSpawnLocation { get; set; }
     
     void Start()
     {
+        m_player = GetComponent<playerMovement>();
         //m_controller = GetComponent<CharacterController>();
         m_currentSpawnLocation = 0;
     }
@@ -34,6 +37,8 @@ public class Respawner : MonoBehaviour
     public void ToSpawnLoc(int _delay)
     {
         //m_controller.enabled = false;
+        
+        m_player.m_canMove = false;
         Invoke("spawnInvokation", _delay);
     }
 
@@ -44,6 +49,9 @@ public class Respawner : MonoBehaviour
 
     private void spawnInvokation()
     {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = m_spawnLocations[m_currentSpawnLocation].position;
+        m_player.m_canMove = true;
+
     }
 }

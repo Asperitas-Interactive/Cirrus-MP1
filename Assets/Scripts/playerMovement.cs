@@ -46,12 +46,14 @@ public class playerMovement : MonoBehaviour
     [SerializeField] bool unlockGlide;
 
     float m_jumpTimer;
+    public bool m_canMove { get; set; }
 
     public bool m_cutscenePlayin { get; set; }
 
     // Start is called before the first frame update
     void Start()
     {
+        m_canMove = true;
         //controller = gameObject.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         m_cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -60,7 +62,7 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(m_cutscenePlayin)    return;
+        if(m_cutscenePlayin || !m_canMove)    return;
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
@@ -97,7 +99,9 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (m_cutscenePlayin) return;
+        transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
+
+        if (m_cutscenePlayin || !m_canMove) return;
         m_jumpTimer -= Time.fixedDeltaTime;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
@@ -136,7 +140,6 @@ public class playerMovement : MonoBehaviour
         }
 
         //animate
-        transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
 
         //Rotate in direction of movement
 
