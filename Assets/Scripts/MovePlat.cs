@@ -33,6 +33,8 @@ public class MovePlat : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         //Move towards location
         transform.Translate(m_vectorSpeed * Time.deltaTime, Space.World);
         //Clamp between for correct calculation

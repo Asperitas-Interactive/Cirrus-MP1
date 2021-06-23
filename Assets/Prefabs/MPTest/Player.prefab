@@ -200,7 +200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_glide: 0
   m_speed: 12
-  m_jumpHeight: 7500
+  m_jumpHeight: 2.5
   m_groundCheck: {fileID: 1004495456966238038}
   m_groundDistance: 0.4
   m_groundMask:
@@ -222,7 +222,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1001 &4345364058747966748
 PrefabInstance:
