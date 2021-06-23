@@ -55,10 +55,10 @@ public class playerMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
 
-        m_jumpTimer -= Time.deltaTime;
+        m_jumpTimer -= Time.fixedDeltaTime;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -68,6 +68,15 @@ public class playerMovement : MonoBehaviour
         m_move = new Vector3(x, 0f, y).normalized;
 
         float angle = Mathf.Atan2(m_move.x, m_move.z) * Mathf.Rad2Deg + m_cam.eulerAngles.y;
+
+        if (Input.GetButton("Sprint"))
+        {
+            m_speed = 24;
+        }
+        else
+        {
+            m_speed = 12;
+        }
 
         //float smAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref m_smoothVel, m_smoothTime);
 
@@ -152,23 +161,7 @@ public class playerMovement : MonoBehaviour
 
     }
 
-    void FixedUpdate()
-    {
-        if (transform.parent != null)
-        {
-            if (m_move.magnitude > 0.1f)
-            {
-                m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
-                float targetAngle = Mathf.Atan2(m_rb.velocity.x, m_rb.velocity.z) * Mathf.Rad2Deg + Camera.main.gameObject.transform.eulerAngles.y;
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            }
-
-            else
-            {
-                m_rb.velocity = new Vector3(0f, m_rb.velocity.y, 0f);
-            }
-        }
-    }
+    
 
     /*private void OnTriggerEnter(Collider other)
     {
