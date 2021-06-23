@@ -15,6 +15,8 @@ public class PickUpItem : MonoBehaviour
         if (Input.GetButtonUp("PickUp") && m_pickUp != null)
         {
             m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            m_pickUp.transform.rotation = Quaternion.identity;
+            m_pickUp.GetComponent<MovePlat>().ResetPosition();
             m_pickUp = null;
         }
 
@@ -36,16 +38,28 @@ public class PickUpItem : MonoBehaviour
                 if (m_pickUp == null)
                 {
                     m_pickUp = other.gameObject;
+                    m_pickUp.GetComponent<MovePlat>().enabled = false;
                 }
             }
         }
     }
-    
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "PickUp")
+        { 
+            //m_pickUp.GetComponent<MovePlat>().enabled = true;
+        //     
+            //Invoke("other.gameObject.GetComponent<MovePlat>().ResetPosition()", 3);
+
+        }
+    }
+
     private void LateUpdate()
     {
         if(m_pickUp != null)
         {
-            m_pickUp.transform.position = transform.position + (transform.forward * 4) + (transform.up * 3);
+            m_pickUp.transform.position = transform.position + (transform.forward * 2f) + (transform.up);
         }
     }
     
