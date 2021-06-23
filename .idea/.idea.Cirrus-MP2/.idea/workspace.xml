@@ -40,8 +40,8 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovePlat.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" />
     </changedPaths>
   </component>
@@ -93,7 +93,7 @@
       <workItem from="1622965632228" duration="903000" />
       <workItem from="1623200708509" duration="4566000" />
       <workItem from="1623806267335" duration="4750000" />
-      <workItem from="1624408663424" duration="12064000" />
+      <workItem from="1624408663424" duration="11621000" />
     </task>
     <servers />
   </component>
