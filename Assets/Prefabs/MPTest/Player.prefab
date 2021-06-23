@@ -92,9 +92,9 @@ GameObject:
   - component: {fileID: 1147030448}
   - component: {fileID: 1618807998}
   - component: {fileID: 8880323482727311207}
-  - component: {fileID: 387650482}
   - component: {fileID: 387650484}
   - component: {fileID: 387650483}
+  - component: {fileID: 387650482}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -172,22 +172,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bae24b6eb573b0548ab8e3d8d874df49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &387650482
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4358994942074642480}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!136 &387650484
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -199,7 +183,7 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 2.17
+  m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &387650483
@@ -216,13 +200,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_glide: 0
   m_speed: 12
-  m_jumpHeight: 2
+  m_jumpHeight: 7500
   m_groundCheck: {fileID: 1004495456966238038}
   m_groundDistance: 0.4
   m_groundMask:
     serializedVersion: 2
     m_Bits: 8
   m_glideFactor: -1.8
+--- !u!54 &387650482
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4358994942074642480}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 2
 --- !u!1001 &4345364058747966748
 PrefabInstance:
   m_ObjectHideFlags: 0

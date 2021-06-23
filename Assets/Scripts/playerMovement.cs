@@ -43,6 +43,7 @@ public class playerMovement : MonoBehaviour
     Vector3 m_dir;
     Vector3 m_move;
 
+    [SerializeField] bool unlockGlide;
 
     float m_jumpTimer;
     // Start is called before the first frame update
@@ -54,41 +55,67 @@ public class playerMovement : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        m_jumpTimer -= Time.deltaTime;
+        //Jump Force
+        if (Input.GetButtonDown("Jump") && m_isGrounded)
+        {
+            //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
+
+            m_isJumping = true;
+            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Force);
+            m_defaultPos = transform.position.y;
+            m_jumpTimer = 0.2f;
+        }
+
+        if (unlockGlide)
+        {
+            //Check if we can glide
+            if (Input.GetButtonUp("Jump"))
+            {
+                m_canGlide = true;
+                m_glideTimer = m_glideFactor;
+            }
+
+            //Gliding
+            if (Input.GetButtonDown("Jump") && m_canGlide)
+            {
+                m_rb.velocity = Vector3.zero;
+                m_isGliding = true;
+            }
+            if (!m_isGrounded && Input.GetButtonUp("Jump"))
+            {
+                m_isGliding = false;
+            }
+        }
+    }
+
+    // Update is called once per frame
+    void FixedUpdate()
+    {
+        m_jumpTimer -= Time.fixedDeltaTime;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
 
-        // transform.GetChild(4).GetComponent<Animator>().SetFloat("inputX", x);
-        // transform.GetChild(4).GetComponent<Animator>().SetFloat("inputY", y);
-
-
-
-
-
-
-        //if (!isGrounded)
-        //{
-        //    x = Input.GetAxis("Horizontal");
-        //    y = Input.GetAxis("Vertical");
-        //}
-
-        //Get input axes
-
-
         //Move with local dir
-
         m_move = new Vector3(x, 0f, y).normalized;
-
 
         float angle = Mathf.Atan2(m_move.x, m_move.z) * Mathf.Rad2Deg + m_cam.eulerAngles.y;
 
-        float smAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref m_smoothVel, m_smoothTime);
+        if (Input.GetButton("Sprint"))
+        {
+            m_speed = 12;
+        }
+        else
+        {
+            m_speed = 6;
+        }
 
+        //float smAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref m_smoothVel, m_smoothTime);
+
+        //resets if grounded
         if (m_isGrounded)
         {
             m_canGlide = false;
@@ -103,21 +130,19 @@ public class playerMovement : MonoBehaviour
             }
         }
 
+        //animate
         transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
 
-        transform.rotation = Quaternion.Euler(0f, m_cam.eulerAngles.y, 0f);
+        //Rotate in direction of movement
+        transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
+        //if moving
         if (m_move.magnitude > 0.1f)
         {
-
-
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            if (transform.parent == null)
-            {
-                m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
-            }
+            m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
         }
-        else
+        else //if still
         {
             m_rb.velocity = new Vector3(0f, m_rb.velocity.y, 0f);
             m_rb.angularVelocity = Vector3.zero;
@@ -138,83 +163,23 @@ public class playerMovement : MonoBehaviour
             m_jumpTimer = 0.2f;
         }
 
+        //movement if we arent jumping?
+        
         if (m_isGrounded && !m_isJumping)
         {
-            m_rb.velocity = new Vector3(m_rb.velocity.x, 0f, m_rb.velocity.z);
+            //m_rb.velocity = new Vector3(m_rb.velocity.x, 0f, m_rb.velocity.z);
         }
 
-
-        if (Input.GetButtonUp("Jump"))
+        if (Input.GetButton("Jump") && m_isGliding)
         {
-            m_canGlide = true;
-            m_glideTimer = m_glideFactor;
+            m_rb.AddForce(-Physics.gravity / 2.5f, ForceMode.Force);
         }
-
-        if (Input.GetButton("Jump") && m_canGlide)
-        {
-            RaycastHit hit = new RaycastHit();
-            //transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", true);
-
-            m_glideTimer -= Time.deltaTime;
-
-            float distToGround = 5f;
-            if (!m_isGliding)
-            {
-                if (Physics.Raycast(transform.position, -Vector3.up, out hit))
-                {
-                    //Debug.Log(hit.distance);
-                    distToGround = hit.distance;
-                }
-
-                m_rb.velocity = new Vector3(m_rb.velocity.x, -0.5f, m_rb.velocity.z);
-
-                m_isGliding = true;
-            }
-            float currDist;
-
-            Physics.Raycast(transform.position, -Vector3.up, out hit);
-            currDist = hit.distance;
-
-            if (m_glideTimer > 0.0f)
-            {
-
-            }
-            else
-            {
-                m_rb.AddForce(Vector3.up * distToGround * -3 * Time.deltaTime, ForceMode.VelocityChange);
-            }
-
-            if (m_rb.velocity.y < -1.0f)
-                m_rb.AddForce(Vector3.up * distToGround * 10f * Time.deltaTime, ForceMode.VelocityChange);
-            else
-                m_rb.AddForce(Vector3.up * 1f * Time.deltaTime, ForceMode.VelocityChange);
-
-        }
-        else
-        {
-            //transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
-
-        }
-
 
     }
 
-    void FixedUpdate()
+    public void turnOnGlide()
     {
-        if (transform.parent != null)
-        {
-            if (m_move.magnitude > 0.1f)
-            {
-                m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
-                float targetAngle = Mathf.Atan2(m_rb.velocity.x, m_rb.velocity.z) * Mathf.Rad2Deg + Camera.main.gameObject.transform.eulerAngles.y;
-                transform.rotation = Quaternion.Euler(0f, targetAngle, 0f);
-            }
-
-            else
-            {
-                m_rb.velocity = new Vector3(0f, m_rb.velocity.y, 0f);
-            }
-        }
+        unlockGlide = true;
     }
 
     /*private void OnTriggerEnter(Collider other)
