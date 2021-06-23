@@ -133,15 +133,21 @@ public class playerMovement : MonoBehaviour
         }
 
         //Gliding
-        if (Input.GetButton("Jump") && m_canGlide)
+        if (Input.GetButtonDown("Jump") && m_canGlide)
         {
-            
+            m_rb.velocity = Vector3.zero;
+            m_isGliding = true;
         }
-        else
+        if (Input.GetButton("Jump") && m_isGliding)
         {
-            //transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
+            m_rb.AddForce(-Physics.gravity / 4, ForceMode.Force);
+        }
+        if (!m_isGrounded && Input.GetButtonUp("Jump"))
+        {
+            m_isGliding = false;
+        }
 
-        }
+        Debug.Log(m_rb.velocity);
 
 
     }
