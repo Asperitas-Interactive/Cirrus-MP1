@@ -22,12 +22,9 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/CinemachineFreeLook.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/7D971898-EA0F-4307-A8ED-DF491EA76525/77/fa0a6624/CharacterController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/Cinemachine3rdPersonAim.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Assets/Scripts/MovingPlat.cs" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <changedPaths>
@@ -42,9 +39,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/MovingPlat.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovePlat.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Doors.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CharacterMovement.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Reciever.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tZ9B78imEIjZTnTcebdlBIaIxF" />
@@ -95,6 +93,7 @@
       <workItem from="1622965632228" duration="903000" />
       <workItem from="1623200708509" duration="4566000" />
       <workItem from="1623806267335" duration="4750000" />
+      <workItem from="1624408663424" duration="302000" />
     </task>
     <servers />
   </component>

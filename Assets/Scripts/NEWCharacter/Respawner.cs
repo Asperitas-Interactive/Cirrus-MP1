@@ -14,7 +14,7 @@ public class Respawner : MonoBehaviour
     
     void Start()
     {
-        m_controller = GetComponent<CharacterController>();
+        //m_controller = GetComponent<CharacterController>();
         m_currentSpawnLocation = 0;
     }
 
@@ -25,15 +25,15 @@ public class Respawner : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (!m_controller.enabled)
+        //if (!m_controller.enabled)
         {
-            m_controller.enabled = true;
+           // m_controller.enabled = true;
         }
     }
 
     public void ToSpawnLoc(int _delay)
     {
-        m_controller.enabled = false;
+        //m_controller.enabled = false;
         Invoke("spawnInvokation", _delay);
     }
 
