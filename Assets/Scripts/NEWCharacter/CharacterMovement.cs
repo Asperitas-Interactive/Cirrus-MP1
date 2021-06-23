@@ -52,7 +52,7 @@ public class CharacterMovement : MonoBehaviour
     Vector3 SlopeOff;
     bool onSlope = false;
 
-    float prevY;
+    float disG;
 
     private Animator m_animator;
     bool isJumping;
@@ -76,6 +76,9 @@ public class CharacterMovement : MonoBehaviour
         GetAxis();
 
         m_isGrounded = Physics.Raycast(transform.position, -Vector3.up, out hitInfo, m_groundDistance, m_layerMask);
+
+        disG = transform.position.y - hitInfo.point.y;
+
         GetGroundAngle();
 
         GetForward();
@@ -266,7 +269,6 @@ public class CharacterMovement : MonoBehaviour
             Velocity = Vector3.zero;
         }
 
-        prevY = transform.position.y;
         m_controller.Move(Velocity * Time.deltaTime);
 
     }
