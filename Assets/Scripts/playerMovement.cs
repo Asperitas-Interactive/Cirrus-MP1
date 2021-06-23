@@ -102,11 +102,11 @@ public class playerMovement : MonoBehaviour
 
         if (Input.GetButton("Sprint"))
         {
-            m_speed = 24;
+            m_speed = 12;
         }
         else
         {
-            m_speed = 12;
+            m_speed = 6;
         }
 
         //float smAngle = Mathf.SmoothDampAngle(transform.eulerAngles.y, angle, ref m_smoothVel, m_smoothTime);
