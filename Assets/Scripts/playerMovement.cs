@@ -54,10 +54,41 @@ public class playerMovement : MonoBehaviour
         m_rb = GetComponent<Rigidbody>();
     }
 
+    private void Update()
+    {
+        //Jump Force
+        if (Input.GetButtonDown("Jump") && m_isGrounded)
+        {
+            //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
+
+            m_isJumping = true;
+            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Force);
+            m_defaultPos = transform.position.y;
+            m_jumpTimer = 0.2f;
+        }
+
+        //Check if we can glide
+        if (Input.GetButtonUp("Jump"))
+        {
+            m_canGlide = true;
+            m_glideTimer = m_glideFactor;
+        }
+
+        //Gliding
+        if (Input.GetButtonDown("Jump") && m_canGlide)
+        {
+            m_rb.velocity = Vector3.zero;
+            m_isGliding = true;
+        }
+        if (!m_isGrounded && Input.GetButtonUp("Jump"))
+        {
+            m_isGliding = false;
+        }
+    }
+
     // Update is called once per frame
     void FixedUpdate()
     {
-
         m_jumpTimer -= Time.fixedDeltaTime;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
@@ -116,17 +147,6 @@ public class playerMovement : MonoBehaviour
             m_rb.angularVelocity = Vector3.zero;
         }
 
-        //Jump Force
-        if (Input.GetButtonDown("Jump") && m_isGrounded)
-        {
-           //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
-
-            m_isJumping = true;
-            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Force);
-            m_defaultPos = transform.position.y;
-            m_jumpTimer = 0.2f;
-        }
-
         //movement if we arent jumping?
         
         if (m_isGrounded && !m_isJumping)
@@ -134,26 +154,9 @@ public class playerMovement : MonoBehaviour
             //m_rb.velocity = new Vector3(m_rb.velocity.x, 0f, m_rb.velocity.z);
         }
 
-        //Check if we can glide
-        if (Input.GetButtonUp("Jump"))
-        {
-            m_canGlide = true;
-            m_glideTimer = m_glideFactor;
-        }
-
-        //Gliding
-        if (Input.GetButtonDown("Jump") && m_canGlide)
-        {
-            m_rb.velocity = Vector3.zero;
-            m_isGliding = true;
-        }
         if (Input.GetButton("Jump") && m_isGliding)
         {
-            m_rb.AddForce(-Physics.gravity / 4, ForceMode.Force);
-        }
-        if (!m_isGrounded && Input.GetButtonUp("Jump"))
-        {
-            m_isGliding = false;
+            m_rb.AddForce(-Physics.gravity / 2.5f, ForceMode.Force);
         }
 
     }
