@@ -149,7 +149,7 @@ public class playerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
+            m_rb.velocity = new Vector3(m_dir.x * m_speed, m_rb.velocity.y, m_dir.z * m_speed);
         }
         else //if still
         {
