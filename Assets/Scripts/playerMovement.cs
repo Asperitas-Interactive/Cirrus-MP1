@@ -168,7 +168,7 @@ public class playerMovement : MonoBehaviour
         
         if (!m_isGrounded && !m_isGliding)
         {
-            Debug.Log("call");
+            //Debug.Log("call");
             m_rb.AddForce(Physics.gravity, ForceMode.Force);
         }
 
