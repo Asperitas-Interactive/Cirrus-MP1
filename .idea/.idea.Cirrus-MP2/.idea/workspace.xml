@@ -105,4 +105,23 @@
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="DotNet Breakpoints">
+          <url>file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs</url>
+          <line>75</line>
+          <properties documentPath="D:\Users\MDS00001XO\Documents\GitHub\Cirrus-MP2\Assets\Scripts\NEWCharacter\CameraSwitcher.cs" initialLine="75" containingFunctionPresentation="method 'hasCollected'">
+            <startOffsets>
+              <option value="1612" />
+            </startOffsets>
+            <endOffsets>
+              <option value="1638" />
+            </endOffsets>
+          </properties>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
 </project>
