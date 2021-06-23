@@ -43,6 +43,7 @@ public class playerMovement : MonoBehaviour
     Vector3 m_dir;
     Vector3 m_move;
 
+    [SerializeField] bool unlockGlide;
 
     float m_jumpTimer;
     // Start is called before the first frame update
@@ -67,22 +68,25 @@ public class playerMovement : MonoBehaviour
             m_jumpTimer = 0.2f;
         }
 
-        //Check if we can glide
-        if (Input.GetButtonUp("Jump"))
+        if (unlockGlide)
         {
-            m_canGlide = true;
-            m_glideTimer = m_glideFactor;
-        }
+            //Check if we can glide
+            if (Input.GetButtonUp("Jump"))
+            {
+                m_canGlide = true;
+                m_glideTimer = m_glideFactor;
+            }
 
-        //Gliding
-        if (Input.GetButtonDown("Jump") && m_canGlide)
-        {
-            m_rb.velocity = Vector3.zero;
-            m_isGliding = true;
-        }
-        if (!m_isGrounded && Input.GetButtonUp("Jump"))
-        {
-            m_isGliding = false;
+            //Gliding
+            if (Input.GetButtonDown("Jump") && m_canGlide)
+            {
+                m_rb.velocity = Vector3.zero;
+                m_isGliding = true;
+            }
+            if (!m_isGrounded && Input.GetButtonUp("Jump"))
+            {
+                m_isGliding = false;
+            }
         }
     }
 
@@ -158,7 +162,10 @@ public class playerMovement : MonoBehaviour
 
     }
 
-    
+    public void turnOnGlide()
+    {
+        unlockGlide = true;
+    }
 
     /*private void OnTriggerEnter(Collider other)
     {
