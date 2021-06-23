@@ -136,10 +136,7 @@ public class playerMovement : MonoBehaviour
         if (m_move.magnitude > 0.1f)
         {
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            if (transform.parent == null)
-            {
-                m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
-            }
+            m_rb.velocity = new Vector3((m_dir * m_speed).x, m_rb.velocity.y, (m_dir * m_speed).z);
         }
         else //if still
         {
