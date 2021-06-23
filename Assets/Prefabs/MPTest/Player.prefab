@@ -207,7 +207,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4358994942074642480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bae24b6eb573b0548ab8e3d8d874df49, type: 3}
   m_Name: 
@@ -263,10 +263,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -1318793775937199065, guid: c2bdb74e8bfa6dd44a79559b112a61e4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f3f557305ed3d324288bb0f547d54c66, type: 2}
+    - target: {fileID: -1318793775937199065, guid: c2bdb74e8bfa6dd44a79559b112a61e4, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b78c8d32da320f74d94c7b722ed1f3eb, type: 2}
     - target: {fileID: 919132149155446097, guid: c2bdb74e8bfa6dd44a79559b112a61e4, type: 3}
       propertyPath: m_Name
       value: Idle
       objectReference: {fileID: 0}
+    - target: {fileID: 3046102255760763785, guid: c2bdb74e8bfa6dd44a79559b112a61e4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fe1bb2c8af3b0a64597641fa5e9d857a, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c2bdb74e8bfa6dd44a79559b112a61e4, type: 3}
 --- !u!1 &3498378025054054477 stripped
