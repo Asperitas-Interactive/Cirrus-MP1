@@ -18,10 +18,18 @@ public class TriggerFunction : MonoBehaviour
     [SerializeField] private UnityEvent m_triggerExitTagged;
 
 
+    [SerializeField] private bool m_onceAndDestroy;
 
+    private void Start()
+    {
+        if (m_onceAndDestroy)
+            m_triggerEnter.AddListener(Destroy);
+    }
 
-
-
+    void Destroy()
+    {
+        Destroy(this);
+    }
 
     private void OnTriggerEnter(Collider _collider)
     {

@@ -8,18 +8,40 @@ public class PickUpItem : MonoBehaviour
     private GameObject m_pickUp;
 
     bool m_canPickUp = false;
+    private bool m_pickepUp = false;
     
+    public void DisablePickup()
+    {
+        m_pickepUp = false;
+        m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        m_pickUp.transform.rotation = Quaternion.identity;
+        m_pickUp.GetComponent<MovePlat>().ResetPosition();
+        m_pickUp = null;
+    }
     
     void Update()
     {
-        if (Input.GetButtonUp("PickUp") && m_pickUp != null)
+ 
+
+        if (Input.GetButtonDown("PickUp") && m_pickUp != null && m_pickepUp)
         {
-            m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
-            m_pickUp.transform.rotation = Quaternion.identity;
-            m_pickUp.GetComponent<MovePlat>().ResetPosition();
-            m_pickUp = null;
+           
+
+            DisablePickup();
+            
+
         }
 
+        else if (Input.GetButtonDown("PickUp") && m_canPickUp == true && m_pickepUp ==false)
+        {
+            void picked()
+            {
+                m_pickepUp = true;
+            }
+                m_pickUp.GetComponent<MovePlat>().enabled = false;
+                m_canPickUp = false;
+                picked();
+        }
         if(m_pickUp != null)
         {
             m_pickUp.transform.Rotate(new Vector3(10 * Time.deltaTime, 0.0f, 0.0f));
@@ -28,28 +50,23 @@ public class PickUpItem : MonoBehaviour
 
 
 
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "PickUp")
         {
+            m_pickUp = other.gameObject;
             m_canPickUp = true;
-            if (Input.GetButton("PickUp"))
-            {
-                if (m_pickUp == null)
-                {
-                    m_pickUp = other.gameObject;
-                    m_pickUp.GetComponent<MovePlat>().enabled = false;
-                }
-            }
+           
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.tag == "PickUp")
-        { 
+        {
+            m_canPickUp = false;
             //m_pickUp.GetComponent<MovePlat>().enabled = true;
-        //     
+            //     
             //Invoke("other.gameObject.GetComponent<MovePlat>().ResetPosition()", 3);
 
         }
@@ -57,7 +74,7 @@ public class PickUpItem : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(m_pickUp != null)
+        if(m_pickUp != null && m_pickepUp == true)
         {
             m_pickUp.transform.position = transform.position + (transform.forward * 2f) + (transform.up);
         }

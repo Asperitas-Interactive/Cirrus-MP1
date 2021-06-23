@@ -65,8 +65,9 @@ public class CameraSwitcher : MonoBehaviour
 
     public void Collection(GameObject _collect)
     {
-        _collect.SetActive(false);
         m_collections++;
+
+        _collect.SetActive(false);
     }
 
     public void hasCollected()
