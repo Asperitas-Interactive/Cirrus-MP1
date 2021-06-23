@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CameraSwitcher : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class CameraSwitcher : MonoBehaviour
     [SerializeField] private GameObject m_aimCamera;
     [SerializeField] private GameObject m_normalCamera;
 
+    private int m_collections = 0;
+    
     void Start()
     {
         
@@ -57,6 +60,20 @@ public class CameraSwitcher : MonoBehaviour
             m_state = eState.normal;
             m_aimCamera.SetActive(false);
             m_normalCamera.SetActive(true);             
+        }
+    }
+
+    public void Collection(GameObject _collect)
+    {
+        _collect.SetActive(false);
+        m_collections++;
+    }
+
+    public void hasCollected()
+    {
+        if (m_collections == 3)
+        {
+            SceneManager.LoadScene(1);
         }
     }
 }
