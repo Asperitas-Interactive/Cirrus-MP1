@@ -148,11 +148,27 @@ public class playerMovement : MonoBehaviour
             m_rb.angularVelocity = Vector3.zero;
         }
 
+
+
+
+        //Fall down
+
+        if (Input.GetButtonDown("Jump") && m_isGrounded)
+        {
+           //transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
+
+            m_isJumping = true;
+            m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+            m_defaultPos = transform.position.y;
+            m_jumpTimer = 0.2f;
+        }
+
         //movement if we arent jumping?
         
-        if (m_isGrounded && !m_isJumping)
+        if (!m_isGrounded && !m_isGliding)
         {
-            //m_rb.velocity = new Vector3(m_rb.velocity.x, 0f, m_rb.velocity.z);
+            Debug.Log("call");
+            m_rb.AddForce(Physics.gravity, ForceMode.Force);
         }
 
         if (Input.GetButton("Jump") && m_isGliding)

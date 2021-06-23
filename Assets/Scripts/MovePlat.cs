@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
@@ -11,16 +12,19 @@ public class MovePlat : MonoBehaviour
     [FormerlySerializedAs("DisplacementNeg")] public Vector3 m_displacementNeg;
     //The Speed you arrive at a end point
     public Vector3 m_vectorSpeed;
+
+    private Vector3 m_origin;
     //The Destination it checks
     private Vector3 m_destinationMax;
     private Vector3 m_destinationMin;
 
-    public GameObject m_Player;
+    //public GameObject m_Player;
     public BoxCollider m_Trigger;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_origin = transform.position;
         m_destinationMax = transform.position + m_displacementPos;
         m_destinationMin = transform.position + m_displacementNeg;
     }
@@ -41,6 +45,17 @@ public class MovePlat : MonoBehaviour
        
     }
 
+    public void ResetPosition()
+    {
+
+        Invoke("resetPos", 3);
+      
+    }
+
+    private void resetPos()
+    {
+        transform.position = m_origin;
+    }
     //Check if it reached its destination
     void DestinationReach()
     {
@@ -57,9 +72,9 @@ public class MovePlat : MonoBehaviour
 
     private void LateUpdate()
     {
-        if (m_Trigger.bounds.Contains(m_Player.transform.position))
+       // if (m_Trigger.bounds.Contains(m_Player.transform.position))
         {
-            m_Player.GetComponent<CharacterController>().Move(m_vectorSpeed * Time.deltaTime);
+            //m_Player.GetComponent<CharacterController>().Move(m_vectorSpeed * Time.deltaTime);
         }
     }
 
