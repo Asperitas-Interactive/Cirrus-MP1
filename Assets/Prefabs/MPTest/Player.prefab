@@ -207,6 +207,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 8
   m_glideFactor: -1.8
+  unlockGlide: 0
 --- !u!54 &387650482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -221,8 +222,8 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 2
+  m_Constraints: 112
+  m_CollisionDetection: 0
 --- !u!1001 &4345364058747966748
 PrefabInstance:
   m_ObjectHideFlags: 0
