@@ -18,8 +18,6 @@ public class MovePlat : MonoBehaviour
     private Vector3 m_destinationMax;
     private Vector3 m_destinationMin;
 
-    //public GameObject m_Player;
-    public BoxCollider m_Trigger;
 
     // Start is called before the first frame update
     void Start()
@@ -71,13 +69,4 @@ public class MovePlat : MonoBehaviour
             m_vectorSpeed = -m_vectorSpeed;
         }
     }
-
-    private void LateUpdate()
-    {
-       // if (m_Trigger.bounds.Contains(m_Player.transform.position))
-        {
-            //m_Player.GetComponent<CharacterController>().Move(m_vectorSpeed * Time.deltaTime);
-        }
-    }
-
 }
