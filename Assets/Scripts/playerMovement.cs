@@ -145,8 +145,25 @@ public class playerMovement : MonoBehaviour
 
         //Rotate in direction of movement
 
-        //if moving
-        if (m_move.magnitude > 0.1f)
+        //Make a sweep test
+        RaycastHit sweep;
+
+        //We can mess with the max distance (1.5f)
+        bool isAtwall = m_rb.SweepTest(m_dir, out sweep, 1.5f);
+
+        Debug.DrawLine(transform.position, sweep.point);
+
+        //We first check if the sweep has passed and we arent grounded
+        if(!m_isGrounded && isAtwall)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
+            m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
+            m_rb.angularVelocity = Vector3.zero;
+        }
+        else if (m_move.magnitude > 0.1f) //if moving
         {
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
@@ -155,6 +172,10 @@ public class playerMovement : MonoBehaviour
         }
         else //if still
         {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
             m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
             m_rb.angularVelocity = Vector3.zero;
         }
