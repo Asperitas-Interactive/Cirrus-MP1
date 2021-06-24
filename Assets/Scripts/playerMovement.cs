@@ -50,6 +50,8 @@ public class playerMovement : MonoBehaviour
 
     public bool m_cutscenePlayin { get; set; }
 
+    private Vector3 m_movingPlat = Vector3.zero;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -149,11 +151,11 @@ public class playerMovement : MonoBehaviour
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
-            m_rb.velocity = new Vector3(m_dir.x * m_speed, m_rb.velocity.y, m_dir.z * m_speed);
+            m_rb.velocity = new Vector3(m_dir.x * m_speed, m_rb.velocity.y + m_movingPlat.y, m_dir.z * m_speed);
         }
         else //if still
         {
-            m_rb.velocity = new Vector3(0f, m_rb.velocity.y, 0f);
+            m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y + m_movingPlat.y, 0f + m_movingPlat.z);
             m_rb.angularVelocity = Vector3.zero;
         }
 
@@ -184,13 +186,20 @@ public class playerMovement : MonoBehaviour
         unlockGlide = true;
     }
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        //4 is water
-        if (other.gameObject.layer == 4)
-        {
-            rb.AddForce(0.0f, -1.0f * Physics.gravity.y, 0.0f, ForceMode.VelocityChange);
-        }
 
-    }*/
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            m_movingPlat = collision.gameObject.GetComponent<Rigidbody>().velocity;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            m_movingPlat = Vector3.zero;
+        }
+    }
 };
