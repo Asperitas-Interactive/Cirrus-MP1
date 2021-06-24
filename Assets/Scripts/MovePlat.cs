@@ -20,6 +20,7 @@ public class MovePlat : MonoBehaviour
 
     private Rigidbody m_rigidBody;
 
+    //Prevents it from getting stuck
     bool reachmax = false;
     bool reachmin = false;
 
@@ -60,6 +61,8 @@ public class MovePlat : MonoBehaviour
     //Check if it reached its destination
     void DestinationReach()
     {
+        //Without the bool itd get stuck at a destination and have its speed reset over and over
+
         if(transform.position.x == m_destinationMax.x && transform.position.y == m_destinationMax.y && transform.position.z == m_destinationMax.z && !reachmax)
         {
             m_vectorSpeed = -m_vectorSpeed;
