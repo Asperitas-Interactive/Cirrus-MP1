@@ -12,7 +12,6 @@ public class OptionsMenuManager : MonoBehaviour
     public static OptionsMenuManager Instance
     {
         get { return m_instance; }
-
     }
 
     private void Awake()
