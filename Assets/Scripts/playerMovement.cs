@@ -52,18 +52,36 @@ public class playerMovement : MonoBehaviour
 
     private Vector3 m_movingPlat = Vector3.zero;
 
+    private bool m_paused = false;
+
     // Start is called before the first frame update
     void Start()
     {
         m_canMove = true;
-        //Cursor.lockState = CursorLockMode.Locked;
+        Cursor.lockState = CursorLockMode.Locked;
         m_cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         m_rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        if(m_cutscenePlayin || !m_canMove)    return;
+        //Pause stuff
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (m_paused)
+            {
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+                m_paused = false;
+            } else
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                m_paused = true;
+            }
+        }
+
+        if (m_cutscenePlayin || !m_canMove)    return;
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
