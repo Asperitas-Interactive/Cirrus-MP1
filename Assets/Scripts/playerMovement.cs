@@ -56,7 +56,6 @@ public class playerMovement : MonoBehaviour
     void Start()
     {
         m_canMove = true;
-        //controller = gameObject.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         m_cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         m_rb = GetComponent<Rigidbody>();
