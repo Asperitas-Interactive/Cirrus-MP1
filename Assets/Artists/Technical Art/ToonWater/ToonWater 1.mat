@@ -52,7 +52,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_14045465f7de45538c03bd62b951534e: 5.35
+    - Vector1_14045465f7de45538c03bd62b951534e: 5.8
     - Vector1_72f24bca0f384df2a86ee7783398485b: 1
     - _Depthpower: 7.19
     - _FoamSpeed: 0.128
