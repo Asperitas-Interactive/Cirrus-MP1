@@ -50,11 +50,14 @@ public class playerMovement : MonoBehaviour
 
     public bool m_cutscenePlayin { get; set; }
 
+    private Vector3 m_movingPlat = Vector3.zero;
+
+    private bool m_paused = false;
+
     // Start is called before the first frame update
     void Start()
     {
         m_canMove = true;
-        //controller = gameObject.GetComponent<CharacterController>();
         Cursor.lockState = CursorLockMode.Locked;
         m_cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
         m_rb = GetComponent<Rigidbody>();
@@ -62,7 +65,23 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
-        if(m_cutscenePlayin || !m_canMove)    return;
+        //Pause stuff
+        if (Input.GetButtonDown("Pause"))
+        {
+            if (m_paused)
+            {
+                Time.timeScale = 1;
+                Cursor.lockState = CursorLockMode.Locked;
+                m_paused = false;
+            } else
+            {
+                Time.timeScale = 0;
+                Cursor.lockState = CursorLockMode.None;
+                m_paused = true;
+            }
+        }
+
+        if (m_cutscenePlayin || !m_canMove)    return;
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
@@ -143,8 +162,25 @@ public class playerMovement : MonoBehaviour
 
         //Rotate in direction of movement
 
-        //if moving
-        if (m_move.magnitude > 0.1f)
+        //Make a sweep test
+        RaycastHit sweep;
+
+        //We can mess with the max distance (1.5f)
+        bool isAtwall = m_rb.SweepTest(m_dir, out sweep, 1.5f);
+
+        Debug.DrawLine(transform.position, sweep.point);
+
+        //We first check if the sweep has passed and we arent grounded
+        if(!m_isGrounded && isAtwall)
+        {
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
+            m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
+            m_rb.angularVelocity = Vector3.zero;
+        }
+        else if (m_move.magnitude > 0.1f) //if moving
         {
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
@@ -153,7 +189,11 @@ public class playerMovement : MonoBehaviour
         }
         else //if still
         {
-            m_rb.velocity = new Vector3(0f, m_rb.velocity.y, 0f);
+            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+
+            m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
+            m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
             m_rb.angularVelocity = Vector3.zero;
         }
 
@@ -184,13 +224,20 @@ public class playerMovement : MonoBehaviour
         unlockGlide = true;
     }
 
-    /*private void OnTriggerEnter(Collider other)
-    {
-        //4 is water
-        if (other.gameObject.layer == 4)
-        {
-            rb.AddForce(0.0f, -1.0f * Physics.gravity.y, 0.0f, ForceMode.VelocityChange);
-        }
 
-    }*/
+    private void OnCollisionStay(Collision collision)
+    {
+        if(collision.gameObject.layer == 7)
+        {
+            m_movingPlat = collision.gameObject.GetComponent<Rigidbody>().velocity;
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.layer == 7)
+        {
+            m_movingPlat = Vector3.zero;
+        }
+    }
 };
