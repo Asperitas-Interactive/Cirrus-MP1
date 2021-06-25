@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 1340240350089741933}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.06, y: 1.06, z: 1.06}
   m_Children:
   - {fileID: 6952981108464244652}
   m_Father: {fileID: 0}
@@ -170,10 +170,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -4350756901331226568, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8825875481077153662, guid: 28d6d1f04d248b646a05c2619a2476e7, type: 3}
+    - target: {fileID: 309463952820482923, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5184557ad1d09f845bd74896f7e64cc3, type: 2}
     - target: {fileID: 919132149155446097, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
       propertyPath: m_Name
       value: MOD_Door
       objectReference: {fileID: 0}
+    - target: {fileID: 2714056160562616351, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 8420293092928972554, guid: 28d6d1f04d248b646a05c2619a2476e7, type: 3}
+    - target: {fileID: 4586259602423127305, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7e1371482461c7b41b7c58c03f187b90, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
 --- !u!4 &6952981108464244652 stripped
