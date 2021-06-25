@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class OptionsMenuManager : MonoBehaviour
 {
     private static OptionsMenuManager m_instance { get; set; }
-
+    
     private Scene m_currentScene;
 
     public static OptionsMenuManager Instance
