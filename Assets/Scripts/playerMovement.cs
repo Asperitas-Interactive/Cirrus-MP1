@@ -88,7 +88,7 @@ public class playerMovement : MonoBehaviour
              transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
         
              m_isJumping = true;
-             m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+             m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
              m_defaultPos = transform.position.y;
              m_jumpTimer = 0.2f;
          }
