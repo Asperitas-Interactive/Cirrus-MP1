@@ -3,7 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.ProBuilder;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class MovePlat : MonoBehaviour
 {
@@ -18,6 +20,12 @@ public class MovePlat : MonoBehaviour
     private Vector3 m_destinationMax;
     private Vector3 m_destinationMin;
 
+    [Header("Random")]
+    [SerializeField] private Vector3 m_isRandom;
+    
+    [SerializeField] private Vector2 m_rangeX;
+    [SerializeField] private Vector2 m_rangeY;
+    [SerializeField] private Vector2 m_rangeZ;
     private Rigidbody m_rigidBody;
 
     //Prevents it from getting stuck
@@ -27,6 +35,23 @@ public class MovePlat : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (m_isRandom.x == 1)
+        {
+            m_displacementNeg.x = Random.Range(m_rangeX.x, 0f);
+            m_displacementPos.x = Random.Range(0f, m_rangeX.y);
+        }
+        
+        if (m_isRandom.y == 1)
+        {
+            m_displacementNeg.y = Random.Range(m_rangeY.x, 0f);
+            m_displacementPos.y = Random.Range(0f, m_rangeY.y);
+        }
+        
+        if (m_isRandom.z == 1)
+        {
+            m_displacementNeg.z = Random.Range(m_rangeZ.x, 0f);
+            m_displacementPos.z = Random.Range(0f, m_rangeZ.y);
+        }
         m_rigidBody = GetComponent<Rigidbody>();
         m_origin = transform.position;
         m_destinationMax = transform.position + m_displacementPos;
@@ -76,5 +101,12 @@ public class MovePlat : MonoBehaviour
             reachmin = true;
             reachmax = false;
         }
+    }
+
+
+    public void ToFinalPos()
+    {
+        transform.position = new Vector3(-7.666f, -5.651f, 85.005f);
+        transform.rotation = Quaternion.Euler(180f, 0f, 180f);
     }
 }

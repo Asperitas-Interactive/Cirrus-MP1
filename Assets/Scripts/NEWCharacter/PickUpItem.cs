@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class PickUpItem : MonoBehaviour
 {
@@ -9,19 +10,27 @@ public class PickUpItem : MonoBehaviour
 
     bool m_canPickUp = false;
     private bool m_pickepUp = false;
-    
+    private NavMeshAgent m_agent;
+
+    private void Start()
+    {
+        m_agent = GetComponent<NavMeshAgent>();
+    }
+
     public void DisablePickup()
     {
         m_pickepUp = false;
         m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
         m_pickUp.transform.rotation = Quaternion.identity;
         m_pickUp.GetComponent<MovePlat>().ResetPosition();
+        m_canPickUp = false;
         m_pickUp = null;
     }
     
     void Update()
     {
- 
+
+        if (GetComponent<playerMovement>().m_cutscenePlayin) return;
 
         if (Input.GetButtonDown("PickUp") && m_pickUp != null && m_pickepUp)
         {
@@ -77,6 +86,10 @@ public class PickUpItem : MonoBehaviour
         if(m_pickUp != null && m_pickepUp == true)
         {
             m_pickUp.transform.position = transform.position + (transform.forward * 2f) + (transform.up);
+        }
+        if(m_agent.enabled && m_pickUp != null && m_pickepUp == true)
+        {
+            m_pickUp.transform.position = transform.position + (transform.forward);
         }
     }
     

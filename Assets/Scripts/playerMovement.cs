@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.PlayerLoop;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -13,12 +14,15 @@ public class playerMovement : MonoBehaviour
     float m_smoothTime = 0.1f;
     float m_smoothVel;
 
+    private NavMeshAgent m_agent;
+    
     [FormerlySerializedAs("glide")] public bool m_glide;
 
     //Movement Based Variables
     [FormerlySerializedAs("speed")] public float m_speed = 12.0f;
     [FormerlySerializedAs("jumpHeight")] public float m_jumpHeight;
 
+    
 
     Vector3 m_velocity;
 
@@ -57,6 +61,7 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_agent = GetComponent<NavMeshAgent>();
         m_canMove = true;
         Cursor.lockState = CursorLockMode.Locked;
         m_cam = GameObject.FindGameObjectWithTag("MainCamera").transform;
@@ -81,7 +86,17 @@ public class playerMovement : MonoBehaviour
             }
         }
 
-        if (m_cutscenePlayin || !m_canMove)    return;
+        if (m_cutscenePlayin || !m_canMove)
+        {
+            m_rb.velocity = Vector3.zero;
+            m_rb.AddForce(Physics.gravity, ForceMode.Acceleration);
+
+            if (m_agent.enabled)
+            {
+                transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_agent.velocity.magnitude);
+            }
+            return;
+        }
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
@@ -118,10 +133,12 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
+        if(!m_agent.enabled)
+            transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
 
         if (m_cutscenePlayin || !m_canMove) return;
         m_jumpTimer -= Time.fixedDeltaTime;
+        m_glideTimer -= Time.fixedDeltaTime;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
         float x = Input.GetAxisRaw("Horizontal");
@@ -152,7 +169,7 @@ public class playerMovement : MonoBehaviour
             if (m_jumpTimer < 0.0f)
             {
                 m_isJumping = false;
-                // transform.GetChild(4).GetComponent<Animator>().SetBool("isJumping", false);
+                 transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", false);
                 // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
             }
@@ -166,7 +183,7 @@ public class playerMovement : MonoBehaviour
         RaycastHit sweep;
 
         //We can mess with the max distance (1.5f)
-        bool isAtwall = m_rb.SweepTest(m_dir, out sweep, 1.5f);
+        bool isAtwall = m_rb.SweepTest(m_dir, out sweep, 1.5f, QueryTriggerInteraction.Ignore);
 
         Debug.DrawLine(transform.position, sweep.point);
 
@@ -217,14 +234,19 @@ public class playerMovement : MonoBehaviour
                 m_rb.AddForce( Physics.gravity * 4f, ForceMode.Acceleration);
             else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))
                 m_rb.AddForce( Physics.gravity * 2.5f, ForceMode.Acceleration);
-            else 
+            else if(m_isJumping && m_rb.velocity.y > 0)
+                m_rb.AddForce( Physics.gravity * 1.25f, ForceMode.Acceleration);
+            else if(!m_isGliding)
                 m_rb.AddForce( Physics.gravity, ForceMode.Acceleration);
 
         }
 
         if (Input.GetButton("Jump") && m_isGliding)
         {
-            m_rb.AddForce(Physics.gravity / 2.5f, ForceMode.Force);
+            if(m_glideTimer < 0f)
+                m_rb.AddForce(Physics.gravity / 4f, ForceMode.Acceleration);
+            else
+                m_rb.AddForce(Physics.gravity / 2.5f, ForceMode.Acceleration);
         }
 
     }
@@ -249,5 +271,10 @@ public class playerMovement : MonoBehaviour
         {
             m_movingPlat = Vector3.zero;
         }
+    }
+
+    public void SetCam()
+    {
+        
     }
 };
