@@ -88,7 +88,7 @@ public class playerMovement : MonoBehaviour
              transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
         
              m_isJumping = true;
-             m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.VelocityChange);
+             m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
              m_defaultPos = transform.position.y;
              m_jumpTimer = 0.2f;
          }
@@ -96,22 +96,22 @@ public class playerMovement : MonoBehaviour
         if (unlockGlide)
         {
             //Check if we can glide
-            if (Input.GetButtonUp("Jump"))
-            {
-                m_canGlide = true;
-                m_glideTimer = m_glideFactor;
-            }
-
-            //Gliding
-            if (Input.GetButtonDown("Jump") && m_canGlide)
-            {
-                m_rb.velocity = Vector3.zero;
-                m_isGliding = true;
-            }
-            if (!m_isGrounded && Input.GetButtonUp("Jump"))
-            {
-                m_isGliding = false;
-            }
+            // if (Input.GetButtonUp("Jump"))
+            // {
+            //     m_canGlide = true;
+            //     m_glideTimer = m_glideFactor;
+            // }
+            //
+            // //Gliding
+            // if (Input.GetButtonDown("Jump") && m_canGlide)
+            // {
+            //     m_rb.velocity = Vector3.zero;
+            //     m_isGliding = true;
+            // }
+            // if (!m_isGrounded && Input.GetButtonUp("Jump"))
+            // {
+            //     m_isGliding = false;
+            // }
         }
     }
 
@@ -209,12 +209,22 @@ public class playerMovement : MonoBehaviour
         if (!m_isGrounded && !m_isGliding)
         {
             //Debug.Log("call");
-            m_rb.AddForce(Physics.gravity, ForceMode.Force);
+            if (m_isJumping && m_rb.velocity.y < 0 && Input.GetButton("Jump") && unlockGlide)
+            {
+                m_isGliding = true;
+            }
+            if(m_isJumping && m_rb.velocity.y < 0)
+                m_rb.AddForce( Physics.gravity * 4f, ForceMode.Acceleration);
+            else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))
+                m_rb.AddForce( Physics.gravity * 2.5f, ForceMode.Acceleration);
+            else 
+                m_rb.AddForce( Physics.gravity, ForceMode.Acceleration);
+
         }
 
         if (Input.GetButton("Jump") && m_isGliding)
         {
-            m_rb.AddForce(-Physics.gravity / 2.5f, ForceMode.Force);
+            m_rb.AddForce(Physics.gravity / 2.5f, ForceMode.Force);
         }
 
     }
