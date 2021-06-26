@@ -138,7 +138,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4358994942074642480}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4a7ce18b431caa4a9869e43a05000be, type: 3}
   m_Name: 
@@ -179,7 +179,7 @@ CapsuleCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4358994942074642480}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: dd232542e695c674099bde65595cae6b, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
@@ -200,14 +200,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_glide: 0
   m_speed: 12
-  m_jumpHeight: 10
+  m_jumpHeight: 6
   m_groundCheck: {fileID: 1004495456966238038}
   m_groundDistance: 0.4
   m_groundMask:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   m_glideFactor: -1.8
-  unlockGlide: 0
+  unlockGlide: 1
 --- !u!54 &387650482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -219,7 +219,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
