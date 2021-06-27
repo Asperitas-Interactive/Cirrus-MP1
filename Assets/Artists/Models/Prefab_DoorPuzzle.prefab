@@ -44,6 +44,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 10.132747, y: 15.94642, z: 1.5190344}
   m_Center: {x: 5.0663733, y: 7.97321, z: 0.49035776}
+--- !u!95 &2004122279
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836350367149678335}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5d99f4b481f4af949b9d576583581190, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &2004122278
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2836350367149678335}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a30d2b4370639e4da68b44c2dc83389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoorOpen: {fileID: 0}
 --- !u!65 &7757008676794572411
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -57,6 +89,38 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 6.264991, y: 15.94642, z: 1.5190347}
   m_Center: {x: -3.1324954, y: 7.97321, z: 0.49035782}
+--- !u!95 &694899466
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931649942437977656}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 88a29311085d42441aa67bfd834b41ca, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &694899467
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5931649942437977656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4a30d2b4370639e4da68b44c2dc83389, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_DoorOpen: {fileID: 0}
 --- !u!1001 &3805322878442995675
 PrefabInstance:
   m_ObjectHideFlags: 0

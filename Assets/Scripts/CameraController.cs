@@ -22,6 +22,7 @@ public class CameraController : MonoBehaviour
     [Header("Cutscene 3")]
     [SerializeField] private GameObject m_recieverCamIsland2;
     [SerializeField] private GameObject m_collectibleCamIsland2;
+    [SerializeField] private GameObject m_levelCamIsland2;
     
     
     
@@ -47,6 +48,9 @@ public class CameraController : MonoBehaviour
         m_collectibleCam.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_collectibleCam.SetActive(false);
+        m_levelCamIsland2.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        m_levelCamIsland2.SetActive(false);
         m_recieverCam.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_recieverCam.SetActive(false);

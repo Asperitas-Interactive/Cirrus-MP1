@@ -15,8 +15,8 @@ GameObject:
   - component: {fileID: 8539908737860305106}
   - component: {fileID: 8539908737860305107}
   - component: {fileID: 8539908737860305108}
-  - component: {fileID: 968811870}
   - component: {fileID: 7249963656748958952}
+  - component: {fileID: 968811870}
   m_Layer: 0
   m_Name: crystal
   m_TagString: PickUp
@@ -150,6 +150,19 @@ MonoBehaviour:
   m_rangeX: {x: 0, y: 0}
   m_rangeY: {x: 0, y: 0}
   m_rangeZ: {x: 0, y: 0}
+--- !u!114 &7249963656748958952
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686488713644834481}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd0518b3fcb8ed34c9bc547db07d0b70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_twinkle: {fileID: 0}
 --- !u!95 &968811870
 Animator:
   serializedVersion: 3
@@ -169,19 +182,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7249963656748958952
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 686488713644834481}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dd0518b3fcb8ed34c9bc547db07d0b70, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_twinkle: {fileID: 0}
 --- !u!1 &1685318036279557711
 GameObject:
   m_ObjectHideFlags: 0
