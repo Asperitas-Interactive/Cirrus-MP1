@@ -49,6 +49,14 @@ public class playerMovement : MonoBehaviour
 
     [SerializeField] bool unlockGlide;
 
+    public bool m_jumpAnimator
+    {
+        set
+        {
+            transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", true);
+        }
+    }
+
     float m_jumpTimer;
     public bool m_canMove { get; set; }
 
@@ -62,6 +70,8 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private AudioSource m_running;
     [SerializeField] private AudioSource m_jumpStart;
     [SerializeField] private AudioSource m_jumpLand;
+    private RaycastHit hitInfo;
+    private float disG;
 
     // Start is called before the first frame update
     void Start()
@@ -75,6 +85,8 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
+
+        
         //Pause stuff
         if (Input.GetButtonDown("Pause"))
         {
@@ -102,6 +114,10 @@ public class playerMovement : MonoBehaviour
             }
             return;
         }
+        
+        Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 100f, m_groundMask);
+
+        disG = hitInfo.distance;
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
@@ -152,6 +168,8 @@ public class playerMovement : MonoBehaviour
         bool test = m_isGrounded;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
+       
+
         if(test != m_isGrounded && m_isGrounded == true)
         {
             m_jumpStart.Stop();
@@ -190,6 +208,7 @@ public class playerMovement : MonoBehaviour
                 // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
             }
+            transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", false);
         }
 
         //animate
@@ -255,6 +274,12 @@ public class playerMovement : MonoBehaviour
             {
                 m_isGliding = true;
             }
+
+            if (m_isJumping && m_rb.velocity.y < 0 && disG < 2.4f)
+            {
+                m_jumpAnimator = true;
+            }
+            
             if(m_isJumping && m_rb.velocity.y < 0)          //Descent
                 m_rb.AddForce( Physics.gravity * 4f, ForceMode.Acceleration);
             else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))     //Jumping up and not holding the jump button

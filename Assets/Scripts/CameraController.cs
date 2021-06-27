@@ -105,7 +105,6 @@ public class CameraController : MonoBehaviour
         agent.enabled = true;
         agent.SetDestination(m_depositLocation.position);
         yield return new WaitForSeconds(4f);
-        m_playerMovement.gameObject.GetComponent<PickUpItem>().DisablePickup();
         m_pickup.SetTrigger("Execute");
         m_pickup.tag = "Untagged";
         
