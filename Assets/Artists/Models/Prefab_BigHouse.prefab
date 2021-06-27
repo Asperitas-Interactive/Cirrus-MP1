@@ -65,6 +65,42 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e2a171872daa7fa4c9096ff93e769540, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: b0630376081e8924fb91a9a58d4f657e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 83b639e9b201a81448248c58aedf1b7b, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b13749a098894542bdedf6f2f4de2a3, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: c0c7d55c8887d324fb4b1a92e1132d3a, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[6]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1a59490b14831894d981c92b8229ca4a, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: a1243038805c90c47ba64632996ecee3, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[8]
+      value: 
+      objectReference: {fileID: 2100000, guid: 1bd474627871a924b8f2474e51ff1472, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
+      propertyPath: m_Materials.Array.data[9]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9907202ae4d99474b93b9e2bbb744d7b, type: 2}
     - target: {fileID: 919132149155446097, guid: 35d5f1b39cee0c942983bf8c543ee8ca, type: 3}
       propertyPath: m_Name
       value: Prefab_BigHouse
