@@ -9,10 +9,11 @@ using UnityEngine.Serialization;
 public class TriggerFunction : MonoBehaviour
 {
     [SerializeField] private UnityEvent m_triggerEnter;
-    [SerializeField] private UnityEvent m_triggerExit;
 
     [SerializeField] private string m_enterTag;
     [SerializeField] private UnityEvent m_triggerEnterTagged;
+
+    [SerializeField] private UnityEvent m_triggerExit;
 
     [SerializeField] private string m_exitTag;
     [SerializeField] private UnityEvent m_triggerExitTagged;

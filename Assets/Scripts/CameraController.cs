@@ -32,12 +32,12 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator eCutscene1()
     {
-        m_collectibleCamIsland2.SetActive(true);
+        m_collectibleCam.SetActive(true);
         yield return new WaitForSeconds(4.5f);
-        m_collectibleCamIsland2.SetActive(false);
-        m_recieverCamIsland2.SetActive(true);
+        m_collectibleCam.SetActive(false);
+        m_recieverCam.SetActive(true);
         yield return new WaitForSeconds(4.5f);
-        m_recieverCamIsland2.SetActive(false);
+        m_recieverCam.SetActive(false);
         if (m_playerMovement != null)
             m_playerMovement.m_cutscenePlayin = false;
     }
@@ -45,15 +45,15 @@ public class CameraController : MonoBehaviour
     private IEnumerator eCutscene3()
     {
 
-        m_collectibleCam.SetActive(true);
+        m_collectibleCamIsland2.SetActive(true);
         yield return new WaitForSeconds(4.5f);
-        m_collectibleCam.SetActive(false);
+        m_collectibleCamIsland2.SetActive(false);
         m_levelCamIsland2.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_levelCamIsland2.SetActive(false);
-        m_recieverCam.SetActive(true);
+        m_recieverCamIsland2.SetActive(true);
         yield return new WaitForSeconds(4.5f);
-        m_recieverCam.SetActive(false);
+        m_recieverCamIsland2.SetActive(false);
         if (m_playerMovement != null)
             m_playerMovement.m_cutscenePlayin = false;    }
 
@@ -104,12 +104,11 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         agent.enabled = true;
         agent.SetDestination(m_depositLocation.position);
-
-      //  m_pickup.gameObject.transform.position = agent.transform.position + Vector3.forward;
         yield return new WaitForSeconds(4f);
+        m_playerMovement.gameObject.GetComponent<PickUpItem>().DisablePickup();
         m_pickup.SetTrigger("Execute");
         m_pickup.tag = "Untagged";
-        //m_pickup.gameObject.transform.position = m_playerMovement.gameObject.transform.forward;
+        
         agent.transform.rotation = m_depositLocation.rotation;
         yield return new WaitForSeconds(3f);
 

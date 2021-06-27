@@ -255,13 +255,13 @@ public class playerMovement : MonoBehaviour
             {
                 m_isGliding = true;
             }
-            if(m_isJumping && m_rb.velocity.y < 0)
+            if(m_isJumping && m_rb.velocity.y < 0)          //Descent
                 m_rb.AddForce( Physics.gravity * 4f, ForceMode.Acceleration);
-            else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))
+            else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))     //Jumping up and not holding the jump button
                 m_rb.AddForce( Physics.gravity * 2.5f, ForceMode.Acceleration);
-            else if(m_isJumping && m_rb.velocity.y > 0)
+            else if(m_isJumping && m_rb.velocity.y > 0)                                 //Jumping up and holding the jump button
                 m_rb.AddForce( Physics.gravity * 1.25f, ForceMode.Acceleration);
-            else if(!m_isGliding)
+            else if(!m_isGliding)                                                       //Normal gravity in other case
                 m_rb.AddForce( Physics.gravity, ForceMode.Acceleration);
 
         }
