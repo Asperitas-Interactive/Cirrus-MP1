@@ -58,6 +58,11 @@ public class playerMovement : MonoBehaviour
 
     private bool m_paused = false;
 
+    [SerializeField] private AudioSource m_walking;
+    [SerializeField] private AudioSource m_running;
+    [SerializeField] private AudioSource m_jumpStart;
+    [SerializeField] private AudioSource m_jumpLand;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -106,6 +111,7 @@ public class playerMovement : MonoBehaviour
              m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
              m_defaultPos = transform.position.y;
              m_jumpTimer = 0.2f;
+             m_jumpStart.Play();
          }
 
         if (unlockGlide)
@@ -139,7 +145,14 @@ public class playerMovement : MonoBehaviour
         if (m_cutscenePlayin || !m_canMove) return;
         m_jumpTimer -= Time.fixedDeltaTime;
         m_glideTimer -= Time.fixedDeltaTime;
+        bool test = m_isGrounded;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
+
+        if(test != m_isGrounded && m_isGrounded == true)
+        {
+            m_jumpStart.Stop();
+            m_jumpLand.Play();
+        }
 
         float x = Input.GetAxisRaw("Horizontal");
         float y = Input.GetAxisRaw("Vertical");
@@ -196,6 +209,8 @@ public class playerMovement : MonoBehaviour
 
             m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
             m_rb.angularVelocity = Vector3.zero;
+
+            TurnOffMovingSFX();
         }
         else if (m_move.magnitude > 0.1f) //if moving
         {
@@ -203,6 +218,8 @@ public class playerMovement : MonoBehaviour
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
             m_rb.velocity = new Vector3(m_dir.x * m_speed, m_rb.velocity.y, m_dir.z * m_speed);
+
+            TurnOnMovingSFX();
         }
         else //if still
         {
@@ -212,6 +229,8 @@ public class playerMovement : MonoBehaviour
 
             m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
             m_rb.angularVelocity = Vector3.zero;
+
+            TurnOffMovingSFX();
         }
 
 
@@ -276,5 +295,33 @@ public class playerMovement : MonoBehaviour
     public void SetCam()
     {
         
+    }
+
+    public void TurnOffMovingSFX()
+    {
+        m_walking.Stop();
+        m_running.Stop();
+    }
+
+    public void TurnOnMovingSFX()
+    {
+        if (m_isGrounded)
+        {
+            if (m_speed == 12 && !m_running.isPlaying)
+            {
+                m_walking.Stop();
+                m_running.Play();
+            }
+            else if (m_speed == 6 && !m_walking.isPlaying)
+            {
+                m_running.Stop();
+                m_walking.Play();
+            }
+        }
+        else
+        {
+            TurnOffMovingSFX();
+        }
+
     }
 };
