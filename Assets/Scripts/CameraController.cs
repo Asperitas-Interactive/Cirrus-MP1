@@ -72,20 +72,21 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator eCutscene2()
     {
+        
         m_recieverNearCam.SetActive(true);
         var agent = m_playerMovement.gameObject.GetComponent<NavMeshAgent>();
         yield return new WaitForSeconds(2f);
         agent.enabled = true;
         agent.SetDestination(m_depositLocation.position);
-        m_pickup.tag = "Untagged";
 
       //  m_pickup.gameObject.transform.position = agent.transform.position + Vector3.forward;
         yield return new WaitForSeconds(4f);
-        m_playerMovement.gameObject.GetComponent<PickUpItem>().DisablePickup();
-        
-        agent.transform.rotation = m_depositLocation.rotation;
         m_pickup.SetTrigger("Execute");
+        m_pickup.tag = "Untagged";
+        //m_pickup.gameObject.transform.position = m_playerMovement.gameObject.transform.forward;
+        agent.transform.rotation = m_depositLocation.rotation;
         yield return new WaitForSeconds(3f);
+
         m_recieverNearCam.SetActive(false);
         agent.enabled = false;
         m_doorCam.SetActive(true);
