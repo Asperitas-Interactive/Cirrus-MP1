@@ -44,7 +44,7 @@ MeshCollider:
   serializedVersion: 4
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: -5234304281333667439, guid: 75e3c2c7dee95294f9462c80bd01f5eb, type: 3}
+  m_Mesh: {fileID: 1609758122959983415, guid: 75e3c2c7dee95294f9462c80bd01f5eb, type: 3}
 --- !u!1001 &8028052971245907375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 75e3c2c7dee95294f9462c80bd01f5eb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: d6cd486db3b424342b90aafcef6d355e, type: 2}
     - target: {fileID: 919132149155446097, guid: 75e3c2c7dee95294f9462c80bd01f5eb, type: 3}
       propertyPath: m_Name
       value: MOD_Ruins_2
