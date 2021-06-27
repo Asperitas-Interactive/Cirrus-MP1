@@ -18,6 +18,13 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject m_recieverNearCam;
     [SerializeField] private Transform m_depositLocation;
     [SerializeField] private Animator m_pickup;
+
+    [Header("Cutscene 3")]
+    [SerializeField] private GameObject m_recieverCamIsland2;
+    [SerializeField] private GameObject m_collectibleCamIsland2;
+    [SerializeField] private GameObject m_levelCamIsland2;
+    
+    
     
     [SerializeField] private playerMovement m_playerMovement;
     
@@ -25,14 +32,34 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator eCutscene1()
     {
+        m_collectibleCamIsland2.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        m_collectibleCamIsland2.SetActive(false);
+        m_recieverCamIsland2.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        m_recieverCamIsland2.SetActive(false);
+        if (m_playerMovement != null)
+            m_playerMovement.m_cutscenePlayin = false;
+    }
+
+    private IEnumerator eCutscene3()
+    {
+
         m_collectibleCam.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_collectibleCam.SetActive(false);
+        m_levelCamIsland2.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        m_levelCamIsland2.SetActive(false);
         m_recieverCam.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_recieverCam.SetActive(false);
         if (m_playerMovement != null)
-            m_playerMovement.m_cutscenePlayin = false;
+            m_playerMovement.m_cutscenePlayin = false;    }
+
+    public void Cutscene3()
+    {
+        
     }
 
 
@@ -72,7 +99,6 @@ public class CameraController : MonoBehaviour
 
     private IEnumerator eCutscene2()
     {
-        
         m_recieverNearCam.SetActive(true);
         var agent = m_playerMovement.gameObject.GetComponent<NavMeshAgent>();
         yield return new WaitForSeconds(2f);
@@ -95,7 +121,6 @@ public class CameraController : MonoBehaviour
 
         if (m_playerMovement != null)
             m_playerMovement.m_cutscenePlayin = false;
-
     }
     private void enable()
     {
