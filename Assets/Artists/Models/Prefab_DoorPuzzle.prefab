@@ -42,8 +42,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.25, y: 16, z: 1}
-  m_Center: {x: 3.125, y: 8, z: 0}
+  m_Size: {x: 6.234396, y: 15.946422, z: 1.5190344}
+  m_Center: {x: 3.117198, y: 7.9732037, z: 0.49035394}
 --- !u!95 &4270509677312572943
 Animator:
   serializedVersion: 3
@@ -75,6 +75,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a30d2b4370639e4da68b44c2dc83389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DoorOpen: {fileID: 0}
+--- !u!65 &6583051162283686690
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8628475504322880382}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 3.8735805, y: 15.946422, z: 1.5190344}
+  m_Center: {x: 8.195955, y: 7.9732037, z: 0.49035394}
 --- !u!65 &7534482100539537035
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -86,8 +100,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 6.25, y: 16, z: 1}
-  m_Center: {x: -3.125, y: 8, z: 0}
+  m_Size: {x: 6.264991, y: 15.94642, z: 1.5190347}
+  m_Center: {x: -3.1324944, y: 7.9732037, z: 0.490354}
 --- !u!95 &7715564999091908348
 Animator:
   serializedVersion: 3
@@ -119,6 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a30d2b4370639e4da68b44c2dc83389, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_DoorOpen: {fileID: 0}
 --- !u!1001 &7491537902078144583
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -174,6 +189,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 8825875481077153662, guid: 28d6d1f04d248b646a05c2619a2476e7, type: 3}
+    - target: {fileID: -462236808485209554, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -462236808485209554, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 309463952820482923, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -181,6 +204,14 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
       propertyPath: m_Name
       value: MOD_Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378106908019106475, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2378106908019106475, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2714056160562616351, guid: 44871eae5607d0145b6a2a8f48159bfa, type: 3}
       propertyPath: m_Mesh
