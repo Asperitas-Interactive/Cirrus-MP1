@@ -20,8 +20,8 @@ MonoBehaviour:
       m_RotationRangeMax: {x: 0, y: 281.63266, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 2, y: 2, z: 2}
-      m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 0
+      m_UniformScale: {x: 1, y: 2}
+      m_UniformBool: 1
       m_XRotationBool: 0
       m_YRotationBool: 0
       m_ZRotationBool: 0
@@ -100,8 +100,8 @@ MonoBehaviour:
       m_RotationRangeMax: {x: 0, y: 340.40817, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
       m_ScaleRangeMax: {x: 2, y: 2, z: 2}
-      m_UniformScale: {x: 1, y: 1}
-      m_UniformBool: 0
+      m_UniformScale: {x: 1, y: 2}
+      m_UniformBool: 1
       m_XRotationBool: 1
       m_YRotationBool: 1
       m_ZRotationBool: 1
@@ -125,3 +125,19 @@ MonoBehaviour:
       m_YScaleBool: 0
       m_ZScaleBool: 1
     name: Prefab_Lilypad
+  - gameObject: {fileID: 2008392412338057633, guid: 9588d4c28de991d4ba744a50ac4e758f, type: 3}
+    settings:
+      m_Strength: 50
+      m_RotationRangeMin: {x: 0, y: 0, z: 0}
+      m_RotationRangeMax: {x: 0, y: 0, z: 0}
+      m_ScaleRangeMin: {x: 0.5, y: 0.5, z: 0.5}
+      m_ScaleRangeMax: {x: 2, y: 2, z: 2}
+      m_UniformScale: {x: 0.5, y: 2}
+      m_UniformBool: 1
+      m_XRotationBool: 0
+      m_YRotationBool: 0
+      m_ZRotationBool: 0
+      m_XScaleBool: 1
+      m_YScaleBool: 1
+      m_ZScaleBool: 1
+    name: Bush
