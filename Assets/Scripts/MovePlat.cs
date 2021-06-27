@@ -73,9 +73,8 @@ public class MovePlat : MonoBehaviour
     }
 
     public void ResetPosition()
-    {
-        resetPos();
-        // Invoke("resetPos", 3);
+    { 
+        Invoke("resetPos", 3);
     }
 
     private void resetPos()

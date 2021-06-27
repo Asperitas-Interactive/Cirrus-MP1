@@ -27,6 +27,16 @@ public class PickUpItem : MonoBehaviour
         m_pickUp = null;
     }
     
+    public void DisablePickupNoRes()
+    {
+        m_pickepUp = false;
+        m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+        m_pickUp.transform.rotation = Quaternion.identity;
+        //m_pickUp.GetComponent<MovePlat>().ResetPosition();
+        m_canPickUp = false;
+        m_pickUp = null;
+    }
+    
     void Update()
     {
 
