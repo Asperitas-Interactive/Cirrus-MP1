@@ -139,10 +139,14 @@ public class playerMovement : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if(!m_agent.enabled)
-            transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
 
-        if (m_cutscenePlayin || !m_canMove) return;
+
+        if (m_cutscenePlayin || !m_canMove)
+        {
+            if(!m_agent.enabled)
+                transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
+            return;
+        }
         m_jumpTimer -= Time.fixedDeltaTime;
         m_glideTimer -= Time.fixedDeltaTime;
         bool test = m_isGrounded;
@@ -214,6 +218,7 @@ public class playerMovement : MonoBehaviour
         }
         else if (m_move.magnitude > 0.1f) //if moving
         {
+            transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
@@ -223,7 +228,8 @@ public class playerMovement : MonoBehaviour
         }
         else //if still
         {
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            //transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", 0);
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
