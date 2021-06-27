@@ -46,10 +46,10 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/Doors.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/TriggerFunction.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/MovePlat.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tZ9B78imEIjZTnTcebdlBIaIxF" />

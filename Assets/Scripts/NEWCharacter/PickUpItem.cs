@@ -87,7 +87,7 @@ public class PickUpItem : MonoBehaviour
         {
             m_pickUp.transform.position = transform.position + (transform.forward * 2f) + (transform.up);
         }
-        if(m_agent.enabled && m_pickUp != null && m_pickepUp == true)
+        if(m_agent.enabled && m_pickUp != null)
         {
             m_pickUp.transform.position = transform.position + (transform.forward);
         }
