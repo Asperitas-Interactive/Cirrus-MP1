@@ -10,7 +10,8 @@ public class DebugBoxCol : MonoBehaviour
 
         if(GetComponent<BoxCollider>() != null)
         {
-            Gizmos.DrawWireCube(GetComponent<BoxCollider>().center, GetComponent<BoxCollider>().size);
+            Gizmos.DrawCube(transform.position, new Vector3(1, 1, 1));
+            Debug.Log(transform.position);
         }
     }
 }
