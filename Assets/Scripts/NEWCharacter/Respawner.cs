@@ -9,7 +9,7 @@ public class Respawner : MonoBehaviour
 {
 
     [SerializeField] private Transform[] m_spawnLocations;
-
+    [SerializeField] private AudioSource m_respawnSound;
 
     private playerMovement m_player;
     public int m_currentSpawnLocation { get; set; }
@@ -52,6 +52,6 @@ public class Respawner : MonoBehaviour
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = m_spawnLocations[m_currentSpawnLocation].position;
         m_player.m_canMove = true;
-
+        m_respawnSound.Play();
     }
 }
