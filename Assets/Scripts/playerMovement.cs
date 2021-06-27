@@ -62,6 +62,7 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private AudioSource m_running;
     [SerializeField] private AudioSource m_jumpStart;
     [SerializeField] private AudioSource m_jumpLand;
+    [SerializeField] private AudioSource m_Splash;
 
     // Start is called before the first frame update
     void Start()
@@ -329,5 +330,13 @@ public class playerMovement : MonoBehaviour
             TurnOffMovingSFX();
         }
 
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Water")
+        {
+            m_Splash.Play();
+        }
     }
 };

@@ -7,6 +7,7 @@ public class Lillypad : MonoBehaviour
     private Vector3 startPos;
     private bool m_playerOn = false;
     private Rigidbody m_rigidbody;
+    [SerializeField] private AudioSource m_squish;
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +39,10 @@ public class Lillypad : MonoBehaviour
         if(collision.gameObject.tag == "Player")
         {
             m_playerOn = true;
+            if (!m_squish.isPlaying)
+            {
+                m_squish.Play();
+            }
         }
     }
 
