@@ -112,6 +112,10 @@ MonoBehaviour:
   m_displacementPos: {x: 0, y: 5, z: 0}
   m_displacementNeg: {x: 0, y: -5, z: 0}
   m_vectorSpeed: {x: 0, y: 2, z: 0}
+  m_isRandom: {x: 0, y: 0, z: 0}
+  m_rangeX: {x: 0, y: 0}
+  m_rangeY: {x: 0, y: 0}
+  m_rangeZ: {x: 0, y: 0}
 --- !u!54 &1789004134
 Rigidbody:
   m_ObjectHideFlags: 0
