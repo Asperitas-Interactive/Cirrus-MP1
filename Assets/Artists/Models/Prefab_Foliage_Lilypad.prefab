@@ -128,7 +128,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 1c281ce84cd28c44cbea0510535bc559, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6241efed3a77f414d9e01b45158bba25, type: 2}
+      objectReference: {fileID: 2100000, guid: 567d75b881081e34f8ebf16c298388bb, type: 2}
     - target: {fileID: 919132149155446097, guid: 1c281ce84cd28c44cbea0510535bc559, type: 3}
       propertyPath: m_Name
       value: MOD_Lilypad
