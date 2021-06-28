@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_PicketFence
+  m_Name: MAT_PicketFenceBeam
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _ENVIRONMENTREFLECTIONS_OFF _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
@@ -34,11 +34,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f7a9ce1a80bc51d48aba053161ae0098, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6b810e905909ca948b12be8b551de7f0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: ded152248b8639f45bf23b8ada6f980b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6ebed141c1122f443b6216b182f52f4f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -58,11 +58,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f7a9ce1a80bc51d48aba053161ae0098, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6b810e905909ca948b12be8b551de7f0, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: b72cafa00bb2c87409f34ef460a1bb5f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 9ab01f82c624f28458e19617bbeb50e3, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
