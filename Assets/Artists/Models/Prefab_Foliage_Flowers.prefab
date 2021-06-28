@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1818054281703562141}
   - component: {fileID: 4530605786627403607}
   m_Layer: 0
-  m_Name: Prefab_Flowers
+  m_Name: Prefab_Foliage_Flowers
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2728914765298454146}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -29.311789, y: -7.614, z: 82.568054}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2.6891742, y: 2.6891742, z: 2.6891742}
   m_Children: []
   m_Father: {fileID: 0}

@@ -9,8 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1019086218024008158}
-  m_Layer: 0
-  m_Name: Prefab_Lilypad
+  m_Layer: 3
+  m_Name: Prefab_Foliage_Lilypad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -128,10 +128,14 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 1c281ce84cd28c44cbea0510535bc559, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 6241efed3a77f414d9e01b45158bba25, type: 2}
+      objectReference: {fileID: 2100000, guid: 567d75b881081e34f8ebf16c298388bb, type: 2}
     - target: {fileID: 919132149155446097, guid: 1c281ce84cd28c44cbea0510535bc559, type: 3}
       propertyPath: m_Name
       value: MOD_Lilypad
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 1c281ce84cd28c44cbea0510535bc559, type: 3}
+      propertyPath: m_Layer
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1c281ce84cd28c44cbea0510535bc559, type: 3}
