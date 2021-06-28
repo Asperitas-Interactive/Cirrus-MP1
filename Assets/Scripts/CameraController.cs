@@ -145,11 +145,11 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         agent.enabled = true;
         agent.SetDestination(m_depositLocationIsland2.position);
-        yield return new WaitForSeconds(4f);
-        m_pickupIsland2.SetTrigger("Execute");
+        yield return new WaitForSeconds(5f);
+        m_pickupIsland2.SetTrigger("Execute2");
         m_pickupIsland2.tag = "Untagged";
         
-        agent.transform.rotation = m_depositLocationIsland2.rotation;
+        agent.transform.rotation = Quaternion.Lerp(agent.transform.rotation, m_depositLocationIsland2.rotation, 10);
         yield return new WaitForSeconds(3f);
 
         m_recieverNearCamIsland2.SetActive(false);
