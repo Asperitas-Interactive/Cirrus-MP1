@@ -26,7 +26,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PolyMesh:
-    name: PolybrushMesh565208
+    name: PolybrushMesh1715402
     vertices:
     - {x: 0.9571777, y: 3.1246479, z: 0.9822412}
     - {x: 0.60730207, y: 3.1246479, z: 0.679533}
@@ -357,7 +357,7 @@ MonoBehaviour:
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
@@ -365,69 +365,69 @@ MonoBehaviour:
     - serializedVersion: 2
       rgba: 65024
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
     - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65024
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
       rgba: 65024
     - serializedVersion: 2
+      rgba: 254
+    - serializedVersion: 2
+      rgba: 255
+    - serializedVersion: 2
+      rgba: 254
+    - serializedVersion: 2
+      rgba: 255
+    - serializedVersion: 2
+      rgba: 254
+    - serializedVersion: 2
+      rgba: 65280
+    - serializedVersion: 2
+      rgba: 255
+    - serializedVersion: 2
       rgba: 65024
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 65024
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
+    - serializedVersion: 2
+      rgba: 254
     - serializedVersion: 2
       rgba: 3198464
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
       rgba: 130304
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
+    - serializedVersion: 2
+      rgba: 255
+    - serializedVersion: 2
+      rgba: 255
+    - serializedVersion: 2
+      rgba: 255
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
       rgba: 3198464
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
     - serializedVersion: 2
       rgba: 2937344
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
@@ -435,21 +435,21 @@ MonoBehaviour:
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
+    - serializedVersion: 2
+      rgba: 254
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
-      rgba: 65280
-    - serializedVersion: 2
-      rgba: 65280
+      rgba: 255
     - serializedVersion: 2
       rgba: 65024
     - serializedVersion: 2
@@ -457,7 +457,7 @@ MonoBehaviour:
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
-      rgba: 65280
+      rgba: 254
     - serializedVersion: 2
       rgba: 65280
     - serializedVersion: 2
