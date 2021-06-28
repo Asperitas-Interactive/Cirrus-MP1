@@ -168,6 +168,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 06b6caac21fe4c44d8933ce0b0a2249e, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2d7bd1446b7c32a458bfec6e46ef0361, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 06b6caac21fe4c44d8933ce0b0a2249e, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 177f98a6bfa973249b1f7b193332d618, type: 2}
     - target: {fileID: 919132149155446097, guid: 06b6caac21fe4c44d8933ce0b0a2249e, type: 3}
       propertyPath: m_Name
       value: MOD_Ruins_EndBase
