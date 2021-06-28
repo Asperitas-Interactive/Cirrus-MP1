@@ -8,6 +8,9 @@ public class IslandAmbience : MonoBehaviour
     [SerializeField] private AudioSource m_ambientBird;
     [SerializeField] private AudioSource[] m_ambientBugs;
 
+    float birdTimer = 13.0f;
+    float bugTimer = 5.0f;
+
     //Start the ambient as you enter
     private void OnTriggerEnter(Collider other)
     {
@@ -20,20 +23,28 @@ public class IslandAmbience : MonoBehaviour
     //Play the ambient sounds as the player stays in the area
     private void OnTriggerStay(Collider other)
     {
+        //Bugs like the inbetween wind
+        //Do it last since it has a *return* statement
         if (other.tag == "Player")
         {
-            //Randomly play a ambience noise
-            foreach (AudioSource a in m_ambientBugs)
+            birdTimer -= Time.deltaTime;
+            bugTimer -= Time.deltaTime;
+
+            if (birdTimer < 0)
             {
-                if (a.isPlaying)
-                {
-                    return;
-                }
+                m_ambientBird.Play();
+                //Make it feel more natural
+                birdTimer = Random.Range(10.0f, 25.0f);
             }
 
-            int noise = Random.Range(0, m_ambientBugs.Length - 1);
+            if (bugTimer < 0)
+            {
+                int noise = Random.Range(0, m_ambientBugs.Length - 1);
 
-            m_ambientBugs[noise].Play();
+                bugTimer = Random.Range(5.0f, 10.0f);
+
+                m_ambientBugs[noise].Play();
+            }
         }
     }
 
