@@ -24,6 +24,11 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject m_collectibleCamIsland2;
     [SerializeField] private GameObject m_levelCamIsland2;
     
+    [Header("Cutscene 4")]
+    [SerializeField] private GameObject m_doorCamIsland2;
+    [SerializeField] private GameObject m_recieverNearCamIsland2;
+    [SerializeField] private Transform m_depositLocationIsland2;
+    [SerializeField] private Animator m_pickupIsland2;
     
     
     [SerializeField] private playerMovement m_playerMovement;
@@ -45,21 +50,32 @@ public class CameraController : MonoBehaviour
     private IEnumerator eCutscene3()
     {
 
-        m_collectibleCamIsland2.SetActive(true);
-        yield return new WaitForSeconds(4.5f);
-        m_collectibleCamIsland2.SetActive(false);
+        
         m_levelCamIsland2.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_levelCamIsland2.SetActive(false);
+        m_collectibleCamIsland2.SetActive(true);
+        yield return new WaitForSeconds(4.5f);
+        m_collectibleCamIsland2.SetActive(false);
         m_recieverCamIsland2.SetActive(true);
         yield return new WaitForSeconds(4.5f);
         m_recieverCamIsland2.SetActive(false);
         if (m_playerMovement != null)
-            m_playerMovement.m_cutscenePlayin = false;    }
+            m_playerMovement.m_cutscenePlayin = false; 
+    }
+    
+    
 
     public void Cutscene3()
     {
-        
+        if (m_playerMovement != null)
+            m_playerMovement.m_cutscenePlayin = true;
+        else
+        {
+            Debug.Log("Player not assigned in script CameraController.cs");
+        }
+
+        StartCoroutine(eCutscene3());
     }
 
 
@@ -105,7 +121,6 @@ public class CameraController : MonoBehaviour
         agent.enabled = true;
         agent.SetDestination(m_depositLocation.position);
         yield return new WaitForSeconds(4f);
-        m_playerMovement.gameObject.GetComponent<PickUpItem>().DisablePickup();
         m_pickup.SetTrigger("Execute");
         m_pickup.tag = "Untagged";
         
@@ -121,6 +136,44 @@ public class CameraController : MonoBehaviour
         if (m_playerMovement != null)
             m_playerMovement.m_cutscenePlayin = false;
     }
+    
+    
+    private IEnumerator eCutscene4()
+    {
+        m_recieverNearCamIsland2.SetActive(true);
+        var agent = m_playerMovement.gameObject.GetComponent<NavMeshAgent>();
+        yield return new WaitForSeconds(2f);
+        agent.enabled = true;
+        agent.SetDestination(m_depositLocationIsland2.position);
+        yield return new WaitForSeconds(4f);
+        m_pickupIsland2.SetTrigger("Execute");
+        m_pickupIsland2.tag = "Untagged";
+        
+        agent.transform.rotation = m_depositLocationIsland2.rotation;
+        yield return new WaitForSeconds(3f);
+
+        m_recieverNearCamIsland2.SetActive(false);
+        agent.enabled = false;
+        m_doorCamIsland2.SetActive(true);
+        yield return new WaitForSeconds(4.0f);
+        m_doorCamIsland2.SetActive(false);
+
+        if (m_playerMovement != null)
+            m_playerMovement.m_cutscenePlayin = false;
+    }
+
+    public void Cutscene4()
+    {
+        if (m_playerMovement != null)
+            m_playerMovement.m_cutscenePlayin = true;
+        else
+        {
+            Debug.Log("Player not assigned in script CameraController.cs");
+        }
+
+        StartCoroutine(eCutscene4());
+    }
+    
     private void enable()
     {
         m_freeLook.m_YAxisRecentering.m_enabled = true;

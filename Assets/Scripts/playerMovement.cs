@@ -15,14 +15,14 @@ public class playerMovement : MonoBehaviour
     float m_smoothVel;
 
     private NavMeshAgent m_agent;
-    
+
     [FormerlySerializedAs("glide")] public bool m_glide;
 
     //Movement Based Variables
     [FormerlySerializedAs("speed")] public float m_speed = 12.0f;
     [FormerlySerializedAs("jumpHeight")] public float m_jumpHeight;
 
-    
+
 
     Vector3 m_velocity;
 
@@ -49,6 +49,14 @@ public class playerMovement : MonoBehaviour
 
     [SerializeField] bool unlockGlide;
 
+    public bool m_jumpAnimator
+    {
+        set
+        {
+            transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", true);
+        }
+    }
+
     float m_jumpTimer;
     public bool m_canMove { get; set; }
 
@@ -63,6 +71,8 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private AudioSource m_jumpStart;
     [SerializeField] private AudioSource m_jumpLand;
     [SerializeField] private AudioSource m_Splash;
+    private RaycastHit hitInfo;
+    private float disG;
 
     // Start is called before the first frame update
     void Start()
@@ -76,6 +86,8 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
+
+
         //Pause stuff
         if (Input.GetButtonDown("Pause"))
         {
@@ -103,11 +115,15 @@ public class playerMovement : MonoBehaviour
             }
             return;
         }
+
+        Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 100f, m_groundMask);
+
+        disG = hitInfo.distance;
         //Jump Force
          if (Input.GetButtonDown("Jump") && m_isGrounded)
          {
              transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
-        
+
              m_isJumping = true;
              m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
              m_defaultPos = transform.position.y;
@@ -153,6 +169,8 @@ public class playerMovement : MonoBehaviour
         bool test = m_isGrounded;
         m_isGrounded = Physics.CheckSphere(m_groundCheck.position, m_groundDistance, m_groundMask);
 
+
+
         if(test != m_isGrounded && m_isGrounded == true)
         {
             m_jumpStart.Stop();
@@ -191,6 +209,7 @@ public class playerMovement : MonoBehaviour
                 // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
             }
+            transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", false);
         }
 
         //animate
@@ -245,10 +264,10 @@ public class playerMovement : MonoBehaviour
 
         //Fall down
 
-        
+
 
         //movement if we arent jumping?
-        
+
         if (!m_isGrounded && !m_isGliding)
         {
             //Debug.Log("call");
@@ -256,6 +275,12 @@ public class playerMovement : MonoBehaviour
             {
                 m_isGliding = true;
             }
+
+            if (m_isJumping && m_rb.velocity.y < 0 && disG < 2.4f)
+            {
+                m_jumpAnimator = true;
+            }
+
             if(m_isJumping && m_rb.velocity.y < 0)          //Descent
                 m_rb.AddForce( Physics.gravity * 4f, ForceMode.Acceleration);
             else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))     //Jumping up and not holding the jump button
@@ -301,7 +326,7 @@ public class playerMovement : MonoBehaviour
 
     public void SetCam()
     {
-        
+
     }
 
     public void TurnOffMovingSFX()
