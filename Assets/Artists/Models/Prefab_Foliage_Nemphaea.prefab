@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 573b58c292a14834496429d8a03608fa, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -16.126333
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 573b58c292a14834496429d8a03608fa, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 42.198902
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 573b58c292a14834496429d8a03608fa, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -561.8129
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 573b58c292a14834496429d8a03608fa, type: 3}
       propertyPath: m_LocalRotation.w
@@ -57,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: f0088b544501c0947b1f7e453073959b, type: 2}
     - target: {fileID: 919132149155446097, guid: 573b58c292a14834496429d8a03608fa, type: 3}
       propertyPath: m_Name
-      value: Prefab_Nemphaea
+      value: Prefab_Foliage_Nemphaea
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 573b58c292a14834496429d8a03608fa, type: 3}
