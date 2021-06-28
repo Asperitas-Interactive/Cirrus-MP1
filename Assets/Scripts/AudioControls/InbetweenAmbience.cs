@@ -15,7 +15,6 @@ public class InbetweenAmbience : MonoBehaviour
             {
                 if (a.isPlaying)
                 {
-                    Debug.Log("bonk");
                     return;
                 }
             }

@@ -8,10 +8,6 @@ public class DebugBoxCol : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        if(GetComponent<BoxCollider>() != null)
-        {
-            Gizmos.DrawCube(transform.position, new Vector3(1, 1, 1));
-            Debug.Log(transform.position);
-        }
+        Gizmos.DrawWireCube(transform.position, transform.localScale);
     }
 }
