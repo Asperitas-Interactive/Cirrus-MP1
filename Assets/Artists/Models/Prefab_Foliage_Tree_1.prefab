@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5325811344740377446}
   - component: {fileID: 5374975187540231295}
   - component: {fileID: 6609969602481916000}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Leaves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43050,7 +43050,7 @@ GameObject:
   - component: {fileID: 3039229993166422727}
   - component: {fileID: 1778997095309475917}
   - component: {fileID: 3393895736046101542}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Trunk
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -43143,8 +43143,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6392254883231244657}
-  m_Layer: 0
-  m_Name: Prefab_Tree_1
+  m_Layer: 8
+  m_Name: Prefab_Foliage_Tree_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

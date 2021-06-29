@@ -140,12 +140,12 @@ public class playerMovement : MonoBehaviour
         if (Input.GetButtonDown("Jump") && m_isGrounded)
         {
 
-            Invoke("JumpInvokation", 0.2f);
+            JumpInvokation();
 
 
             m_increaseWeight = true;
             
-            m_jumpTimer = 0.4f;
+            m_jumpTimer = 0.2f;
 
 
         }
@@ -259,20 +259,37 @@ public class playerMovement : MonoBehaviour
 
         //We can mess with the max distance (1.5f)
         bool isAtwall = m_rb.SweepTest(m_dir, out sweep, 1.5f, QueryTriggerInteraction.Ignore);
+        //bool isAtwall = m_rb.SweepTest(m_dir, out sweep, 1.5f, QueryTriggerInteraction.Ignore);
 
         Debug.DrawLine(transform.position, sweep.point);
 
+        
         //We first check if the sweep has passed and we arent grounded
-        if(!m_isGrounded && isAtwall)
+        if (!m_isGrounded && isAtwall)
         {
-            transform.rotation = Quaternion.Euler(0f, angle, 0f);
+            Debug.Log(sweep.collider.tag);
+            if (sweep.collider.CompareTag("PickUp"))
+            {
+                
+                m_animationHandler.m_speedAnimator = m_rb.velocity.magnitude;
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+                m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+                m_rb.velocity = new Vector3(m_dir.x * m_speed, m_rb.velocity.y, m_dir.z * m_speed);
 
-            m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
-            m_rb.angularVelocity = Vector3.zero;
+                TurnOnMovingSFX();
+            }
+            else
+            {
+                transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
-            TurnOffMovingSFX();
+                m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+
+                m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
+                m_rb.angularVelocity = Vector3.zero;
+
+                TurnOffMovingSFX();
+            }
         }
         else if (m_move.magnitude > 0.1f) //if moving
         {

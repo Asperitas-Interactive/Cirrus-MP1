@@ -18,6 +18,8 @@ public class CameraController : MonoBehaviour
     [SerializeField] private GameObject m_recieverNearCam;
     [SerializeField] private Transform m_depositLocation;
     [SerializeField] private Animator m_pickup;
+    [SerializeField] private Animator m_doorL;
+    [SerializeField] private Animator m_doorR;
 
     [Header("Cutscene 3")]
     [SerializeField] private GameObject m_recieverCamIsland2;
@@ -138,7 +140,10 @@ public class CameraController : MonoBehaviour
         m_recieverNearCam.SetActive(false);
         //agent.enabled = false;
         m_doorCam.SetActive(true);
-        yield return new WaitForSeconds(4.0f);
+        yield return new WaitForSeconds(2.0f);
+        m_doorL.SetTrigger("Open");
+        m_doorR.SetTrigger("Open");
+        yield return new WaitForSeconds(2.0f);
 
         m_doorCam.SetActive(false);
         m_playerMovement.enabled = true;
@@ -180,8 +185,8 @@ public class CameraController : MonoBehaviour
         agent.enabled = true;
         agent.SetDestination(m_depositLocationIsland3.position);
         yield return new WaitForSeconds(5f);
-        m_pickupIsland2.SetTrigger("Execute3");
-        m_pickupIsland2.tag = "Untagged";
+        m_pickupIsland3.SetTrigger("Execute3");
+        m_pickupIsland3.tag = "Untagged";
                 
         agent.transform.rotation = Quaternion.Lerp(agent.transform.rotation, m_depositLocationIsland3.rotation, 10);
         yield return new WaitForSeconds(3f);
