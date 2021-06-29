@@ -10,12 +10,28 @@ public class AnimationHandler : MonoBehaviour
     
     void Start()
     {
-        m_animator = GetComponent<Animator>();
+        m_animator = transform.GetChild(2).GetComponent<Animator>();
         m_characterController = GetComponentInParent<CharacterController>();
     }
-
-    void Update()
+    
+    public bool m_jumpAnimator
     {
-        m_animator.SetFloat("Speed", m_characterController.velocity.magnitude);
+        get => m_animator.GetBool("isJumping");
+        set => m_animator.SetBool("isJumping", value);
+    }
+    public bool m_glideAnimator
+    {
+        get => m_animator.GetBool("isGliding");
+        set => m_animator.SetBool("isGliding", value);
+    }
+    public bool m_endJumpAnimator
+    {
+        get => m_animator.GetBool("Jump");
+        set => m_animator.SetBool("Jump", value);
+    }
+    public float m_speedAnimator
+    {
+        get => m_animator.GetFloat("Speed");
+        set => m_animator.SetFloat("Speed", value);
     }
 }

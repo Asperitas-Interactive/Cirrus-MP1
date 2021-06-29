@@ -49,14 +49,8 @@ public class playerMovement : MonoBehaviour
 
     [SerializeField] bool unlockGlide;
 
-    public bool m_jumpAnimator
-    {
-        set
-        {
-            transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", true);
-        }
-    }
-
+    private AnimationHandler m_animationHandler;
+    
     float m_jumpTimer;
     public bool m_canMove { get; set; }
 
@@ -79,6 +73,7 @@ public class playerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_animationHandler = GetComponent<AnimationHandler>();
         m_animator = transform.GetChild(2).GetComponent<Animator>();
         m_agent = GetComponent<NavMeshAgent>();
         m_canMove = true;
@@ -99,7 +94,8 @@ public class playerMovement : MonoBehaviour
                 Time.timeScale = 1;
                 Cursor.lockState = CursorLockMode.Locked;
                 m_paused = false;
-            } else
+            } 
+            else
             {
                 Time.timeScale = 0;
                 Cursor.lockState = CursorLockMode.None;
@@ -114,7 +110,7 @@ public class playerMovement : MonoBehaviour
 
             if (m_agent.enabled)
             {
-                transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_agent.velocity.magnitude);
+                m_animationHandler.m_speedAnimator =  m_agent.velocity.magnitude;
             }
             return;
         }
@@ -180,7 +176,7 @@ public class playerMovement : MonoBehaviour
         if (m_cutscenePlayin || !m_canMove)
         {
             if(!m_agent.enabled)
-                transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
+               m_animationHandler.m_speedAnimator =  m_rb.velocity.magnitude;
             return;
         }
         m_jumpTimer -= Time.fixedDeltaTime;
@@ -224,12 +220,13 @@ public class playerMovement : MonoBehaviour
             if (m_jumpTimer < 0.0f)
             {
                 m_isJumping = false;
-                 transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", false);
+                m_animationHandler.m_jumpAnimator = false;
+                m_animationHandler.m_endJumpAnimator = false;
                 // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
                 m_animator.SetLayerWeight(2, 0);
             }
-            transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", false);
+
 
         }
 
@@ -259,7 +256,7 @@ public class playerMovement : MonoBehaviour
         }
         else if (m_move.magnitude > 0.1f) //if moving
         {
-            transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", m_rb.velocity.magnitude);
+            m_animationHandler.m_speedAnimator = m_rb.velocity.magnitude;
             transform.rotation = Quaternion.Euler(0f, angle, 0f);
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
@@ -270,7 +267,7 @@ public class playerMovement : MonoBehaviour
         else //if still
         {
             //transform.rotation = Quaternion.Euler(0f, angle, 0f);
-            transform.GetChild(2).GetComponent<Animator>().SetFloat("Speed", 0);
+            m_animationHandler.m_speedAnimator = 0;
 
             m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
@@ -299,7 +296,7 @@ public class playerMovement : MonoBehaviour
 
             if (m_isJumping && m_rb.velocity.y < 0 && disG < 2.4f)
             {
-                m_jumpAnimator = true;
+                m_animationHandler.m_jumpAnimator = true;
             }
 
             if(m_isJumping && m_rb.velocity.y < 0)          //Descent

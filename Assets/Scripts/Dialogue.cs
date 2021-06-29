@@ -99,12 +99,15 @@ public class Dialogue : MonoBehaviour
     {
         while (m_pointer < m_dialogues[_count].myList.Count)
         {
-            //if(m_canProceed)
-              StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime, m_dialogues[_count].myList[m_pointer]));
-    
-            //m_canProceed = false;
-            m_playing = true;
-            yield return null;
+            if (m_canProceed)
+            {
+                StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime,
+                    m_dialogues[_count].myList[m_pointer]));
+
+                //m_canProceed = false;
+                m_playing = true;
+                yield return null;
+            }
         }
 
         if (m_pointer == m_dialogues[_count].myList.Count)
@@ -145,7 +148,7 @@ public class Dialogue : MonoBehaviour
     {
         if (m_playing)
         {
-            if (Input.GetButtonDown("Sprint"))
+            if (Input.GetButtonDown("Jump"))
             {
                 m_pointer++;
             }
