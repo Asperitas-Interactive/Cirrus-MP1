@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: MAT_BookStraps
+  m_Name: MAT_BookStraps 3
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
   m_ShaderKeywords: _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: e764c8941d224df48935d27b360bb69f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 59cc8c8c86cb54c43b02105ff9032afa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: 8c4b97b80be0862438002c779765619d, type: 3}
+        m_Texture: {fileID: 2800000, guid: fbdf753031b5dc54baa61aedbf944182, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -45,11 +45,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: e764c8941d224df48935d27b360bb69f, type: 3}
+        m_Texture: {fileID: 2800000, guid: 59cc8c8c86cb54c43b02105ff9032afa, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 2800000, guid: 3c7c979ec615726468fba7620091fb6b, type: 3}
+        m_Texture: {fileID: 2800000, guid: 04cae98b29c05fb49a84c3b8534a9fc5, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
