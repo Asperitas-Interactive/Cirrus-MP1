@@ -15,7 +15,7 @@ MonoBehaviour:
   prefabs:
   - gameObject: {fileID: 6052285249745943499, guid: cfbf43859ac354047bbcf81726764c22, type: 3}
     settings:
-      m_Strength: 59.721634
+      m_Strength: 85.0136
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 281.63266, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
