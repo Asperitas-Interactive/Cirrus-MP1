@@ -95,7 +95,7 @@ GameObject:
   - component: {fileID: 387650484}
   - component: {fileID: 387650483}
   - component: {fileID: 387650482}
-  - component: {fileID: 5319860248717262979}
+  - component: {fileID: 8927772809857626755}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -161,6 +161,10 @@ MonoBehaviour:
   m_spawnLocations:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  m_respawnSound: {fileID: 0}
 --- !u!114 &8880323482727311207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -168,7 +172,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4358994942074642480}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bae24b6eb573b0548ab8e3d8d874df49, type: 3}
   m_Name: 
@@ -201,18 +205,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_glide: 0
   m_speed: 12
-  m_jumpHeight: 10
+  m_jumpHeight: 4
   m_groundCheck: {fileID: 1004495456966238038}
   m_groundDistance: 0.4
   m_groundMask:
     serializedVersion: 2
     m_Bits: 136
   m_glideFactor: 2
-  unlockGlide: 0
+  unlockGlide: 1
   m_walking: {fileID: 0}
   m_running: {fileID: 0}
   m_jumpStart: {fileID: 0}
   m_jumpLand: {fileID: 0}
+  m_Splash: {fileID: 0}
 --- !u!54 &387650482
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -224,12 +229,12 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!195 &5319860248717262979
+--- !u!195 &8927772809857626755
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -242,7 +247,7 @@ NavMeshAgent:
   m_Speed: 3.5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 0
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1

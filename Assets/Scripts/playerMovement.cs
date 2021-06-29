@@ -23,6 +23,7 @@ public class playerMovement : MonoBehaviour
     [FormerlySerializedAs("jumpHeight")] public float m_jumpHeight;
 
 
+    public Transform LookOverride { get; set; }
 
     Vector3 m_velocity;
 
@@ -69,6 +70,7 @@ public class playerMovement : MonoBehaviour
     private float disG;
     private Animator m_animator;
     private bool m_increaseWeight;
+    private bool m_decreaseWeight;
 
     // Start is called before the first frame update
     void Start()
@@ -106,19 +108,30 @@ public class playerMovement : MonoBehaviour
         if (m_cutscenePlayin || !m_canMove)
         {
             m_rb.velocity = Vector3.zero;
-            m_rb.AddForce(Physics.gravity, ForceMode.Acceleration);
+            //m_rb.AddForce(Physics.gravity, ForceMode.Acceleration);
 
             if (m_agent.enabled)
             {
+                m_rb.velocity = Vector3.zero;
+                m_rb.angularVelocity = Vector3.zero;
+                if (m_agent.remainingDistance < 0.1f)
+                {
+                    m_agent.enabled = false;
+                }
                 m_animationHandler.m_speedAnimator =  m_agent.velocity.magnitude;
             }
             return;
         }
 
         if(m_increaseWeight)
-            m_animator.SetLayerWeight(2, m_animator.GetLayerWeight(2) + 2 * Time.deltaTime);
+            m_animationHandler.m_weightJump += 5 * Time.deltaTime;
         if (m_animator.GetLayerWeight(2) >= 1f)
             m_increaseWeight = false;
+        
+        if(m_decreaseWeight)
+            m_animationHandler.m_weightJump -= 5 * Time.deltaTime;
+        if (m_animator.GetLayerWeight(2) <= 0f)
+            m_decreaseWeight = false;
         
         Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 100f, m_groundMask);
 
@@ -176,7 +189,13 @@ public class playerMovement : MonoBehaviour
         if (m_cutscenePlayin || !m_canMove)
         {
             if(!m_agent.enabled)
-               m_animationHandler.m_speedAnimator =  m_rb.velocity.magnitude;
+               m_animationHandler.m_speedAnimator =  0f;
+            else
+            {
+                transform.rotation = LookOverride.rotation;
+                if(m_velocity.magnitude > 1f)
+                    transform.forward = m_agent.velocity.normalized;
+            }
             return;
         }
         m_jumpTimer -= Time.fixedDeltaTime;
@@ -224,7 +243,8 @@ public class playerMovement : MonoBehaviour
                 m_animationHandler.m_endJumpAnimator = false;
                 // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
-                m_animator.SetLayerWeight(2, 0);
+                // m_decreaseWeight = true;
+                m_animationHandler.m_weightJump = 0f;
             }
 
 
@@ -269,7 +289,7 @@ public class playerMovement : MonoBehaviour
             //transform.rotation = Quaternion.Euler(0f, angle, 0f);
             m_animationHandler.m_speedAnimator = 0;
 
-            m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
+            //m_dir = Quaternion.Euler(0f, angle, 0f) * Vector3.forward;
 
             m_rb.velocity = new Vector3(0f + m_movingPlat.x, m_rb.velocity.y, 0f + m_movingPlat.z);
             m_rb.angularVelocity = Vector3.zero;
@@ -292,6 +312,7 @@ public class playerMovement : MonoBehaviour
             if (m_isJumping && m_rb.velocity.y < 0 && Input.GetButton("Jump") && unlockGlide)
             {
                 m_isGliding = true;
+                m_animationHandler.m_glideAnimator = true;
             }
 
             if (m_isJumping && m_rb.velocity.y < 0 && disG < 2.4f)
@@ -299,23 +320,37 @@ public class playerMovement : MonoBehaviour
                 m_animationHandler.m_jumpAnimator = true;
             }
 
-            if(m_isJumping && m_rb.velocity.y < 0)          //Descent
-                m_rb.AddForce( Physics.gravity * 4f, ForceMode.Acceleration);
-            else if(m_isJumping && m_rb.velocity.y > 0 && !Input.GetButton("Jump"))     //Jumping up and not holding the jump button
-                m_rb.AddForce( Physics.gravity * 2.5f, ForceMode.Acceleration);
-            else if(m_isJumping && m_rb.velocity.y > 0)                                 //Jumping up and holding the jump button
-                m_rb.AddForce( Physics.gravity * 1.25f, ForceMode.Acceleration);
-            else if(!m_isGliding)                                                       //Normal gravity in other case
-                m_rb.AddForce( Physics.gravity, ForceMode.Acceleration);
-
+            if (!m_isGliding)
+            {
+                if (m_isJumping && m_rb.velocity.y < 0) //Descent
+                    m_rb.AddForce(Physics.gravity * 4f, ForceMode.Acceleration);
+                else if (m_isJumping && m_rb.velocity.y > 0 &&
+                         !Input.GetButton("Jump")) //Jumping up and not holding the jump button
+                    m_rb.AddForce(Physics.gravity * 2.5f, ForceMode.Acceleration);
+                else if (m_isJumping && m_rb.velocity.y > 0) //Jumping up and holding the jump button
+                    m_rb.AddForce(Physics.gravity * 1.25f, ForceMode.Acceleration);
+                else if (!m_isGliding) //Normal gravity in other case
+                    m_rb.AddForce(Physics.gravity, ForceMode.Acceleration);
+            }
         }
 
         if (Input.GetButton("Jump") && m_isGliding)
         {
             if(disG > 5)
                 m_rb.AddForce(Physics.gravity / 4f, ForceMode.Acceleration);
+
+
             else
-                m_rb.AddForce(Physics.gravity / 2.5f, ForceMode.Acceleration);
+            {
+                float dis = disG;
+                dis = disG / 5f;
+                
+                m_rb.AddForce((Physics.gravity / 6f) * dis, ForceMode.Acceleration);
+            }
+        }
+        else if (m_isGliding)
+        {
+            m_isGliding = false;
         }
 
     }
