@@ -8,12 +8,17 @@ public class PickUpItem : MonoBehaviour
 {
     private GameObject m_pickUp;
 
+    private AnimationHandler m_animationHandler;
     bool m_canPickUp = false;
     private bool m_pickepUp = false;
     private NavMeshAgent m_agent;
+    
+    private bool m_incerasing;
+    private bool m_decreasing;
 
     private void Start()
     {
+        m_animationHandler = GetComponent<AnimationHandler>();
         m_agent = GetComponent<NavMeshAgent>();
     }
 
@@ -21,6 +26,8 @@ public class PickUpItem : MonoBehaviour
     {
         if (m_pickUp != null)
         {
+            m_pickUp.transform.GetChild(1).gameObject.SetActive(false);
+            m_decreasing = true;
             m_pickepUp = false;
             m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
             m_pickUp.transform.rotation = Quaternion.identity;
@@ -32,12 +39,17 @@ public class PickUpItem : MonoBehaviour
 
     public void DisablePickupNoRes()
     {
-        m_pickepUp = false;
-        m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
-        m_pickUp.transform.rotation = Quaternion.identity;
-        //m_pickUp.GetComponent<MovePlat>().ResetPosition();
-        m_canPickUp = false;
-        m_pickUp = null;
+        if (m_pickUp!= null)
+        {
+            m_decreasing = true;
+            m_pickepUp = false;
+            m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            m_pickUp.transform.rotation = Quaternion.identity;
+            m_pickUp.transform.GetChild(1).gameObject.SetActive(false);
+            //m_pickUp.GetComponent<MovePlat>().ResetPosition();
+            m_canPickUp = false;
+            m_pickUp = null;
+        }
     }
     
     void Update()
@@ -45,13 +57,31 @@ public class PickUpItem : MonoBehaviour
 
         if (GetComponent<playerMovement>().m_cutscenePlayin) return;
 
+        if (m_incerasing)
+        {
+            if (m_animationHandler.m_weightCast < 1f)
+                m_animationHandler.m_weightCast += 2 * Time.deltaTime;
+            else
+            {
+                m_animationHandler.m_weightCast = 1f;
+                m_incerasing = false;
+            }
+        }
+    
+        
+        if (m_decreasing)
+        {
+            if (m_animationHandler.m_weightCast > 0f)
+                m_animationHandler.m_weightCast -= 2 * Time.deltaTime;
+            else
+            {
+                m_animationHandler.m_weightCast = 0f;
+                m_decreasing = false;
+            }
+        }
         if (Input.GetButtonDown("PickUp") && m_pickUp != null && m_pickepUp)
         {
-           
-
-            DisablePickup();
-            
-
+            Invoke("DisablePickup", 3f);
         }
 
         else if (Input.GetButtonDown("PickUp") && m_canPickUp == true && m_pickepUp ==false)
@@ -59,6 +89,8 @@ public class PickUpItem : MonoBehaviour
             void picked()
             {
                 m_pickepUp = true;
+                m_incerasing = true;
+                m_pickUp.transform.GetChild(1).gameObject.SetActive(true);
             }
                 m_pickUp.GetComponent<MovePlat>().enabled = false;
                 m_canPickUp = false;

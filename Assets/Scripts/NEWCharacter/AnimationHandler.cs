@@ -34,4 +34,16 @@ public class AnimationHandler : MonoBehaviour
         get => m_animator.GetFloat("Speed");
         set => m_animator.SetFloat("Speed", value);
     }
+
+    public float m_weightCast
+    {
+        get => m_animator.GetLayerWeight(1);
+        set => m_animator.SetLayerWeight(1, value);
+    }
+
+    public float m_weightJump
+    {
+        get => m_animator.GetLayerWeight(2);
+        set => m_animator.SetLayerWeight(2, value);
+    }
 }

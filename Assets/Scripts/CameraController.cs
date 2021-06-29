@@ -126,18 +126,22 @@ public class CameraController : MonoBehaviour
         yield return new WaitForSeconds(2f);
         agent.enabled = true;
         agent.SetDestination(m_depositLocation.position);
-        yield return new WaitForSeconds(4f);
+
+        m_playerMovement.LookOverride = m_depositLocation;
+        yield return new WaitUntil(()=>!agent.enabled);
         m_pickup.SetTrigger("Execute");
         m_pickup.tag = "Untagged";
-        
+        //m_playerMovement.enabled = false;
         agent.transform.rotation = m_depositLocation.rotation;
         yield return new WaitForSeconds(3f);
 
         m_recieverNearCam.SetActive(false);
-        agent.enabled = false;
+        //agent.enabled = false;
         m_doorCam.SetActive(true);
         yield return new WaitForSeconds(4.0f);
+
         m_doorCam.SetActive(false);
+        m_playerMovement.enabled = true;
 
         if (m_playerMovement != null)
             m_playerMovement.m_cutscenePlayin = false;
