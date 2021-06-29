@@ -6,23 +6,15 @@
   <component name="ChangeListManager">
     <list default="true" id="566830a8-82ba-4377-8178-8d7be6e26ea1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Cirrus-MP2/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Cirrus-MP2/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Animations/NewAnimations/ArmPose.FBX.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/NewAnimations/ArmPose.FBX.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Animations/NewAnimations/Idle.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Animations/NewAnimations/Idle.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Artists/Models/Prefab_Statue_Player.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Artists/Models/Prefab_Statue_Player.prefab" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Artists/Texturing/Books/Book2/MAT_BookStraps 3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Artists/Texturing/Books/Book2/MAT_BookStraps 3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Artists/UI/textbox.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Artists/UI/textbox.png.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/crystal.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/crystal.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Artists/Models/Prefab_Foliage_Tree_1.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Artists/Models/Prefab_Foliage_Tree_1.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Myles' Test Scene Backup 220621.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Myles' Test Scene Backup 220621.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Myles' Test Scene Backup 220621/NavMesh.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Myles' Test Scene Backup 220621/NavMesh.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Guardian.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Guardian.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/AnimationHandler.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/AnimationHandler.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.polybrush/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.polybrush/Settings.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/Packages/com.unity.probuilder/Settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/EditorUserSettings.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +36,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/RisingPlatform.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Assets/Scripts/BookScript.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.cinemachine@2.6.3/Runtime/Behaviours/Cinemachine3rdPersonAim.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/AnimationEvents.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/NEWCharacter/CameraSwitcher.cs" root0="FORCE_HIGHLIGHTING" />
@@ -70,14 +63,15 @@
       <option value="$PROJECT_DIR$/Assets/Scripts/AnimationEvents.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/Doors.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/TriggerFunction.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Guardian.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/Respawner.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/RisingPlatform.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Guardian.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/AnimationHandler.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" />
-      <option value="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" />
       <option value="$PROJECT_DIR$/Assets/Scripts/NEWCharacter/PickUpItem.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/playerMovement.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/BookScript.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/Dialogue.cs" />
+      <option value="$PROJECT_DIR$/Assets/Scripts/CameraController.cs" />
     </changedPaths>
   </component>
   <component name="ProjectId" id="1tZ9B78imEIjZTnTcebdlBIaIxF" />
@@ -106,10 +100,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="36436">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" value="36436" />
+      <option name="pid" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -132,6 +126,7 @@
       <workItem from="1624625306892" duration="20735000" />
       <workItem from="1624830924287" duration="3269000" />
       <workItem from="1624834217603" duration="3692000" />
+      <workItem from="1624976789999" duration="4194000" />
     </task>
     <servers />
   </component>
@@ -150,8 +145,10 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
 </project>

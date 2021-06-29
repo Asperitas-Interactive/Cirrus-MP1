@@ -26,8 +26,8 @@ public class PickUpItem : MonoBehaviour
     {
         if (m_pickUp != null)
         {
-            m_pickUp.transform.GetChild(1).gameObject.SetActive(false);
-            m_decreasing = true;
+            m_pickUp.transform.GetChild(1).gameObject.SetActive(false);     //Disable bubble
+            m_decreasing = true;    //Disable Blend Gradually, done in Update
             m_pickepUp = false;
             m_pickUp.GetComponent<Rigidbody>().velocity = Vector3.zero;
             m_pickUp.transform.rotation = Quaternion.identity;
@@ -67,7 +67,6 @@ public class PickUpItem : MonoBehaviour
                 m_incerasing = false;
             }
         }
-    
         
         if (m_decreasing)
         {
@@ -81,7 +80,7 @@ public class PickUpItem : MonoBehaviour
         }
         if (Input.GetButtonDown("PickUp") && m_pickUp != null && m_pickepUp)
         {
-            Invoke("DisablePickup", 3f);
+            DisablePickup();
         }
 
         else if (Input.GetButtonDown("PickUp") && m_canPickUp == true && m_pickepUp ==false)
@@ -89,8 +88,8 @@ public class PickUpItem : MonoBehaviour
             void picked()
             {
                 m_pickepUp = true;
-                m_incerasing = true;
-                m_pickUp.transform.GetChild(1).gameObject.SetActive(true);
+                m_incerasing = true;    //Gradually increase blend
+                m_pickUp.transform.GetChild(1).gameObject.SetActive(true);  //enable Buble
             }
                 m_pickUp.GetComponent<MovePlat>().enabled = false;
                 m_canPickUp = false;

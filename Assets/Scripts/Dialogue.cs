@@ -45,7 +45,8 @@ public class Dialogue : MonoBehaviour
     public void SetString(int _count)
     {
         m_textBox.transform.parent.gameObject.SetActive(true);
-        m_dialogues[_count].m_camera.SetActive(true);
+        if(m_dialogues[_count].m_camera!=null)
+            m_dialogues[_count].m_camera.SetActive(true);
         m_pointer = 0;
         {
             StartCoroutine(eRunDialogue(_count));
@@ -97,9 +98,9 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator eRunDialogue(int _count)
     {
-        while (m_pointer < m_dialogues[_count].myList.Count)
+        while (m_pointer < m_dialogues[_count].myList.Count)    // If pointer is not at the end
         {
-            if (m_canProceed)
+            if (m_canProceed)   
             {
                 StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime,
                     m_dialogues[_count].myList[m_pointer]));
@@ -110,11 +111,12 @@ public class Dialogue : MonoBehaviour
             }
         }
 
-        if (m_pointer == m_dialogues[_count].myList.Count)
+        if (m_pointer == m_dialogues[_count].myList.Count)  //If pointer is at the end, remove the dialgue after default wait time(3 seconds).
         {
             m_playing = false;
-            StartCoroutine(eSetString(0, m_defaultWaitTime, ""));
-            m_dialogues[_count].m_camera.SetActive(false);
+            StartCoroutine(eSetString(m_defaultWaitTime, m_defaultWaitTime, ""));
+            if(m_dialogues[_count].m_camera!= null)
+                m_dialogues[_count].m_camera.SetActive(false);
             m_textBox.transform.parent.gameObject.SetActive(false);
         }
 
