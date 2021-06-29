@@ -97,9 +97,9 @@ public class Dialogue : MonoBehaviour
 
     private IEnumerator eRunDialogue(int _count)
     {
-        while (m_pointer < m_dialogues[_count].myList.Count)
+        while (m_pointer < m_dialogues[_count].myList.Count)    // If pointer is not at the end
         {
-            if (m_canProceed)
+            if (m_canProceed)   
             {
                 StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime,
                     m_dialogues[_count].myList[m_pointer]));
@@ -110,10 +110,10 @@ public class Dialogue : MonoBehaviour
             }
         }
 
-        if (m_pointer == m_dialogues[_count].myList.Count)
+        if (m_pointer == m_dialogues[_count].myList.Count)  //If pointer is at the end, remove the dialgue after default wait time(3 seconds).
         {
             m_playing = false;
-            StartCoroutine(eSetString(0, m_defaultWaitTime, ""));
+            StartCoroutine(eSetString(m_defaultWaitTime, m_defaultWaitTime, ""));
             m_dialogues[_count].m_camera.SetActive(false);
             m_textBox.transform.parent.gameObject.SetActive(false);
         }
