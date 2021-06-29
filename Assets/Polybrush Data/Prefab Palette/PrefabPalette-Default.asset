@@ -159,7 +159,7 @@ MonoBehaviour:
     name: Prefab_Foliage_SmallLily
   - gameObject: {fileID: 2728914765298454146, guid: 7dfd0085d2aad604b9b67a34caa41842, type: 3}
     settings:
-      m_Strength: 43.27372
+      m_Strength: 83.01825
       m_RotationRangeMin: {x: 0, y: 0, z: 0}
       m_RotationRangeMax: {x: 0, y: 0, z: 0}
       m_ScaleRangeMin: {x: 1, y: 1, z: 1}
