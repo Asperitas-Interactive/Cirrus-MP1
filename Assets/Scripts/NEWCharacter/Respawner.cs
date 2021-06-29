@@ -52,6 +52,7 @@ public class Respawner : MonoBehaviour
         GetComponent<Rigidbody>().velocity = Vector3.zero;
         transform.position = m_spawnLocations[m_currentSpawnLocation].position;
         m_player.m_canMove = true;
+        GetComponent<PickUpItem>().DisablePickup();
         m_respawnSound.Play();
     }
 }

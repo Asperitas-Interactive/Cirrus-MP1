@@ -24,20 +24,15 @@ public class Guardian : MonoBehaviour
             return false;
         else return true;
     }
-    private IEnumerator eDialogue()
-    {
-        m_eventBefore?.Invoke();
-        yield return new WaitWhile(() => !Input.GetButton("Jump"));
-    }
+    
 
     private void OnTriggerStay(Collider _collider)
     {
-        if (_collider.CompareTag("Player") && Input.GetButton("PickUp"))
+        if (_collider.CompareTag("Player") && Input.GetButtonDown("PickUp"))
         {
             if (!m_yes)
             {
-                StartCoroutine(eDialogue());
-
+                m_eventBefore?.Invoke();
             }
             else
                 m_eventAfter?.Invoke();

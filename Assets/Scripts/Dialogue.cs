@@ -13,16 +13,22 @@ public class ListWrapper
 }
 public class Dialogue : MonoBehaviour
 {
+    //private int textIterator = 0;
     // Start is called before the first frame update
     [SerializeField] private TMP_Text m_textBox;
 
     [SerializeField] private playerMovement m_player;
 
     [SerializeField] private List<ListWrapper> m_dialogues = new List<ListWrapper>();
+    private bool m_canProceed = true;
+    //private bool m_moveTextForward;
 
     public bool m_playing
     {
-        get { return m_player.m_cutscenePlayin; }
+        get
+        {
+            return m_player.m_cutscenePlayin;
+        }
         set
         {
             m_player.m_cutscenePlayin = value;
@@ -38,10 +44,11 @@ public class Dialogue : MonoBehaviour
 
     public void SetString(int _count)
     {
+        m_textBox.transform.parent.gameObject.SetActive(true);
+        m_dialogues[_count].m_camera.SetActive(true);
         m_pointer = 0;
         {
-            StartCoroutine(eRunDialogue(_count));   
-            
+            StartCoroutine(eRunDialogue(_count));
         }
     }
     
@@ -55,6 +62,7 @@ public class Dialogue : MonoBehaviour
     
     public void SetString(string _text)
     {
+        
             int count = -1;
             int index = 0;
             int i = 0;
@@ -91,7 +99,10 @@ public class Dialogue : MonoBehaviour
     {
         while (m_pointer < m_dialogues[_count].myList.Count)
         {
-            StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime, m_dialogues[_count].myList[m_pointer]));
+            //if(m_canProceed)
+              StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime, m_dialogues[_count].myList[m_pointer]));
+    
+            //m_canProceed = false;
             m_playing = true;
             yield return null;
         }
@@ -100,7 +111,8 @@ public class Dialogue : MonoBehaviour
         {
             m_playing = false;
             StartCoroutine(eSetString(0, m_defaultWaitTime, ""));
-            
+            m_dialogues[_count].m_camera.SetActive(false);
+            m_textBox.transform.parent.gameObject.SetActive(false);
         }
 
         //  StartCoroutine(eSetString(m_defaultWaitTime, m_defaultDelayTime, ""));
@@ -108,11 +120,16 @@ public class Dialogue : MonoBehaviour
     }
 
     private IEnumerator eSetString(int _time, int _delay, string _text)
-    
     {
-        yield return new WaitForSeconds(_delay);
+        string word = "";
+        
+   
         m_textBox.SetText(_text);
-       // yield return new WaitForSeconds(_time);
+        m_canProceed = true;
+
+        yield return new WaitForSeconds(_time);
+
+        // yield return new WaitForSeconds(_time);
         //m_textBox.SetText("");
     }
     
@@ -131,7 +148,6 @@ public class Dialogue : MonoBehaviour
             if (Input.GetButtonDown("Sprint"))
             {
                 m_pointer++;
-                
             }
         }
     }

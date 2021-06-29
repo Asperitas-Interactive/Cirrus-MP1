@@ -73,10 +73,13 @@ public class playerMovement : MonoBehaviour
     [SerializeField] private AudioSource m_Splash;
     private RaycastHit hitInfo;
     private float disG;
+    private Animator m_animator;
+    private bool m_increaseWeight;
 
     // Start is called before the first frame update
     void Start()
     {
+        m_animator = transform.GetChild(2).GetComponent<Animator>();
         m_agent = GetComponent<NavMeshAgent>();
         m_canMove = true;
         Cursor.lockState = CursorLockMode.Locked;
@@ -116,20 +119,27 @@ public class playerMovement : MonoBehaviour
             return;
         }
 
+        if(m_increaseWeight)
+            m_animator.SetLayerWeight(2, m_animator.GetLayerWeight(2) + 2 * Time.deltaTime);
+        if (m_animator.GetLayerWeight(2) >= 1f)
+            m_increaseWeight = false;
+        
         Physics.Raycast(transform.position, -Vector3.up, out hitInfo, 100f, m_groundMask);
 
         disG = hitInfo.distance;
         //Jump Force
-         if (Input.GetButtonDown("Jump") && m_isGrounded)
-         {
-             transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", true);
+        if (Input.GetButtonDown("Jump") && m_isGrounded)
+        {
 
-             m_isJumping = true;
-             m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
-             m_defaultPos = transform.position.y;
-             m_jumpTimer = 0.2f;
-             m_jumpStart.Play();
-         }
+            Invoke("JumpInvokation", 0.2f);
+
+
+            m_increaseWeight = true;
+            
+            m_jumpTimer = 0.4f;
+
+
+        }
 
         if (unlockGlide)
         {
@@ -151,6 +161,15 @@ public class playerMovement : MonoBehaviour
             //     m_isGliding = false;
             // }
         }
+    }
+
+    private void JumpInvokation()
+    {
+        m_animator.SetBool("isJumping", true);
+        m_isJumping = true;
+        m_rb.AddForce(Vector3.up * Mathf.Sqrt(m_jumpHeight * -2f * Physics.gravity.y), ForceMode.Impulse);
+        m_defaultPos = transform.position.y;
+        m_jumpStart.Play();
     }
 
     // Update is called once per frame
@@ -208,8 +227,10 @@ public class playerMovement : MonoBehaviour
                  transform.GetChild(2).GetComponent<Animator>().SetBool("isJumping", false);
                 // transform.GetChild(4).GetComponent<Animator>().SetBool("isGliding", false);
 
+                m_animator.SetLayerWeight(2, 0);
             }
             transform.GetChild(2).GetComponent<Animator>().SetBool("Jump", false);
+
         }
 
         //animate
@@ -294,7 +315,7 @@ public class playerMovement : MonoBehaviour
 
         if (Input.GetButton("Jump") && m_isGliding)
         {
-            if(m_glideTimer < 0f)
+            if(disG > 5)
                 m_rb.AddForce(Physics.gravity / 4f, ForceMode.Acceleration);
             else
                 m_rb.AddForce(Physics.gravity / 2.5f, ForceMode.Acceleration);
