@@ -11,6 +11,8 @@ public class RisingPlatform : MonoBehaviour
     private bool m_rise;
 
     [SerializeField] private float m_speed = 5f;
+    [SerializeField] private GameObject m_camera;
+    
     private void Start()
     {
         m_origin = transform.position;
@@ -28,6 +30,10 @@ public class RisingPlatform : MonoBehaviour
             if ((transform.position.y - m_origin.y) < 11f)
             {
                 transform.Translate(0f, m_speed * Time.deltaTime, 0f);
+            }
+            else
+            {
+                m_camera.GetComponent<Animator>().SetBool("Shake", false);
             }
         }
     }

@@ -30,6 +30,12 @@ public class CameraController : MonoBehaviour
     [SerializeField] private Transform m_depositLocationIsland2;
     [SerializeField] private Animator m_pickupIsland2;
     
+    [Header("Cutscene 5")]
+    [SerializeField] private GameObject m_recieverNearCamIsland3;
+    [SerializeField] private GameObject m_StaircaseCam;
+    [SerializeField] private Transform m_depositLocationIsland3;
+    [SerializeField] private Animator m_pickupIsland3;
+    [SerializeField] private RisingPlatform m_staircase;
     
     [SerializeField] private playerMovement m_playerMovement;
     
@@ -161,6 +167,38 @@ public class CameraController : MonoBehaviour
         if (m_playerMovement != null)
             m_playerMovement.m_cutscenePlayin = false;
     }
+    
+    private IEnumerator eCutscene5()
+    {
+        m_recieverNearCamIsland3.SetActive(true);
+        var agent = m_playerMovement.gameObject.GetComponent<NavMeshAgent>();
+        yield return new WaitForSeconds(2f);
+        agent.enabled = true;
+        agent.SetDestination(m_depositLocationIsland3.position);
+        yield return new WaitForSeconds(5f);
+        m_pickupIsland2.SetTrigger("Execute3");
+        m_pickupIsland2.tag = "Untagged";
+                
+        agent.transform.rotation = Quaternion.Lerp(agent.transform.rotation, m_depositLocationIsland3.rotation, 10);
+        yield return new WaitForSeconds(3f);
+
+        m_recieverNearCamIsland3.SetActive(false);
+        agent.enabled = false;
+        m_StaircaseCam.SetActive(true);
+
+        yield return new WaitForSeconds(2f);
+        
+        m_staircase.rise();
+        m_StaircaseCam.GetComponent<Animator>().SetBool("Shake", true);
+
+        //Add the VFX here
+        yield return new WaitForSeconds(4.0f);
+
+        m_StaircaseCam.SetActive(false);
+
+        if (m_playerMovement != null)
+            m_playerMovement.m_cutscenePlayin = false;
+    }
 
     public void Cutscene4()
     {
@@ -172,6 +210,18 @@ public class CameraController : MonoBehaviour
         }
 
         StartCoroutine(eCutscene4());
+    }
+    
+    public void Cutscene5()
+    {
+        if (m_playerMovement != null)
+            m_playerMovement.m_cutscenePlayin = true;
+        else
+        {
+            Debug.Log("Player not assigned in script CameraController.cs");
+        }
+
+        StartCoroutine(eCutscene5());
     }
     
     private void enable()
