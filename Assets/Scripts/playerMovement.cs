@@ -86,6 +86,8 @@ public class playerMovement : MonoBehaviour
 
     private void Update()
     {
+
+
         //Pause stuff
         if (Input.GetButtonDown("Pause"))
         {
